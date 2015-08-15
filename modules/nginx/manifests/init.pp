@@ -32,6 +32,20 @@ class nginx(
 
     package { [ "nginx-${variant}", 'nginx-common' ]: }
 
+    # In the unmanaged case, this prevents the scenario where after the
+    # initial puppet run that installs the package, the net resulting state is
+    # a fully deployed configuration on disk, but the running instance still
+    # running the default configuration from the package.  With this, it gets
+    # stopped before the service clause checks->starts it with good config.
+    if ! $managed {
+        exec { 'stop-default-nginx':
+            command => '/usr/sbin/service nginx stop',
+            subscribe => Package["nginx-${variant}"],
+            refreshonly => true,
+            before => Service['nginx'],
+        }
+    }
+
     package { 'nginx':
         ensure => 'present',
         name   => $package,
@@ -55,5 +69,20 @@ class nginx(
     file { '/etc/nginx/fastcgi.conf':
         ensure => 'present',
         content => template('nginx/fastcgi.conf.erb'),
+    }
+
+    # Order package -> config -> service for all
+    #  nginx-tagged config files (including all File resources
+    #  declared within this module), and set up the
+    #  notification for config~>service if $managed.
+    # Also set up ssl tag -> service similarly, for certs
+    Package["nginx-${variant}"] -> File <| tag == 'nginx' |>
+    if $managed {
+        File <| tag == 'nginx' |> ~> Service['nginx']
+        File <| tag == 'ssl' |> ~> Service['nginx']
+    }
+    else {
+        File <| tag == 'nginx' |> -> Service['nginx']
+        File <| tag == 'ssl' |> -> Service['nginx']
     }
 }

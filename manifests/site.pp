@@ -10,11 +10,6 @@ class standard{
 		system    => true,                      #Makes sure user has uid less than 500
 		managehome => true,
 	}
-	exec { "apt-update":
-		command => "/usr/bin/apt-get update"
-	}
-
-	Exec["apt-update"] -> Package <| |>
 }
 
 node 'puppetclient' {
@@ -22,5 +17,4 @@ node 'puppetclient' {
 	include role::gmond
 	include role::symlinkdata
 	include role::mediawiki
-	include role::nginx::droidwiki
 }

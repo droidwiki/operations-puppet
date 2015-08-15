@@ -10,7 +10,7 @@ add_header X-Cache $upstream_cache_status;
 server {
         # Running port
         listen 443 ssl spdy;
-        server_name .droid.wiki .droidwiki.de;
+        server_name .droidwiki.de .droid.wiki;
 
         # SSL settings
         ssl_certificate /data/www/droid.wiki/droidwiki.de.crt;
