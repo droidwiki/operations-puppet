@@ -1,0 +1,7 @@
+# ganglia does not conform to this standard and
+# we don't need to rely on it.
+--no-class_inherits_from_params_class-check
+
+# WONTFIX - We want at least 100.
+# Lot of long lines.
+--no-80chars-check

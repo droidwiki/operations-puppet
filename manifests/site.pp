@@ -1,26 +1,24 @@
-import "role/*"
-
-class standard{
-	user { 'florian' : 
-		name      => 'florian',
-		ensure    => present, 
-		shell     => '/bin/bash',
-		password  => '',
-		home      => '/home/florian',
-		system    => true,                      #Makes sure user has uid less than 500
-		managehome => true,
-	}
-	exec { "apt-update":
-		command => "/usr/bin/apt-get update"
-	}
-
-	Exec["apt-update"] -> Package <| |>
+node 'old_example' {
+  include role::mediawiki
+  include role::nginx::droidwiki
 }
 
-node 'puppetclient' {
-	include standard
-	include role::gmond
-	include role::symlinkdata
-	include role::mediawiki
-	include role::nginx::droidwiki
+node 'eclair.dwnet' {
+  include droidwiki::default
+  include role::puppetmaster
+  class { 'role::ganglia':
+    gmetad => true,
+  }
+
+  class { 'droidwiki::iptables':
+    ismailserver  => true,
+    irc_out       => true,
+    isjenkinshost => true,
+  }
+}
+
+node 'donut.dwnet' {
+  include droidwiki::default
+  include droidwiki::iptables
+  include role::ganglia
 }
