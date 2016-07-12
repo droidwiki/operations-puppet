@@ -1,0 +1,6 @@
+[submodule "modules/nginx2"]
+	path = modules/nginx2
+	url = https://gerrit.wikimedia.org/r/operations/puppet/nginx
+[submodule "modules/nginx"]
+	path = modules/nginx
+	url = https://gerrit.wikimedia.org/r/operations/puppet/nginx

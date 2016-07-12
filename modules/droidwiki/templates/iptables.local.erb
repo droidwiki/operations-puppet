@@ -1,0 +1,97 @@
+iptables -F
+
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+
+iptables -P OUTPUT DROP
+
+iptables -A INPUT -p tcp -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+iptables -A INPUT -j ACCEPT -p tcp --sport 22
+iptables -A INPUT -j ACCEPT -p tcp --dport 22
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 22
+iptables -A OUTPUT -j ACCEPT -p tcp --sport 22
+
+# SSH connections for gerrit (inbound and outbound)
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 29418
+iptables -A INPUT -j ACCEPT -p tcp --sport 29418
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 29418
+
+# external connections to git:// targets
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 9418
+
+iptables -A INPUT -j ACCEPT -p tcp --dport 80
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 80
+iptables -A OUTPUT -j ACCEPT -p tcp --sport 80
+iptables -A INPUT -j ACCEPT -p tcp --dport 443
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 443
+iptables -A OUTPUT -j ACCEPT -p tcp --sport 443
+
+iptables -A INPUT -p icmp --icmp-type 8 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT -p icmp --icmp-type 8 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type 0 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT -p icmp --icmp-type 0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# DNS lookup rules
+iptables -A OUTPUT -p udp --dport 53 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT  -p udp --sport 53 -m state --state ESTABLISHED     -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 53 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT  -p tcp --sport 53 -m state --state ESTABLISHED     -j ACCEPT
+
+# DHCP rules
+iptables -A OUTPUT -p udp --sport 68 -j ACCEPT
+iptables -A INPUT -p udp --dport 68 -j ACCEPT
+
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 20
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 21
+
+<% if @ismailserver %>
+iptables -A INPUT -j ACCEPT -p tcp -m multiport --dports 25,143,587,993
+iptables -A OUTPUT -j ACCEPT -p tcp -m multiport --dports 25,143,587,993
+<% end %>
+
+<% if @irc_out %>
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 6697
+<% end %>
+
+# Installation of parsoid
+# FIXME: Is this still needed?
+iptables -A OUTPUT -j ACCEPT -p tcp --dport 8080
+
+<% if @isjenkinshost %>
+iptables -A OUTPUT -j ACCEPT -p udp --dport 5353
+<% end %>
+
+# ntp time sync
+iptables -A OUTPUT -j ACCEPT -p udp --dport 123
+iptables -A INPUT -j ACCEPT -p udp --dport 123
+
+# Very trusted ip addresses, accept all data traffic from there without exceptions!
+###################################################################################
+
+# go2tech.de
+iptables -A INPUT -j ACCEPT -p tcp -s 85.214.215.12
+iptables -A OUTPUT -j ACCEPT -p tcp -d 85.214.215.12
+iptables -A INPUT -j ACCEPT -p udp -s 85.214.215.12
+iptables -A OUTPUT -j ACCEPT -p udp -d 85.214.215.12
+
+# v22015052656325188@netcup
+iptables -A INPUT -j ACCEPT -p all -s 37.120.178.25
+iptables -A OUTPUT -j ACCEPT -p all -d 37.120.178.25
+
+# v22015112656329114@netcup
+iptables -A INPUT -j ACCEPT -p all -s 188.68.49.74
+iptables -A OUTPUT -j ACCEPT -p all -d 188.68.49.74
+
+# localhost
+iptables -A INPUT -j ACCEPT -s 127.0.0.1
+iptables -A OUTPUT -j ACCEPT -d 127.0.0.1
+
+# Log rejected packets
+iptables -N LOGGING
+iptables -A INPUT -j LOGGING
+iptables -A OUTPUT -j LOGGING
+iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables-Dropped: " --log-level 4
+iptables -A LOGGING -j DROP
+

@@ -1,105 +1,5 @@
 # == Class: ganglia::gmond
 #
-# install and configure the ganglia gmond daemon
-#
-# === Parameters
-#
-# All parameteres are optional.
-#
-# [*globals_deaf*]
-#   string - defaults to "no"
-#
-# [*globals_host_dmax *]
-#   string - defaults to "0"
-#
-# [*globals_send_metadata_interval*]
-#   string - defaults to "300"
-#
-# [*cluster_name*]
-#   string - defaults to "unspecified"
-#
-# [*cluster_owner*]
-#   string - defaults to "unspecified"
-#
-# [*cluster_latlong*]
-#   string - defaults to "unspecified"
-#
-# [*cluster_url*]
-#   string - defaults to "unspecified"
-#
-# [*host_location*]
-#   string - defaults to "unspecified"
-#
-# [*udp_send_channel*]
-#   array of hashes.  Valid keys are:
-#
-#   -bind_hostname
-#   -mcast_join
-#   -host
-#   -port
-#   -ttl
-#
-#   defaults to:
-#   [ { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' } ]
-#
-# [*udp_recv_channel*]
-#   array of hashes.  Valid keys are:
-#
-#   -channel
-#   -mcast_join
-#   -port
-#   -bind
-#   -family
-#
-#   defaults to:
-#   [ { mcast_join => '239.2.11.71', port => 8649, ttl => 1 } ]
-#
-# [*tcp_accept_channel*]
-#   array of hashes.  Valid keys are:
-#
-#   -port
-#   -family
-#
-#   defaults to:
-#   [ { port => 8659 } ]
-#
-#
-# === Examples
-#
-#    $udp_recv_channel = [
-#      { port => 8649, bind => 'localhost' },
-#      { port => 8649, bind => '0.0.0.0' },
-#    ]
-#    $udp_send_channel = [
-#      { port => 8649, host => 'test1.example.org', ttl => 2 },
-#      { port => 8649, host => 'test2.example.org', ttl => 2 },
-#      { bind_hostname => "yes", host => 'test3.example.org', ttl => 1 },
-#    ]
-#    $tcp_accept_channel = [
-#      { port => 8649 },
-#    ]
-#
-#    class{ 'ganglia::gmond':
-#      cluster_name       => 'example grid',
-#      cluster_owner      => 'ACME, Inc.',
-#      cluster_latlong    => 'N32.2332147 W110.9481163',
-#      cluster_url        => 'www.example.org',
-#      host_location      => 'example computer room',
-#      udp_recv_channel   => $udp_recv_channel,
-#      udp_send_channel   => $udp_send_channel,
-#      tcp_accept_channel => $tcp_accept_channel,
-#    }
-#
-#
-# === Authors
-#
-# Joshua Hoblitt <jhoblitt@cpan.org>
-#
-# === Copyright
-#
-# Copyright (C) 2012-2014 Joshua Hoblitt
-#
-
 class ganglia::gmond (
   $globals_deaf                   = 'no',
   $globals_host_dmax              = '0',
@@ -117,6 +17,7 @@ class ganglia::gmond (
     { mcast_join => '239.2.11.71', port => 8649, bind => '239.2.11.71' }
   ],
   $tcp_accept_channel             = [ { port => 8659 } ],
+  $gmond_package_name             = $::ganglia::params::gmond_package_name,
 ) inherits ganglia::params {
   validate_string($globals_deaf)
   validate_string($globals_host_dmax)
@@ -132,10 +33,40 @@ class ganglia::gmond (
   validate_array($udp_send_channel)
   validate_array($udp_recv_channel)
   validate_array($tcp_accept_channel)
+  if !(is_string($gmond_package_name) or is_array($gmond_package_name)) {
+    fail('$gmond_package_name is not a string or array.')
+  }
 
-  anchor{ 'ganglia::gmond::begin': } ->
-  class{ 'ganglia::gmond::install': } ->
-  class{ 'ganglia::gmond::config': } ->
-  class{ 'ganglia::gmond::service': } ->
-  anchor{ 'ganglia::gmond::end': }
+  if ($::ganglia::params::gmond_status_command) {
+    $hasstatus = false
+  } else {
+    $hasstatus = true
+  }
+
+  if versioncmp($::puppetversion, '3.6.0') > 0 {
+    package { $gmond_package_name:
+      ensure        => present,
+      allow_virtual => false,
+    }
+  } else {
+    package { $gmond_package_name:
+      ensure => present,
+    }
+  }
+
+  Package[$gmond_package_name] ->
+  file { $::ganglia::params::gmond_service_config:
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template($::ganglia::params::gmond_service_erb),
+  } ~>
+  service { $::ganglia::params::gmond_service_name:
+    ensure     => running,
+    hasstatus  => $hasstatus,
+    hasrestart => true,
+    enable     => true,
+    status     => $::ganglia::params::gmond_status_command,
+  }
 }
