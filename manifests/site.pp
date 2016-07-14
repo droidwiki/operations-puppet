@@ -5,20 +5,20 @@ node 'old_example' {
 
 node 'eclair.dwnet' {
   include droidwiki::default
+  include role::gerrit
+  include role::webserver
+  include role::mailserver
+  include role::ircbot
+  include role::jenkinsmaster
   include role::puppetmaster
+
   class { 'role::ganglia':
     gmetad => true,
-  }
-
-  class { 'droidwiki::iptables':
-    ismailserver  => true,
-    irc_out       => true,
-    isjenkinshost => true,
   }
 }
 
 node 'donut.dwnet' {
   include droidwiki::default
-  include droidwiki::iptables
+  include role::webserver
   include role::ganglia
 }
