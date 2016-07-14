@@ -4,6 +4,7 @@
 # jenkins role, later.
 class role::puppetmaster {
   package { 'puppet-lint':
-    ensure => 'installed',
+    ensure   => '1.1.0',
+    provider => 'gem',
   }
 }

@@ -20,4 +20,23 @@ class droidwiki::default {
     ensure  => file,
     content => template('droidwiki/hosts.default.erb'),
   }
+
+  # ensure, that rc.local doesn't contain /etc/iptables.local call
+  include droidwiki::rclocal
+  file { '/etc/iptables.local':
+    ensure => 'absent',
+  }
+
+  class { 'firewall': }
+
+  resources { 'firewall':
+    purge   => true
+  }
+
+  Firewall {
+    before  => Class['fw::post'],
+    require => Class['fw::pre'],
+  }
+
+  class { ['fw::pre', 'fw::post']: }
 }
