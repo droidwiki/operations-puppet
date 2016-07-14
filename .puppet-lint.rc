@@ -2,6 +2,6 @@
 # we don't need to rely on it.
 --no-class_inherits_from_params_class-check
 
-# WONTFIX - We want at least 100.
+# WONTFIX - We want at least 150.
 # Lot of long lines.
---no-80chars-check
+--no-140chars-check
