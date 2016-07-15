@@ -11,6 +11,7 @@ node 'eclair.dwnet' {
   include role::ircbot
   include role::jenkinsmaster
   include role::puppetmaster
+  include role::deploymenthost
 
   class { 'role::puppetboard':
     puppetboard_url => 'puppetboard.go2tech.de',
