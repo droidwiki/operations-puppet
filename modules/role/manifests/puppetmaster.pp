@@ -7,4 +7,13 @@ class role::puppetmaster {
     ensure   => '1.1.0',
     provider => 'gem',
   }
+
+  class { 'puppetdb':
+    ssl_listen_port   => 8084,
+    disable_cleartext => true,
+  }
+  class { 'puppetdb::master::config':
+    puppetdb_port => 8084,
+    manage_config => true,
+  }
 }
