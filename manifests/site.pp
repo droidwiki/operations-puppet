@@ -12,6 +12,10 @@ node 'eclair.dwnet' {
   include role::jenkinsmaster
   include role::puppetmaster
 
+  class { 'role::puppetboard':
+    puppetboard_url => 'puppetboard.go2tech.de',
+  }
+
   class { 'role::ganglia':
     gmetad => true,
   }
