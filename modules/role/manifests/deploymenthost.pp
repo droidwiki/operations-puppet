@@ -8,4 +8,12 @@ class role::deploymenthost {
     chain  => 'OUTPUT',
     action => 'accept',
   }
+
+  package { 'git':
+    ensure => present,
+  }
+
+  package { 'rsync':
+    ensure => present,
+  }
 }
