@@ -109,12 +109,19 @@ class fw::pre {
     action      => 'accept',
   }
 
+  firewall { '112 allow outgoing traffic for HKP keyserver proto':
+    chain  => 'OUTPUT',
+    proto  => 'tcp',
+    dport  => '11371',
+    action => 'accept',
+  }
+
   # dwnet network, trusted source and destination ips
   $trustedHosts = [
     # v22015112656329114@netcup, go2tech.de
     '188.68.49.74',
     # v22015052656325188@netcup, droidwiki.de
-    '37.120.178.25'
+    '37.120.178.25',
   ]
 
   $trustedHosts.each |Integer $index, String $ipAddress| {
