@@ -27,6 +27,8 @@ class droidwiki::default {
     ensure => 'absent',
   }
 
+  class { 'sslcert::dhparam': }
+
   class { 'firewall': }
 
   resources { 'firewall':
