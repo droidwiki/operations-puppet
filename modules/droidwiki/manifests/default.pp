@@ -39,4 +39,13 @@ class droidwiki::default {
   }
 
   class { ['fw::pre', 'fw::post']: }
+
+  package { 'python-all-dev':
+    ensure => present,
+  }
+
+  file { '/usr/local/bin/pip-python':
+    ensure => link,
+    target => '/usr/local/bin/pip',
+  }
 }
