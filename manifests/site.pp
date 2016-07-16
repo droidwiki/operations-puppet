@@ -1,8 +1,4 @@
-node 'old_example' {
-  include role::mediawiki
-  include role::nginx::droidwiki
-}
-
+# site.pp
 node 'eclair.dwnet' {
   include droidwiki::default
   include role::gerrit
@@ -12,6 +8,19 @@ node 'eclair.dwnet' {
   include role::jenkinsmaster
   include role::puppetmaster
   include role::deploymenthost
+
+  include role::nginx::go2tech
+  include role::nginx::blog_go2tech
+  include role::nginx::jenkins_go2tech
+  include role::nginx::droidwiki
+  include role::nginx::ops_go2tech
+  include role::nginx::dev_go2tech
+  include role::nginx::ganglia_go2tech
+  include role::nginx::gerrit_go2tech
+  include role::nginx::git_go2tech
+  include role::nginx::puppetboard_go2tech
+  include role::nginx::graphite_go2tech
+  include role::nginx::grafana_go2tech
 
   class { 'role::puppetboard':
     puppetboard_url => 'puppetboard.go2tech.de',
@@ -26,4 +35,6 @@ node 'donut.dwnet' {
   include droidwiki::default
   include role::webserver
   include role::ganglia
+
+  include role::nginx::droidwiki
 }
