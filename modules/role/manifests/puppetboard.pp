@@ -25,11 +25,4 @@ class role::puppetboard(
     ensure   => present,
     provider => 'pip',
   }
-
-  file { "/data/www/${puppetboard_url}":
-    ensure => 'directory',
-    owner  => 'www-data',
-    group  => 'www-data',
-    mode   => '0755',
-  }
 }
