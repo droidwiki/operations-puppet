@@ -40,4 +40,17 @@ class role::webserver {
     chain  => 'OUTPUT',
     action => 'accept',
   }
+
+  # install nginx, but don't configure any hosts
+  class { 'nginx':
+    manage_repo    => true,
+    package_source => 'nginx-mainline'
+  }
+
+  file { '/data/www':
+    ensure => 'directory',
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0775',
+  }
 }
