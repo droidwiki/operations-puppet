@@ -9,6 +9,7 @@ class role::puppetboard(
   class { 'puppetboard':
     manage_virtualenv => 'latest',
     puppetdb_port     => '8083',
+    enable_query      => false,
   }
 
   package { 'flask':
