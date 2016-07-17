@@ -10,7 +10,7 @@ class role::gerrit {
 
   firewall { '201 accept incoming gerrit traffic':
     proto  => 'tcp',
-    sport  => '29418',
+    dport  => '29418',
     action => 'accept',
   }
 }
