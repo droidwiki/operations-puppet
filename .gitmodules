@@ -34,3 +34,7 @@
 [submodule "modules/python"]
 	path = modules/python
 	url = https://github.com/stankevich/puppet-python.git
+[submodule "modules/stdlib"]
+	path = modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
+	branch = 4.12.x
