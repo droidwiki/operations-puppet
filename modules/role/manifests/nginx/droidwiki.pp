@@ -24,8 +24,6 @@ class role::nginx::droidwiki {
     ssl_cert              => '/data/www/droidwiki.de/droidwiki.de.2017.crt',
     ssl_key               => '/data/www/droidwiki.de/droidwiki.de.decrypted.key',
     manage_http_redirects => false,
-    mediawiki_scriptpath  => '',
-    mediawiki_articlepath => '',
   }
 
   # some redirects
@@ -43,15 +41,12 @@ class role::nginx::droidwiki {
         'Strict-Transport-Security' => '"max-age=31536000; includeSubdomains; preload"',
       },
       vhost_cfg_append     => {
-        'return' => '301 https://www.droidwiki.de$request_uri',
+        'return' => '301 https://www.droidwiki.de/$request_uri',
       },
       use_default_location => false,
     ;
     'droidwiki.de':
       server_name      => [ '.droid.wiki', '.droidwiki.de' ],
-      vhost_cfg_append => {
-        'return' => '301 https://www.droidwiki.de$request_uri',
-      },
     ;
     'droidwiki.de.80':
       server_name => [ '.droid.wiki', '.droidwiki.de' ],
