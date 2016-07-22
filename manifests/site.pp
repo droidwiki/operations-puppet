@@ -22,9 +22,7 @@ node 'eclair.dwnet' {
   include role::nginx::graphite_go2tech
   include role::nginx::grafana_go2tech
 
-  class { 'role::puppetboard':
-    puppetboard_url => 'puppetboard.go2tech.de',
-  }
+  include role::puppetboard
 
   class { 'role::ganglia':
     gmetad => true,
