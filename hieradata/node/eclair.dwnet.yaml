@@ -1,0 +1,14 @@
+# enables this host to be the ganglia data collector
+ganglia::gmond::udp_recv_channel:
+  - port: 8649
+ganglia::gmond::tcp_accept_channel:
+  - port: 8649
+
+# configuring gmetad
+role::ganglia::gmetad: yes
+ganglia::gmetad::clusters:
+  - name: go2tech.de
+    polling_interval: 15
+    address: localhost
+ganglia::gmetad::all_trusted: no
+ganglia::gmetad::trusted_hosts: []
