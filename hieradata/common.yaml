@@ -1,0 +1,12 @@
+ganglia::gmond::globals_deaf: "no"
+ganglia::gmond::globals_host_dmax: "no"
+ganglia::gmond::globals_send_metadata_interval: "60"
+ganglia::gmond::cluster_name: go2tech.de
+ganglia::gmond::cluster_owner: DroidWiki1
+ganglia::gmond::cluster_url: droidwiki.de
+ganglia::gmond::udp_send_channel:
+  - port: 8649
+    host: puppet
+    ttl: 2
+ganglia::gmond::udp_recv_channel: []
+ganglia::gmond::tcp_accept_channel: []
