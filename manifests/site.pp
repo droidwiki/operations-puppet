@@ -24,9 +24,7 @@ node 'eclair.dwnet' {
 
   include role::puppetboard
 
-  class { 'role::ganglia':
-    gmetad => true,
-  }
+  include role::ganglia
 }
 
 node 'donut.dwnet' {
