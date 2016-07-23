@@ -7,6 +7,14 @@ class role::nginx::droidwiki {
     mode   => '0755',
   }
 
+  file { '/data/www/droidwiki.de/droidwiki.de.2017.crt':
+    ensure => 'file',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/role/certificates/droidwiki.de.2017.crt',
+  }
+
   file { '/data/www/droidwiki.de/public_html':
     ensure => 'directory',
     owner  => 'www-data',

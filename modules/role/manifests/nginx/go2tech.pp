@@ -7,6 +7,14 @@ class role::nginx::go2tech {
     mode   => '0755',
   }
 
+  file { '/data/www/go2tech.de/go2tech.de.crt':
+    ensure => 'file',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/role/certificates/go2tech.de.crt',
+  }
+
   file { '/data/www/go2tech.de/public_html':
     ensure => 'directory',
     owner  => 'www-data',
