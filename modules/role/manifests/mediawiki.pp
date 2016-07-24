@@ -15,4 +15,22 @@ class role::mediawiki{
     owner  => 'florian',
     group  => 'florian',
   }
+
+  # default location for configuration files
+  # related to mediawiki services
+  file{ '/etc/mediawiki':
+    ensure => 'directory',
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
+  }
+
+  # default location for log files
+  #related to mediawiki services
+  file { '/var/log/mediawiki':
+    ensure => 'directory',
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0755',
+  }
 }

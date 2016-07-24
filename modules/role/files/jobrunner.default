@@ -1,0 +1,7 @@
+# Options for the MediaWiki jobrunner
+JOBRUNNER_CONFIG="/etc/mediawiki/jobrunner.conf"
+JOBRUNNER_PID="/var/run/jobrunner/pid"
+JOBCHRON_PID="/var/run/jobchron/pid"
+JOBRUNNER_USER="florian"
+JOBRUNNER_GROUP="florian"
+DAEMON_OPTS=""
