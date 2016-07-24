@@ -44,3 +44,6 @@
 [submodule "modules/ganglia"]
 	path = modules/ganglia
 	url = https://github.com/jhoblitt/puppet-ganglia.git
+[submodule "modules/epel"]
+	path = modules/epel
+	url = https://github.com/stahnma/puppet-module-epel.git
