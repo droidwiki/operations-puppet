@@ -25,6 +25,8 @@ node 'eclair.dwnet' {
   include role::puppetboard
 
   include role::ganglia
+
+  include role::mailhost
 }
 
 node 'donut.dwnet' {
