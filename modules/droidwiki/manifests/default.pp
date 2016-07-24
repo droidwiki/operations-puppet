@@ -27,7 +27,8 @@ class droidwiki::default {
     ensure => 'absent',
   }
 
-  class { 'firewall': }
+  include firewall
+  include git
 
   resources { 'firewall':
     purge   => true

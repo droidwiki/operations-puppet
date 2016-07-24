@@ -9,10 +9,6 @@ class role::deploymenthost {
     action => 'accept',
   }
 
-  package { 'git':
-    ensure => present,
-  }
-
   package { 'rsync':
     ensure => present,
   }

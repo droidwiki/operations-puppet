@@ -3,6 +3,7 @@ node 'eclair.dwnet' {
   include droidwiki::default
   include role::gerrit
   include role::webserver
+  include role::mediawiki
   include role::mailserver
   include role::ircbot
   include role::jenkinsmaster
@@ -32,6 +33,8 @@ node 'eclair.dwnet' {
 node 'donut.dwnet' {
   include droidwiki::default
   include role::webserver
+  include role::mediawiki
+  include role::jobrunner
   include role::ganglia
 
   include role::nginx::droidwiki
