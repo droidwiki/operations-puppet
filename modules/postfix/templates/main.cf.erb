@@ -1,0 +1,53 @@
+smtpd_banner        = $myhostname ESMTP $mail_name (<%= @operatingsystem %>)
+biff                = no
+append_dot_mydomain = no
+readme_directory    = no
+mynetworks          = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mydestination       =
+mailbox_size_limit  = 51200000
+message_size_limit  = 51200000
+recipient_delimiter =
+inet_interfaces     = all
+myorigin            = <%= @my_hostname %>
+myhostname          = <%= @my_hostname %>
+inet_protocols      = all
+
+# incoming connections tls #
+smtpd_tls_cert_file              = <%= @certpath %>
+smtpd_tls_key_file               = <%= @keypath %>
+smtpd_use_tls                    = yes
+smtpd_tls_security_level         = may
+smtpd_tls_auth_only              = yes
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtpd_tls_mandatory_protocols    = !SSLv2 !SSLv3
+smtpd_tls_protocols              = !SSLv2 !SSLv3
+smtpd_tls_mandatory_ciphers      = high
+smtpd_tls_ciphers                = medium
+
+# outgoing connections tls #
+smtp_tls_security_level         = may
+smtp_tls_cert_file              = <%= @certpath %>
+smtp_tls_key_file               = <%= @keypath %>
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtp_tls_mandatory_protocols    = !SSLv2 !SSLv3
+smtp_tls_protocols              = !SSLv2, !SSLv3
+tls_preempt_cipherlist          = yes
+smtp_tls_mandatory_ciphers      = $smtpd_tls_mandatory_ciphers
+smtp_tls_ciphers                = $smtpd_tls_ciphers
+lmtp_tls_mandatory_ciphers      = $smtpd_tls_mandatory_ciphers
+lmtp_tls_ciphers                = $smtpd_tls_ciphers
+
+# SASL Auth
+smtpd_sasl_type              = dovecot
+smtpd_sasl_path              = private/auth
+smtpd_sasl_auth_enable       = yes
+# Use Dovecot LMTP Service to deliver Mails to Dovecot
+virtual_transport            = lmtp:unix:private/dovecot-lmtp
+# Only allow mail transport if client is authenticated or in own network (PHP Scripts, ...)
+smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+
+# virtual mailboxes managed in mysql
+virtual_alias_maps      = mysql:/etc/postfix/sql/aliases.cf
+virtual_mailbox_maps    = mysql:/etc/postfix/sql/maps.cf
+virtual_mailbox_domains = mysql:/etc/postfix/sql/domains.cf
+local_recipient_maps    = $virtual_mailbox_maps

@@ -1,0 +1,5 @@
+user = <%= @vmaildbuser %>
+password = <%= @vmaildbpass %>
+hosts = <%= @vmaildbhost %>
+dbname = <%= @vmaildbname %>
+query = select concat(username, '@', domain) as 'owns' from users where username = '%u' AND domain = '%d' union select destination AS 'owns' from aliases where source = concat('%u', '@' '%d');
