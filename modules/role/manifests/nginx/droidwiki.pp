@@ -57,7 +57,7 @@ class role::nginx::droidwiki {
       server_name      => [ '.droid.wiki', '.droidwiki.de' ],
     ;
     'droidwiki.de.80':
-      server_name => [ '.droid.wiki', '.droidwiki.de' ],
+      server_name => [ '.droid.wiki', '.droidwiki.org', '.droidwiki.de' ],
       listen_port => 80,
       ssl         => false,
       add_header  => {
