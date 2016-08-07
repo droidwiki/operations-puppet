@@ -89,9 +89,5 @@ class role::nginx::go2tech {
         'port_in_redirect' => 'off',
       },
     ;
-    'go2tech.de/pwm':
-      location => '/pwm',
-      proxy    => 'http://localhost:8082/pwm',
-    ;
   }
 }
