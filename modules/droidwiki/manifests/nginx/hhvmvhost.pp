@@ -4,6 +4,7 @@ define droidwiki::nginx::hhvmvhost (
   $custom_server_name   = undef,
   $auth_basic           = undef,
   $auth_basic_user_file = undef,
+  $www_root             = undef,
 ) {
   validate_string($vhost_url);
 
@@ -14,24 +15,30 @@ define droidwiki::nginx::hhvmvhost (
     $server_name = [ $vhost_url ]
   }
 
-  file { "/data/www/${vhost_url}":
-    ensure => 'directory',
-    owner  => 'www-data',
-    group  => 'www-data',
-    mode   => '0755',
-  }
+  if ( $www_root == undef ) {
+    file { "/data/www/${vhost_url}":
+      ensure => 'directory',
+      owner  => 'www-data',
+      group  => 'www-data',
+      mode   => '0755',
+    }
 
-  file { "/data/www/${vhost_url}/public_html":
-    ensure => 'directory',
-    owner  => 'www-data',
-    group  => 'www-data',
-    mode   => '0755',
+    file { "/data/www/${vhost_url}/public_html":
+      ensure => 'directory',
+      owner  => 'www-data',
+      group  => 'www-data',
+      mode   => '0755',
+    }
+
+    $root = "/data/www/${vhost_url}/public_html"
+  } else {
+    $root = $www_root
   }
 
   nginx::resource::vhost { $vhost_url:
     use_default_location => false,
     server_name          => $server_name,
-    www_root             => "/data/www/${vhost_url}/public_html",
+    www_root             => $root,
   }
 
   nginx::resource::location { "${vhost_url}/ .php":
