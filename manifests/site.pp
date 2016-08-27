@@ -30,6 +30,7 @@ node 'eclair.dwnet' {
   include role::mailhost
 
   include role::profilinghost
+  include role::xhgui
 }
 
 node 'donut.dwnet' {
