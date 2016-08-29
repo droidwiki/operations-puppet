@@ -3,8 +3,8 @@
 class role::xhgui {
   vcsrepo { '/data/xhprof':
     ensure   => 'latest',
-    owner    => 'florian',
-    group    => 'florian',
+    owner    => 'www-data',
+    group    => 'www-data',
     provider => git,
     require  => [ Package['git'] ],
     source   => 'https://gerrit.wikimedia.org/r/operations/software/xhprof',
@@ -20,8 +20,8 @@ class role::xhgui {
 
   vcsrepo { '/data/xhgui':
     ensure   => 'latest',
-    owner    => 'florian',
-    group    => 'florian',
+    owner    => 'www-data',
+    group    => 'www-data',
     provider => git,
     require  => [ Package['git'] ],
     source   => 'https://gerrit.wikimedia.org/r/operations/software/xhgui',
