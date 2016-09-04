@@ -22,6 +22,7 @@ node 'eclair.dwnet' {
   include role::nginx::puppetboard_go2tech
   include role::nginx::graphite_go2tech
   include role::nginx::grafana_go2tech
+  include role::nginx::missionrhode_go2tech
 
   include role::puppetboard
 
