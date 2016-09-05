@@ -16,6 +16,7 @@ class role::nginx::blog_go2tech {
 
   nginx::resource::vhost { 'blog.go2tech.de':
     use_default_location => false,
+    ipv6_enable          => true,
     server_name          => [ 'blog.go2tech.de' ],
     www_root             => '/data/www/blog.go2tech/public_html/',
     index_files          => [ 'index.php' ],

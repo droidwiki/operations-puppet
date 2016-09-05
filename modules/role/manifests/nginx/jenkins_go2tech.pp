@@ -16,6 +16,7 @@ class role::nginx::jenkins_go2tech {
 
   nginx::resource::vhost { 'jenkins.go2tech.de':
     use_default_location => false,
+    ipv6_enable          => true,
     server_name          => [ 'jenkins.go2tech.de' ],
   }
 

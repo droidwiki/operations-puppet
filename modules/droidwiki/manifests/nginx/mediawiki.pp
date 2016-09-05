@@ -11,6 +11,7 @@ define droidwiki::nginx::mediawiki (
   $ssl_cert              = undef,
   $ssl_key               = undef,
   $http2                 = 'on',
+  $ipv6_enable           = true,
   $manage_http_redirects = true,
   $mediawiki_wwwroot     = '/data/mediawiki/main',
   $mediawiki_scriptpath  = 'w/',
@@ -22,6 +23,7 @@ define droidwiki::nginx::mediawiki (
   validate_string($mediawiki_articlepath)
   validate_bool($manage_directories)
   validate_bool($ssl)
+  validate_bool($ipv6_enable)
 
   # ssl config is slightly different
   if ( $ssl ) {
@@ -67,6 +69,7 @@ define droidwiki::nginx::mediawiki (
 
   nginx::resource::vhost { $vhost_url:
     listen_port          => $listen_port,
+    ipv6_enable          => $ipv6_enable,
     ssl                  => $ssl,
     ssl_port             => $ssl_port,
     ssl_cert             => $ssl_cert,
@@ -97,6 +100,7 @@ define droidwiki::nginx::mediawiki (
   if ( $ssl and $manage_http_redirects ) {
     nginx::resource::vhost { "${vhost_url}.80":
       server_name          => $server_names,
+      ipv6_enable          => $ipv6_enable,
       listen_port          => 80,
       ssl                  => false,
       add_header           => {

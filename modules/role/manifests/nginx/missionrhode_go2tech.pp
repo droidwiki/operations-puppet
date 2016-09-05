@@ -24,6 +24,7 @@ class role::nginx::missionrhode_go2tech {
 
   nginx::resource::vhost { 'missionrhode.go2tech.de':
     listen_port          => 443,
+    ipv6_enable          => true,
     ssl                  => true,
     ssl_port             => 443,
     ssl_cert             => '/data/www/missionrhode.go2tech.de/missionrhode.go2tech.de.2017.crt',
@@ -74,6 +75,7 @@ class role::nginx::missionrhode_go2tech {
   # some redirects
   nginx::resource::vhost {
     default:
+      ipv6_enable          => true,
       add_header           => {
         'X-Delivered-By'            => $facts['fqdn'],
       },

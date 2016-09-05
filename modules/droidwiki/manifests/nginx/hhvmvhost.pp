@@ -5,8 +5,10 @@ define droidwiki::nginx::hhvmvhost (
   $auth_basic           = undef,
   $auth_basic_user_file = undef,
   $www_root             = undef,
+  $ipv6_enable          = true,
 ) {
-  validate_string($vhost_url);
+  validate_string($vhost_url)
+  validate_bool($ipv6_enable)
 
   if ( $custom_server_name != undef ) {
     validate_array($custom_server_name)
@@ -37,6 +39,7 @@ define droidwiki::nginx::hhvmvhost (
 
   nginx::resource::vhost { $vhost_url:
     use_default_location => false,
+    ipv6_enable          => $ipv6_enable,
     server_name          => $server_name,
     www_root             => $root,
   }

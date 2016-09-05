@@ -2,6 +2,7 @@
 class role::nginx::grafana_go2tech {
   nginx::resource::vhost { 'grafana.go2tech.de':
     use_default_location => false,
+    ipv6_enable          => true,
     server_name          => [ 'grafana.go2tech.de' ],
   }
 

@@ -6,10 +6,12 @@ define droidwiki::nginx::uwsgivhost (
   $auth_basic_user_file = undef,
   $uwsgi_host           = '127.0.0.1',
   $uwsgi_port           = '9000',
+  $ipv6_enable          = true,
 ) {
   validate_string($vhost_url)
   validate_string($uwsgi_host)
   validate_string($uwsgi_port)
+  validate_bool($ipv6_enable)
 
   if ( $custom_server_name != undef ) {
     validate_array($custom_server_name)
@@ -34,6 +36,7 @@ define droidwiki::nginx::uwsgivhost (
 
   nginx::resource::vhost { $vhost_url:
     use_default_location => false,
+    ipv6_enable          => $ipv6_enable,
     server_name          => $server_name,
   }
 

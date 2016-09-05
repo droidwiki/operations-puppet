@@ -24,6 +24,7 @@ class role::nginx::donut_go2tech {
 
   nginx::resource::vhost { 'donut.go2tech.de.80':
     server_name          => [ 'donut.go2tech.de' ],
+    ipv6_enable          => true,
     add_header           => {
       'X-Delivered-By' => $facts['fqdn'],
     },
@@ -36,6 +37,7 @@ class role::nginx::donut_go2tech {
 
   nginx::resource::vhost { 'donut.go2tech.de':
     server_name          => [ 'donut.go2tech.de' ],
+    ipv6_enable          => true,
     www_root             => '/data/www/donut.go2tech.de/public_html',
     index_files          => [ 'index.php' ],
     listen_port          => 443,
