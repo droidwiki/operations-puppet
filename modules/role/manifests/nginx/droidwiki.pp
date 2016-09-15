@@ -39,6 +39,7 @@ class role::nginx::droidwiki {
     default:
       listen_port          => 443,
       ipv6_enable          => true,
+      ipv6_listen_options  => '',
       ssl_port             => 443,
       ssl                  => true,
       ssl_cert             => '/data/www/droidwiki.de/droidwiki.de.2017.crt',

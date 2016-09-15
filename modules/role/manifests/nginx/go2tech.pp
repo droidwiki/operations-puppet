@@ -40,6 +40,7 @@ class role::nginx::go2tech {
   nginx::resource::vhost { 'go2tech.de.80':
     server_name          => [ 'go2tech.de', 'www.go2tech.de' ],
     ipv6_enable          => true,
+    ipv6_listen_options  => '',
     add_header           => {
       'X-Delivered-By' => $facts['fqdn'],
     },
@@ -53,6 +54,7 @@ class role::nginx::go2tech {
   nginx::resource::vhost { 'go2tech.de':
     server_name          => [ 'go2tech.de', 'www.go2tech.de', 'bits.go2tech.de', '188.68.49.74' ],
     ipv6_enable          => true,
+    ipv6_listen_options  => '',
     www_root             => '/data/www/go2tech.de/public_html',
     index_files          => [ 'index.php' ],
     listen_port          => 443,

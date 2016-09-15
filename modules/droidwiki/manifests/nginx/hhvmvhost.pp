@@ -40,6 +40,7 @@ define droidwiki::nginx::hhvmvhost (
   nginx::resource::vhost { $vhost_url:
     use_default_location => false,
     ipv6_enable          => $ipv6_enable,
+    ipv6_listen_options  => '',
     server_name          => $server_name,
     www_root             => $root,
   }

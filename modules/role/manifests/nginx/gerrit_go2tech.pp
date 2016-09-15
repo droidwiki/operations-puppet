@@ -3,6 +3,7 @@ class role::nginx::gerrit_go2tech {
   nginx::resource::vhost { 'gerrit.go2tech.de':
     use_default_location => false,
     ipv6_enable          => true,
+    ipv6_listen_options  => '',
     server_name          => [ 'gerrit.go2tech.de' ],
   }
 

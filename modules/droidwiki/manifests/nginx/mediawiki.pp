@@ -70,6 +70,7 @@ define droidwiki::nginx::mediawiki (
   nginx::resource::vhost { $vhost_url:
     listen_port          => $listen_port,
     ipv6_enable          => $ipv6_enable,
+    ipv6_listen_options  => '',
     ssl                  => $ssl,
     ssl_port             => $ssl_port,
     ssl_cert             => $ssl_cert,
@@ -101,6 +102,7 @@ define droidwiki::nginx::mediawiki (
     nginx::resource::vhost { "${vhost_url}.80":
       server_name          => $server_names,
       ipv6_enable          => $ipv6_enable,
+      ipv6_listen_options  => '',
       listen_port          => 80,
       ssl                  => false,
       add_header           => {

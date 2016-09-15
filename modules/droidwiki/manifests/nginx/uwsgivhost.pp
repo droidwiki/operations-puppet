@@ -37,6 +37,7 @@ define droidwiki::nginx::uwsgivhost (
   nginx::resource::vhost { $vhost_url:
     use_default_location => false,
     ipv6_enable          => $ipv6_enable,
+    ipv6_listen_options  => '',
     server_name          => $server_name,
   }
 
