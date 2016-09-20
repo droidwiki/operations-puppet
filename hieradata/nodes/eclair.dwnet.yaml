@@ -28,3 +28,31 @@ postfix::vmaildbpass: >
     i1JB/RL4vluR/OQfdK/EanyPuYqm3ANGnZDneiXDTjMeq8azywj44QXPufG7
     TOrfjjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBj5LROC9BDVPE1gYl1
     14tCgBD4TuxwpNAwC1bUN3AcXxcw]
+
+# configuration for automysqlbackup
+automysqlbackup::backup::mysql_dump_username: >
+    ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAOsdfBwm2PenJ+g6bOWDcz5k+yUO6NdzC5xqu
+    plPXd61+0DmPZqKeej28UO+6uRUUfETbCzFvpNdmfbvBWTQfHQkuYyImLdn1
+    UVaKpvxwzHkwB+DmB5rx+tRkzjGPi+sU8ScJIw0wA4mbpggdCkOEItUE4yQ3
+    qrqt4TD76+jESgp97mgM2WR9GsAD9RPM1j2z5phVSQ9hryJ2JYvZuBtEmdqO
+    2cmiZSxhrEg/fV1lyyeGMxZ0VS3SuOe9+SPRNMhgsTUugbytWHYdY5EdPrlA
+    f531kkbDK/qfhdp006qanrejS3uj5v7VOX2M/MoK4AzYyv5ableqKqmz8l45
+    ItBnhjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAmO9CM3EtP/+astb7N
+    RdU8gBCWSXoxAj0jHjaJx5uUriP+]
+automysqlbackup::backup::mysql_dump_password: >
+    ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAfnsQ4u+GdMi1KcyqneNCBINEgA/kJle/M7/3
+    RIiFKDg1NY2cGnYGVNLEA0TqdnIEc41IDsgV63bjZr7O2wNLwXdMiyUn7LFv
+    xGnngMw4EdvRwzEV+4SiwRPnH1U/t3/OPt53DxFvY0kdbPBMM1Rdnaw6xSqi
+    Qvxs1OJ6+F90t6+T8331xQHt98HNAtO8iJd/OnJgsHsaPFU3uvB9f9LHQ54L
+    9Ynj72a7h+vD4f3sGQqNMynuM13dgtZWdrbJm3FQq9Xy+PIQBPK9JRvw69LQ
+    QLLEL76IMUaOXjHgenyrxS/6lUWsEEGrHdp03QVmlONGD3JfUsPwWdB6fJ7R
+    qS3B6DA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCTRgI5PWPj0dfklB1s
+    hhT8gBC6e8onxTx3lSd3US0gqn6i]
+automysqlbackup::backup::db_exclude:
+  - performance_schema
+  - information_schema
+automysqlbackup::backup::table_exclude:
+  - mysql.event
+automysqlbackup::backup_dir: '/data/backup/db'

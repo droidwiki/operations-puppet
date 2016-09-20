@@ -32,6 +32,8 @@ node 'eclair.dwnet' {
 
   include role::profilinghost
   include role::xhgui
+
+  include role::mariadb
 }
 
 node 'donut.dwnet' {

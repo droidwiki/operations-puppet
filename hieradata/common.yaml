@@ -10,3 +10,6 @@ ganglia::gmond::udp_send_channel:
     ttl: 2
 ganglia::gmond::udp_recv_channel: []
 ganglia::gmond::tcp_accept_channel: []
+
+automysqlbackup::backup::mail_address: 'florian@go2tech.de'
+automysqlbackup::backup::mailcontent: 'log'
