@@ -6,7 +6,7 @@ class postfix(
   $my_hostname = undef,
   $vmaildbpass = undef,
   $vmaildbuser = 'vmail',
-  $vmaildbhost = '127.0.0.1',
+  $vmaildbhost = '37.120.178.25',
   $vmaildbname = 'vmail',
 ) {
   validate_string($certfilesource)
