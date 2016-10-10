@@ -40,3 +40,25 @@ automysqlbackup::backup::db_exclude:
 automysqlbackup::backup::table_exclude:
   - mysql.event
 automysqlbackup::backup_dir: '/data/backup/db'
+
+# configuration for monit
+monit::mail_pass: >
+    ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEACqr6BWWQpSPfrEZhhJIJcIZGL6DR0ACAdwfY
+    9ZNC/hzwEGwFro8sTenUphTZsvbucfn1YucujDxJ/8oN7YoFk3jhGmlmWIRv
+    6tiOAbsfu3/Jay4o07qFmxBaXm830io6cIOd767RD/JzSxePmjLxbQGhMxjO
+    UIE3Re6aqwhTdmSKDuvWheWipfhSLd65UFhXvcm5FylJnTliT7jmFZrxTbJB
+    bgtgkOXSLHH6BZvzTqAUE7ZCYxIqeu2plg5m21AWL4frazZjVpd73dljNOn6
+    ZK0HeNZxSwkliDfpPktIqU/vH3V2EpmjL4piNALzgdxJlfJdqHBro8XXxgi8
+    dKgRbTA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDZ+3Z+mnnRDcb6n5vL
+    VsHsgBBw4XW0OlOtmehCSpVWTyU1]
+monit::admin_pass: >
+    ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEACqr6BWWQpSPfrEZhhJIJcIZGL6DR0ACAdwfY
+    9ZNC/hzwEGwFro8sTenUphTZsvbucfn1YucujDxJ/8oN7YoFk3jhGmlmWIRv
+    6tiOAbsfu3/Jay4o07qFmxBaXm830io6cIOd767RD/JzSxePmjLxbQGhMxjO
+    UIE3Re6aqwhTdmSKDuvWheWipfhSLd65UFhXvcm5FylJnTliT7jmFZrxTbJB
+    bgtgkOXSLHH6BZvzTqAUE7ZCYxIqeu2plg5m21AWL4frazZjVpd73dljNOn6
+    ZK0HeNZxSwkliDfpPktIqU/vH3V2EpmjL4piNALzgdxJlfJdqHBro8XXxgi8
+    dKgRbTA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDZ+3Z+mnnRDcb6n5vL
+    VsHsgBBw4XW0OlOtmehCSpVWTyU1]

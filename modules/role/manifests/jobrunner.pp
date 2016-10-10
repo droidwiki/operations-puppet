@@ -60,4 +60,7 @@ class role::jobrunner {
     source => 'puppet:///modules/role/jobchron.init.conf',
     notify => Service['jobchron'],
   }
+
+  monit::service { 'mediawiki-jobrunner': }
+  monit::service { 'mediawiki-jobchron': }
 }

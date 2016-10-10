@@ -94,5 +94,24 @@ class role::nginx::go2tech {
         'port_in_redirect' => 'off',
       },
     ;
+    'go2tech.de/monit':
+      location            => '/monit',
+      location_custom_cfg => {
+        'return' => '301 /monit/',
+      },
+    ;
+    'go2tech.de/monit/':
+      location              => '/monit/',
+      rewrite_rules         => [
+        '^/monit/(.*) /$1 break',
+      ],
+      proxy                 => 'http://127.0.0.1:2812',
+      proxy_set_header      => [
+        'Host $host',
+        'X-Real-IP $remote_addr',
+        'X-Forwarded-For $remote_addr',
+      ],
+      proxy_connect_timeout => '300',
+    ;
   }
 }

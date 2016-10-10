@@ -51,6 +51,11 @@ class role::webserver {
     package_ensure => 'latest',
   }
 
+  class { 'hhvm': }
+
+  monit::service { 'nginx': }
+  monit::service { 'hhvm': }
+
   file { '/data/www':
     ensure => 'directory',
     owner  => 'www-data',
