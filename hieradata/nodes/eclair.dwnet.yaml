@@ -28,3 +28,6 @@ postfix::vmaildbpass: >
     i1JB/RL4vluR/OQfdK/EanyPuYqm3ANGnZDneiXDTjMeq8azywj44QXPufG7
     TOrfjjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBj5LROC9BDVPE1gYl1
     14tCgBD4TuxwpNAwC1bUN3AcXxcw]
+
+# mariadb settings
+role::mariadb::isSlave: true
