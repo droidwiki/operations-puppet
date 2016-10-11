@@ -1,6 +1,7 @@
 # site.pp
 node 'eclair.dwnet' {
   include droidwiki::default
+  include monit
   include role::gerrit
   include role::mariadb
   include role::webserver
@@ -35,7 +36,9 @@ node 'eclair.dwnet' {
 
 node 'donut.dwnet' {
   include droidwiki::default
+  include monit
   include role::mariadb
+  include role::parsoid
   include role::webserver
   include role::mediawiki
   include role::jobrunner
