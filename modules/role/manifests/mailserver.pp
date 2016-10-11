@@ -13,4 +13,6 @@ class role::mailserver {
     chain  => 'OUTPUT',
     action => 'accept',
   }
+
+  include postfix
 }

@@ -29,8 +29,6 @@ node 'eclair.dwnet' {
 
   include role::ganglia
 
-  include role::mailhost
-
   include role::profilinghost
   include role::xhgui
 }
