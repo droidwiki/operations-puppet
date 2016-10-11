@@ -45,8 +45,6 @@ smtpd_sasl_auth_enable       = yes
 virtual_transport            = lmtp:unix:private/dovecot-lmtp
 # Only allow mail transport if client is authenticated or in own network (PHP Scripts, ...)
 smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
-smtpd_delay_reject           = yes
-smtpd_client_restrictions    = permit_sasl_authenticated, reject
 
 # virtual mailboxes managed in mysql
 virtual_alias_maps      = mysql:/etc/postfix/sql/aliases.cf
