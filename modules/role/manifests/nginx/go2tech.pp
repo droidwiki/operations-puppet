@@ -64,7 +64,10 @@ class role::nginx::go2tech {
     ssl_key              => '/data/www/go2tech.de/go2tech.de.key',
     ssl_dhparam          => $sslcert::params::dhparampempath,
     http2                => on,
-    add_header           => { 'X-Delivered-By' => $facts['fqdn'] },
+    add_header           => {
+      'X-Delivered-By'            => $facts['fqdn'],
+      'Strict-Transport-Security' => '"max-age=31536000; preload"',
+    },
     vhost_cfg_append     => {
       'error_page 404' => '/404.html',
     },
