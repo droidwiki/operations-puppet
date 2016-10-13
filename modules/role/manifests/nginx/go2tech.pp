@@ -63,6 +63,9 @@ class role::nginx::go2tech {
     ssl_cert             => '/data/www/go2tech.de/go2tech.de.crt',
     ssl_key              => '/data/www/go2tech.de/go2tech.de.key',
     ssl_dhparam          => $sslcert::params::dhparampempath,
+    ssl_stapling         => true,
+    ssl_stapling_verify  => true,
+    ssl_trusted_cert     => '/etc/ssl/certs/startssl.root.intermediate.pem',
     http2                => on,
     add_header           => { 'X-Delivered-By' => $facts['fqdn'] },
     vhost_cfg_append     => {
