@@ -62,4 +62,12 @@ class role::webserver {
     group  => 'www-data',
     mode   => '0775',
   }
+
+  file { '/etc/ssl/certs/startssl.root.intermediate.pem':
+    ensure => 'present',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/role/certificates/startssl.root.intermediate.pem',
+  }
 }

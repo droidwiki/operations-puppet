@@ -44,6 +44,9 @@ class role::nginx::droidwiki {
       ssl                  => true,
       ssl_cert             => '/data/www/droidwiki.de/droidwiki.de.2017.crt',
       ssl_key              => '/data/www/droidwiki.de/droidwiki.de.decrypted.key',
+      ssl_stapling         => true,
+      ssl_stapling_verify  => true,
+      ssl_trusted_cert     => '/etc/ssl/certs/startssl.root.intermediate.pem',
       ssl_dhparam          => $sslcert::params::dhparampempath,
       http2                => on,
       add_header           => {
