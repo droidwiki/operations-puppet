@@ -78,7 +78,6 @@ define droidwiki::nginx::mediawiki (
     ssl_dhparam          => $sslcert::params::dhparampempath,
     ssl_stapling         => true,
     ssl_stapling_verify  => true,
-    ssl_trusted_cert     => '/etc/ssl/certs/startssl.root.intermediate.pem',
     http2                => $http2,
     add_header           => $add_header,
     use_default_location => false,

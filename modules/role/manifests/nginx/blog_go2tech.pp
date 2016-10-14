@@ -26,6 +26,8 @@ class role::nginx::blog_go2tech {
     ssl_cert             => '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem',
     ssl_key              => '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem',
     ssl_dhparam          => $sslcert::params::dhparampempath,
+    ssl_stapling         => true,
+    ssl_stapling_verify  => true,
     http2                => on,
     www_root             => '/data/www/blog.go2tech/public_html/',
     index_files          => [ 'index.php' ],

@@ -65,7 +65,6 @@ class role::nginx::go2tech {
     ssl_dhparam          => $sslcert::params::dhparampempath,
     ssl_stapling         => true,
     ssl_stapling_verify  => true,
-    ssl_trusted_cert     => '/etc/ssl/certs/startssl.root.intermediate.pem',
     http2                => on,
     add_header           => {
       'X-Delivered-By'            => $facts['fqdn'],
