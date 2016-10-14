@@ -11,6 +11,7 @@ node 'eclair.dwnet' {
   include role::jenkinsmaster
   include role::puppetmaster
   include role::deploymenthost
+  include certbot
 
   include role::nginx::go2tech
   include role::nginx::blog_go2tech
