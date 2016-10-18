@@ -11,7 +11,7 @@ class certbot {
   }
 
   cron { 'letsencrypt renew cron':
-    command => 'certbot-auto renew --quiet --no-self-upgrade',
+    command => '/usr/local/sbin/certbot-auto renew --quiet --no-self-upgrade',
     user    => root,
     hour    => 2,
     minute  => 30,
