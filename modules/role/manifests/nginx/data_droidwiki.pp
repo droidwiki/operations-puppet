@@ -8,7 +8,7 @@ class role::nginx::data_droidwiki {
     html_root             => '/data/www/droidwiki.de/public_html',
     listen_port           => 443,
     ssl                   => true,
-    ssl_cert              => '/data/www/droidwiki.de/droidwiki.de.2017.crt',
-    ssl_key               => '/data/www/droidwiki.de/droidwiki.de.decrypted.key',
+    ssl_cert              => '/etc/letsencrypt/live/droidwiki.de/fullchain.pem',
+    ssl_key               => '/etc/letsencrypt/live/droidwiki.de/privkey.pem',
   }
 }

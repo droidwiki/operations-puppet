@@ -7,14 +7,6 @@ class role::nginx::donut_go2tech {
     mode   => '0755',
   }
 
-  file { '/data/www/donut.go2tech.de/donut.go2tech.de.crt':
-    ensure => 'file',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/role/certificates/donut.go2tech.de.crt',
-  }
-
   file { '/data/www/donut.go2tech.de/public_html':
     ensure => 'directory',
     owner  => 'www-data',
@@ -45,8 +37,8 @@ class role::nginx::donut_go2tech {
     listen_port          => 443,
     ssl_port             => 443,
     ssl                  => true,
-    ssl_cert             => '/data/www/donut.go2tech.de/donut.go2tech.de.crt',
-    ssl_key              => '/data/www/donut.go2tech.de/donut.go2tech.de.key',
+    ssl_cert              => '/etc/letsencrypt/live/droidwiki.de/fullchain.pem',
+    ssl_key               => '/etc/letsencrypt/live/droidwiki.de/privkey.pem',
     ssl_dhparam          => $sslcert::params::dhparampempath,
     http2                => on,
     add_header           => { 'X-Delivered-By' => $facts['fqdn'] },
