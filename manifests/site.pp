@@ -14,6 +14,7 @@ node 'eclair.dwnet' {
   include certbot
 
   include role::nginx::go2tech
+  include role::nginx::www_go2tech
   include role::nginx::blog_go2tech
   include role::nginx::jenkins_go2tech
   include role::nginx::droidwiki
