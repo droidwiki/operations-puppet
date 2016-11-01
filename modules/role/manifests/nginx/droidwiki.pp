@@ -1,18 +1,11 @@
 # nginx vhost droidwiki.de
+# ALWAYS PAIR WITH CERTBOT!
 class role::nginx::droidwiki {
   file { '/data/www/droidwiki.de':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
-  }
-
-  file { '/data/www/droidwiki.de/droidwiki.de.2017.crt':
-    ensure => 'file',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/role/certificates/droidwiki.de.2017.crt',
   }
 
   file { '/data/www/droidwiki.de/public_html':
@@ -29,8 +22,8 @@ class role::nginx::droidwiki {
     html_root             => '/data/mediawiki/mw-config/mw-config/docroot',
     listen_port           => 443,
     ssl                   => true,
-    ssl_cert              => '/data/www/droidwiki.de/droidwiki.de.2017.crt',
-    ssl_key               => '/data/www/droidwiki.de/droidwiki.de.decrypted.key',
+    ssl_cert              => '/etc/letsencrypt/live/droidwiki.de/fullchain.pem',
+    ssl_key               => '/etc/letsencrypt/live/droidwiki.de/privkey.pem',
     manage_http_redirects => false,
   }
 
@@ -42,8 +35,8 @@ class role::nginx::droidwiki {
       ipv6_listen_options  => '',
       ssl_port             => 443,
       ssl                  => true,
-      ssl_cert             => '/data/www/droidwiki.de/droidwiki.de.2017.crt',
-      ssl_key              => '/data/www/droidwiki.de/droidwiki.de.decrypted.key',
+      ssl_cert              => '/etc/letsencrypt/live/droidwiki.de/fullchain.pem',
+      ssl_key               => '/etc/letsencrypt/live/droidwiki.de/privkey.pem',
       ssl_stapling         => true,
       ssl_stapling_verify  => true,
       ssl_dhparam          => $sslcert::params::dhparampempath,
