@@ -19,11 +19,38 @@ class role::nginx::jenkins_go2tech {
     ipv6_enable          => true,
     ipv6_listen_options  => '',
     server_name          => [ 'jenkins.go2tech.de' ],
+    listen_port          => 443,
+    ssl_port             => 443,
+    ssl                  => true,
+    ssl_cert             => '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem',
+    ssl_key              => '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem',
+    ssl_dhparam          => $sslcert::params::dhparampempath,
+    ssl_stapling         => true,
+    ssl_stapling_verify  => true,
+    http2                => on,
+  }
+
+  nginx::resource::vhost { 'jenkins.go2tech.de.80':
+    server_name          => [ 'jenkins.go2tech.de' ],
+    listen_port          => 80,
+    ipv6_enable          => true,
+    ipv6_listen_options  => '',
+    ssl                  => false,
+    add_header           => {
+      'X-Delivered-By' => $facts['fqdn'],
+    },
+    index_files          => [],
+    vhost_cfg_append     => {
+      'return' => '301 https://jenkins.go2tech.de$request_uri',
+    },
+    use_default_location => false,
   }
 
   nginx::resource::location {
     default:
-      vhost => 'jenkins.go2tech.de',
+      vhost    => 'jenkins.go2tech.de',
+      ssl      => true,
+      ssl_only => true,
     ;
     'jenkins.go2tech.de/':
       location              => '/',
@@ -47,5 +74,11 @@ class role::nginx::jenkins_go2tech {
       location => '/zuul/status.json',
       proxy    => 'http://127.0.0.1:8001/status.json',
     ;
+  }
+
+  nginx::resource::location { 'jenkins.go2tech.de/.well-known':
+    vhost    => 'jenkins.go2tech.de.80',
+    location => '^~ /.well-known/acme-challenge/',
+    www_root => '/data/www/jenkins.go2tech.de/public_html/',
   }
 }
