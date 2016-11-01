@@ -45,6 +45,7 @@ node 'donut.dwnet' {
   include role::mediawiki
   include role::jobrunner
   include role::ganglia
+  include certbot
 
   include role::nginx::droidwiki
   include role::nginx::data_droidwiki
