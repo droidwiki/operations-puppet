@@ -8,11 +8,7 @@ class role::nginx::missionrhode_go2tech {
   }
 
   file { '/data/www/missionrhode.go2tech.de/missionrhode.go2tech.de.2017.crt':
-    ensure => 'file',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/role/certificates/missionrhode.go2tech.de.2017.crt',
+    ensure => 'absent',
   }
 
   file { '/data/www/missionrhode.go2tech.de/public_html':
