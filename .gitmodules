@@ -53,3 +53,6 @@
 [submodule "modules/automysqlbackup"]
 	path = modules/automysqlbackup
 	url = git@github.com:nextrevision/puppet-automysqlbackup.git
+[submodule "modules/tagmail"]
+	path = modules/tagmail
+	url = git@github.com:puppetlabs/puppetlabs-tagmail.git
