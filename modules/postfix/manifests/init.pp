@@ -1,6 +1,5 @@
 # Handles the installation and configuration of postfix
 class postfix(
-  $certfilesource = undef,
   $certpath = '/etc/postfix/mailserver.crt',
   $keypath = '/etc/postfix/mailserver.key',
   $my_hostname = undef,
@@ -9,7 +8,6 @@ class postfix(
   $vmaildbhost = 'eclair.dwnet',
   $vmaildbname = 'vmail',
 ) {
-  validate_string($certfilesource)
   validate_string($my_hostname)
   validate_string($certpath)
   validate_string($keypath)
@@ -28,13 +26,10 @@ class postfix(
     require => Package['postfix'],
   }
 
-  file { $certpath:
-    ensure => 'file',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => $certfilesource,
-    notify => Service['postfix'],
+  # FIXME: Remove this after some days (e.g. after the 20th November), so
+  # there's enough time, that the file is removed.
+  file { '/etc/postfix/go2tech.de.crt':
+    ensure => absent,
   }
 
   file { '/etc/postfix/main.cf':
