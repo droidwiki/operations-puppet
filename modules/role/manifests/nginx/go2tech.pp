@@ -8,11 +8,7 @@ class role::nginx::go2tech {
   }
 
   file { '/data/www/go2tech.de/go2tech.de.crt':
-    ensure => 'file',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/role/certificates/go2tech.de.crt',
+    ensure => absent,
   }
 
   file { '/data/www/go2tech.de/public_html':
@@ -60,8 +56,8 @@ class role::nginx::go2tech {
     listen_port          => 443,
     ssl_port             => 443,
     ssl                  => true,
-    ssl_cert             => '/data/www/go2tech.de/go2tech.de.crt',
-    ssl_key              => '/data/www/go2tech.de/go2tech.de.key',
+    ssl_cert             => '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem',
+    ssl_key              => '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem',
     ssl_dhparam          => $sslcert::params::dhparampempath,
     ssl_stapling         => true,
     ssl_stapling_verify  => true,

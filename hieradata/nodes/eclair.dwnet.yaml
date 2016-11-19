@@ -15,9 +15,8 @@ ganglia::gmetad::trusted_hosts: []
 
 # config parameters for postfix
 postfix::my_hostname: go2tech.de
-postfix::keypath: /etc/postfix/go2tech.de.key
-postfix::certpath: /etc/postfix/go2tech.de.crt
-postfix::certfilesource: puppet:///modules/role/certificates/bits.go2tech.de.crt
+postfix::keypath: /etc/letsencrypt/live/blog.go2tech.de/privkey.pem
+postfix::certpath: /etc/letsencrypt/live/blog.go2tech.de/fullchain.pem
 postfix::vmaildbpass: >
     ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
     DQYJKoZIhvcNAQEBBQAEggEAk4OaayYYiTr55g/oFAIayj65Wf8Zy6xwqUpz
