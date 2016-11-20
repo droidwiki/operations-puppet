@@ -56,3 +56,15 @@
 [submodule "modules/tagmail"]
 	path = modules/tagmail
 	url = git@github.com:puppetlabs/puppetlabs-tagmail.git
+[submodule "modules/logstash"]
+	path = modules/logstash
+	url = git@github.com:elastic/puppet-logstash.git
+[submodule "modules/file_concat"]
+	path = modules/file_concat
+	url = git@github.com:electrical/puppet-lib-file_concat.git
+[submodule "modules/kibana4"]
+	path = modules/kibana4
+	url = git@github.com:lesaux/puppet-kibana4.git
+[submodule "modules/redis"]
+	path = modules/redis
+	url = git@github.com:arioch/puppet-redis.git

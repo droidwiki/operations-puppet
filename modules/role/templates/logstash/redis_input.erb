@@ -1,0 +1,9 @@
+input {
+  redis {
+    host      => "<%= @redis_input_host %>"
+    port      => <%= @redis_input_port %>
+    data_type => "<%= @redis_input_data_type %>"
+    key       => "<%= @redis_input_key %>"
+    tags      => [ "redis" ]
+  }
+}

@@ -1,0 +1,13 @@
+output {
+    # We use the http protocol so that the cluster and logstash don't have to
+    # be tightly coupled by the binary protocol
+    elasticsearch {
+        flush_size      => <%= @es_output_flush_size %>
+        host            => "<%= @es_output_host %>"
+        idle_flush_time => <%= @es_output_idle_flush_time %>
+        index           => "<%= @es_output_index %>"
+        port            => <%= @es_output_port %>
+        protocol        => "http"
+        manage_template => false
+    }
+}
