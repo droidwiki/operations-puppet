@@ -21,12 +21,16 @@ class role::logstash(
   }
 
   logstash::configfile { 'input-redis-log':
-    content  => template('role/logstash/redis_input.erb'),
+    content => template('role/logstash/redis_input.erb'),
   }
 
   $es_output_index = 'logstash-%{+YYYY.MM.dd}'
 
   logstash::configfile { 'output-es-log':
-    content  => template('role/logstash/es_output.erb'),
+    content => template('role/logstash/es_output.erb'),
+  }
+
+  logstash::configfile { 'filter-mediawiki':
+    source => 'puppet:///modules/role/logstash/filter-mediawiki.conf',
   }
 }
