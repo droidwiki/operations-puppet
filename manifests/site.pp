@@ -33,6 +33,9 @@ node 'eclair.dwnet' {
 
   include role::profilinghost
   include role::xhgui
+
+  include role::logstash
+  include role::kibana
 }
 
 node 'donut.dwnet' {

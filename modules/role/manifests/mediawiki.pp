@@ -26,11 +26,13 @@ class role::mediawiki{
   }
 
   # default location for log files
-  #related to mediawiki services
+  # related to mediawiki services
   file { '/var/log/mediawiki':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
-    mode   => '0755',
+    # FIXME: 765 because otherwise deployments would fail as they're done
+    # with the user who does the deployment (this should be changed)
+    mode   => '0765',
   }
 }
