@@ -39,6 +39,10 @@ class role::logstash(
     source => 'puppet:///modules/role/logstash/filter-mediawiki.conf',
   }
 
+  logstash::configfile { 'filter_syslog':
+    source => 'puppet:///modules/role/logstash/filter-syslog.conf',
+  }
+
   file { '/usr/local/bin/logstash_delete_index.sh':
     owner  => 'root',
     group  => 'root',

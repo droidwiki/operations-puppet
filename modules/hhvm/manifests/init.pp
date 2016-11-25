@@ -18,12 +18,41 @@ class hhvm {
     notify => Exec[ 'update-rc.d hhvm defaults' ],
   }
 
+  service { 'hhvm':
+    ensure => 'running',
+  }
+
+  file { '/etc/hhvm/server.ini':
+    source => 'puppet:///modules/hhvm/server.ini',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0664',
+    notify => Service['hhvm'],
+  }
+
+  file { '/etc/rsyslog.d/20-hhvm.conf':
+    ensure => 'present',
+    source => 'puppet:///modules/hhvm/hhvm.rsyslog.conf',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0444',
+    notify => Service['rsyslog'],
+  }
+
   file { '/etc/logrotate.d/hhvm':
     content => template('hhvm/hhvm.logrotate.erb'),
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
     before  => Package['hhvm'],
+  }
+
+  file { '/var/log/hhvm':
+    ensure => directory,
+    owner  => 'syslog',
+    group  => 'www-data',
+    mode   => '0775',
+    before => Service['hhvm'],
   }
 
   exec { 'update-rc.d hhvm defaults':
