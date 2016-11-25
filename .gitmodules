@@ -68,3 +68,6 @@
 [submodule "modules/redis"]
 	path = modules/redis
 	url = git@github.com:arioch/puppet-redis.git
+[submodule "modules/rsyslog"]
+	path = modules/rsyslog
+	url = git@github.com:saz/puppet-rsyslog.git
