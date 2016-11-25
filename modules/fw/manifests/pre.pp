@@ -55,10 +55,7 @@ class fw::pre {
   }
 
   firewall { '104 allow puppet communication':
-    dport  => '8140',
-    proto  => 'tcp',
-    chain  => 'OUTPUT',
-    action => 'accept',
+    ensure => 'absent',
   }
 
   firewall { '105 allow outgoing dns requests':
@@ -116,6 +113,20 @@ class fw::pre {
     action => 'accept',
   }
 
+  firewall { '113 allow outgoing dhcp traffic':
+    chain  => 'OUTPUT',
+    proto  => 'udp',
+    dport  => '67',
+    action => 'accept',
+  }
+
+  firewall { '114 allow outgoing dhcp traffic':
+    chain  => 'OUTPUT',
+    proto  => 'udp',
+    dport  => '547',
+    action => 'accept',
+  }
+
   # dwnet network, trusted source and destination ips
   $trustedHosts = [
     # v22015112656329114@netcup, go2tech.de
@@ -125,7 +136,7 @@ class fw::pre {
   ]
 
   $trustedHosts.each |Integer $index, String $ipAddress| {
-    $inputCount = 111 + $index
+    $inputCount = 114 + $index
     $outputCount = $inputCount + 1
     firewall { "${outputCount} allow outgoing traffic to ${ipAddress}":
       proto       => 'all',
