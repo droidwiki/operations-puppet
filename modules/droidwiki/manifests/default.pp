@@ -10,21 +10,9 @@ class droidwiki::default {
     managehome => true,
   }
 
-  # exec { 'apt-update':
-  #   command => '/usr/bin/apt-get update'
-  # }
-
-  # Exec['apt-update'] -> Package <| |>
-
   file { '/etc/hosts':
     ensure  => file,
     content => template('droidwiki/hosts.default.erb'),
-  }
-
-  # ensure, that rc.local doesn't contain /etc/iptables.local call
-  include droidwiki::rclocal
-  file { '/etc/iptables.local':
-    ensure => 'absent',
   }
 
   include firewall
