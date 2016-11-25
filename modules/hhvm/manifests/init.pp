@@ -18,6 +18,14 @@ class hhvm {
     notify => Exec[ 'update-rc.d hhvm defaults' ],
   }
 
+  file { '/etc/logrotate.d/hhvm':
+    content => template('hhvm/hhvm.logrotate.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    before  => Package['hhvm'],
+  }
+
   exec { 'update-rc.d hhvm defaults':
     refreshonly => true,
     path        => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:',
