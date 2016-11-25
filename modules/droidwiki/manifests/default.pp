@@ -45,4 +45,9 @@ class droidwiki::default {
     ensure => link,
     target => '/usr/local/bin/pip',
   }
+
+  class { 'rsyslog::client':
+    server => 'eclair.dwnet',
+    port   => '1514',
+  }
 }

@@ -7,6 +7,7 @@ class role::logstash(
   $redis_input_port          = 6379,
   $redis_input_data_type     = 'list',
   $redis_input_key           = 'logstash',
+  $rsyslog_input_port        = 1514,
   $es_output_flush_size      = 5000,
   $es_output_host            = '127.0.0.1',
   $es_output_port            = 9200,
@@ -24,6 +25,10 @@ class role::logstash(
     content => template('role/logstash/redis_input.erb'),
   }
 
+  logstash::configfile { 'input-rsyslog-log':
+    content => template('role/logstash/rsyslog_input.erb'),
+  }
+
   $es_output_index = 'logstash-%{+YYYY.MM.dd}'
 
   logstash::configfile { 'output-es-log':
@@ -32,5 +37,21 @@ class role::logstash(
 
   logstash::configfile { 'filter-mediawiki':
     source => 'puppet:///modules/role/logstash/filter-mediawiki.conf',
+  }
+
+  file { '/usr/local/bin/logstash_delete_index.sh':
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0555',
+    source => 'puppet:///modules/role/logstash/scripts/logstash_delete_index.sh',
+  }
+
+  cron { "logstash_delete_index":
+    ensure  => 'present',
+    command => "/usr/local/bin/logstash_delete_index.sh ${es_output_host}:${es_output_port} \"logstash-$(date -d '-31days' +\\%Y.\\%m.\\%d)\"",
+    user    => 'root',
+    hour    => 0,
+    minute  => 42,
+    require => File['/usr/local/bin/logstash_delete_index.sh'],
   }
 }
