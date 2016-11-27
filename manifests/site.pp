@@ -32,6 +32,7 @@ node 'eclair.dwnet' {
   include role::profilinghost
   include role::xhgui
 
+  include role::elasticsearch
   include role::logstash
   include role::kibana
 }
