@@ -25,9 +25,16 @@ class role::mediawiki{
     group  => 'root',
   }
 
+  file { '/data/log':
+    ensure => 'directory',
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0765',
+  }
+
   # default location for log files
   # related to mediawiki services
-  file { '/var/log/mediawiki':
+  file { '/data/log/mediawiki':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
