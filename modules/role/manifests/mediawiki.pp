@@ -40,6 +40,6 @@ class role::mediawiki{
     group  => 'www-data',
     # FIXME: 765 because otherwise deployments would fail as they're done
     # with the user who does the deployment (this should be changed)
-    mode   => '0765',
+    mode   => '0766',
   }
 }
