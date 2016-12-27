@@ -1,0 +1,2 @@
+# define this server as the NFS host
+droidwiki::default::isNFSServer: true
