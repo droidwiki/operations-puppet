@@ -83,3 +83,6 @@
 [submodule "modules/sysctl"]
 	path = modules/sysctl
 	url = git@github.com:thias/puppet-sysctl.git
+[submodule "modules/nfs"]
+	path = modules/nfs
+	url = git@github.com:derdanne/puppet-nfs.git

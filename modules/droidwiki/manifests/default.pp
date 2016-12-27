@@ -1,6 +1,8 @@
 # Default things to do for all servers.
 # Create a default user (florian) and run apt-get update
-class droidwiki::default {
+class droidwiki::default (
+  $isNFSServer = false,
+) {
   user { 'florian':
     ensure     => present,
     name       => 'florian',
@@ -37,5 +39,13 @@ class droidwiki::default {
   class { 'rsyslog::client':
     server => 'eclair.dwnet',
     port   => '1514',
+  }
+
+  if ($isNFSServer == false) {
+    # all droidwiki servers should have access to the nfs shareddata
+    class { '::nfs':
+      client_enabled => true,
+    }
+    Nfs::Client::Mount <<| |>>
   }
 }

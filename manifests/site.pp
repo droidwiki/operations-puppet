@@ -47,8 +47,10 @@ node 'donut.dwnet' {
   include role::jobrunner
   include role::ganglia
   include certbot
+  include role::nfs_server
 
   include role::nginx::droidwiki
   include role::nginx::data_droidwiki
   include role::nginx::donut_go2tech
+  include role::nginx::missionrhode_go2tech
 }
