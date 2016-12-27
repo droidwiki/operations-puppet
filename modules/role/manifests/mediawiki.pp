@@ -29,7 +29,7 @@ class role::mediawiki{
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
-    mode   => '0765',
+    mode   => '0755',
   }
 
   # default location for log files
@@ -40,6 +40,6 @@ class role::mediawiki{
     group  => 'www-data',
     # FIXME: 765 because otherwise deployments would fail as they're done
     # with the user who does the deployment (this should be changed)
-    mode   => '0766',
+    mode   => '0755',
   }
 }
