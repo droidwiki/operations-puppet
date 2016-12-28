@@ -1,0 +1,35 @@
+groups:
+  absent:
+    description: meta group for absented users
+    members: []
+  wikidev:
+    gid: 500
+    description: container group for primary user groups.
+    members: []
+  all-users:
+    description: Global group that includes all users
+    gid: 600
+    members: [] # members get populated automagically
+    privileges: [] # NO privileges to this group!
+  ops:
+    gid: 700
+    description: include everywhere ops folks
+    members: &ops_members []
+    privileges: ['ALL = (ALL) NOPASSWD: ALL']
+  deployment:
+    gid: 701
+    description: group for software deployments
+    members: [florian]
+    privileges: ['ALL = (www-data) NOPASSWD: ALL',
+                 'ALL = NOPASSWD: /sbin/restart hhvm',
+                 'ALL = NOPASSWD: /sbin/start hhvm',
+                 'ALL = NOPASSWD: /etc/init.d/nginx']
+
+users:
+  florian:
+    ensure: present
+    gid: 500
+    name: florian
+    realname: Florian Schmidt
+    ssh_keys: [ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC25fuvRCu5K9Jj3TIu49gM5pUFkHvvxxPALucjnmRv4yhP4qJiSCJed5bCrdhVkKL6I/k8/8XawIDGzv7DpzWvp+Sp2xL83GW4zrqVJBtH9eL5H/IPg1TDR4mRsO/6MDIOPEVRM3WwdvVFcYlgUUgqShNK86WCsCkLL+eiHIPsEqMsupoxn3Zt515p9qKwsQ7C5VsOdBid+2kCQnA/UVoLArc/fBiw6tZAmMpzVViYET/FsYUJACPpZTgXgplQZQa4janx4enP3Cb+b8rpY5Ul3Ax7K2p3tsDDFSIo00sRW/mNcoy73zi6lTCONjisRPB0lVMu38ITYHaMGKsHb77j florian.schmidt.welzow@t-online.de]
+    uid: 1000

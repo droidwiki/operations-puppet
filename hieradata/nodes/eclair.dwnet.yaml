@@ -1,3 +1,7 @@
+# groups to create on this host
+admin::groups:
+  - deployment
+
 # enables this host to be the ganglia data collector
 ganglia::gmond::udp_recv_channel:
   - port: 8649
