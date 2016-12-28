@@ -3,14 +3,14 @@
 class droidwiki::default (
   $isNFSServer = false,
 ) {
-  user { 'florian':
-    ensure     => present,
-    name       => 'florian',
-    shell      => '/bin/bash',
-    home       => '/home/florian',
-    system     => true,
-    managehome => true,
-  }
+#  user { 'florian':
+#    ensure     => present,
+#    name       => 'florian',
+#    shell      => '/bin/bash',
+#    home       => '/home/florian',
+#    system     => true,
+#    managehome => true,
+#  }
 
   file { '/etc/hosts':
     ensure  => file,
@@ -48,4 +48,7 @@ class droidwiki::default (
     }
     Nfs::Client::Mount <<| |>>
   }
+
+  include ssh
+  include admin
 }
