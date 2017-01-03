@@ -5,15 +5,15 @@ class role::mediawiki{
   file{ '/data/mediawiki':
     ensure => 'directory',
     mode   => '0775',
-    owner  => 'florian',
-    group  => 'florian',
+    owner  => 'www-data',
+    group  => 'www-data',
   }
 
   file{ '/data/mediawiki/main':
     ensure => 'directory',
     mode   => '0775',
-    owner  => 'florian',
-    group  => 'florian',
+    owner  => 'www-data',
+    group  => 'www-data',
   }
 
   # default location for configuration files
