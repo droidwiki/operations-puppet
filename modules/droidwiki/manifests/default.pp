@@ -1,5 +1,4 @@
 # Default things to do for all servers.
-# Create a default user (florian) and run apt-get update
 class droidwiki::default (
   $isNFSServer = false,
 ) {
