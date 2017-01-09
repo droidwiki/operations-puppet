@@ -11,7 +11,7 @@ class certbot {
   }
 
   cron { 'letsencrypt renew cron':
-    command => '/usr/local/sbin/certbot-auto renew --quiet --no-self-upgrade',
+    command => '/usr/local/sbin/certbot-auto renew --quiet --no-self-upgrade --renew-hook "service nginx restart"',
     user    => root,
     hour    => 2,
     minute  => 30,
