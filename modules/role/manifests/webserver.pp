@@ -48,7 +48,6 @@ class role::webserver {
   class { 'nginx':
     manage_repo    => true,
     package_source => 'nginx-mainline',
-    package_ensure => 'latest',
   }
 
   class { 'hhvm': }
