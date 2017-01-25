@@ -1,0 +1,8 @@
+Code-Review+2: Florian Schmidt <florian.schmidt.stargatewissen@gmail.com>
+Deploy+2: Florian Schmidt <florian.schmidt.stargatewissen@gmail.com>
+Verified+1: Jenkins CI <zuul@go2tech.de>
+Submitted-by: Jenkins CI <zuul@go2tech.de>
+Submitted-at: Wed, 25 Jan 2017 18:38:28 +0100
+Reviewed-on: http://gerrit.go2tech.de/2625
+Project: droidwiki/operations/puppet
+Branch: refs/heads/master
