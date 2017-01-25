@@ -16,8 +16,8 @@ class role::jobrunner {
 
   vcsrepo { '/data/mediawiki/services/jobrunner':
     ensure   => 'latest',
-    owner    => 'florian',
-    group    => 'florian',
+    owner    => 'www-data',
+    group    => 'www-data',
     provider => git,
     require  => [ Package['git'] ],
     source   => 'https://gerrit.wikimedia.org/r/mediawiki/services/jobrunner',
