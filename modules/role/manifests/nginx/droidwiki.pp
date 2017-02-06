@@ -19,9 +19,9 @@ class role::nginx::droidwiki {
     mode   => '0755',
   }
 
-  droidwiki::nginx::mediawiki { 'www.droidwiki.de':
-    vhost_url             => 'www.droidwiki.de',
-    server_name           => [ 'www.droidwiki.de' ],
+  droidwiki::nginx::mediawiki { 'www.droidwiki.org':
+    vhost_url             => 'www.droidwiki.org',
+    server_name           => [ 'www.droidwiki.org' ],
     manage_directories    => false,
     html_root             => '/data/mediawiki/mw-config/mw-config/docroot',
     listen_port           => 443,
@@ -50,12 +50,15 @@ class role::nginx::droidwiki {
         'Strict-Transport-Security' => '"max-age=31536000; includeSubdomains; preload"',
       },
       vhost_cfg_append     => {
-        'return' => '301 https://www.droidwiki.de$request_uri',
+        'return' => '301 https://www.droidwiki.org$request_uri',
       },
       use_default_location => false,
     ;
     'droidwiki.de':
       server_name      => [ '.droid.wiki', '.droidwiki.de' ],
+    ;
+    'www.droidwiki.de':
+      server_name      => [ 'www.droidwiki.de' ],
     ;
     'droidwiki.de.80':
       server_name => [ '.droid.wiki', '.droidwiki.org', '.droidwiki.de' ],
