@@ -42,4 +42,11 @@ class role::mediawiki{
     # with the user who does the deployment (this should be changed)
     mode   => '0755',
   }
+
+  file { '/etc/logrotate.d/mediawiki':
+    content => template('role/mediawiki.logrotate.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+  }
 }

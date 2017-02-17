@@ -41,4 +41,8 @@ class droidwiki::default (
 
   include ssh
   include admin
+
+  include monit
+  monit::service { 'os_disk': }
+  monit::service { 'data_disk': }
 }
