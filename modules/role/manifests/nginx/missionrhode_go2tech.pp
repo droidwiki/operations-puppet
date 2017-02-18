@@ -18,14 +18,17 @@ class role::nginx::missionrhode_go2tech {
     mode   => '0755',
   }
 
+  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
+  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
+
   nginx::resource::vhost { 'missionrhode.go2tech.de':
     listen_port          => 443,
     ipv6_enable          => true,
     ipv6_listen_options  => '',
     ssl                  => true,
     ssl_port             => 443,
-    ssl_cert             => '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem',
-    ssl_key              => '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem',
+    ssl_cert             => $sslcert,
+    ssl_key              => $sslkey,
     ssl_stapling         => true,
     ssl_stapling_verify  => true,
     ssl_dhparam          => $sslcert::params::dhparampempath,
