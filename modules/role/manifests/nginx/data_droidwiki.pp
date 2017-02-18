@@ -1,6 +1,9 @@
 # data.droidwiki.de class
 # ALWAYS PAIR WITH CERTBOT!
 class role::nginx::data_droidwiki {
+  $ssl-cert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
+  $ssl-key = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
+
   droidwiki::nginx::mediawiki { 'data.droidwiki.org':
     vhost_url             => 'data.droidwiki.org',
     server_name           => [ 'data.droidwiki.org' ],
@@ -9,8 +12,8 @@ class role::nginx::data_droidwiki {
     html_root             => '/data/www/droidwiki.de/public_html',
     listen_port           => 443,
     ssl                   => true,
-    ssl_cert              => '/etc/letsencrypt/live/droidwiki.de/fullchain.pem',
-    ssl_key               => '/etc/letsencrypt/live/droidwiki.de/privkey.pem',
+    ssl_cert              => $ssl-cert,
+    ssl_key               => $ssl-key,
   }
 
   # some redirects
@@ -21,8 +24,8 @@ class role::nginx::data_droidwiki {
       ipv6_listen_options  => '',
       ssl_port             => 443,
       ssl                  => true,
-      ssl_cert             => '/etc/letsencrypt/live/droidwiki.de/fullchain.pem',
-      ssl_key              => '/etc/letsencrypt/live/droidwiki.de/privkey.pem',
+      ssl_cert             => $ssl-cert,
+      ssl_key              => $ssl-key,
       ssl_stapling         => true,
       ssl_stapling_verify  => true,
       ssl_dhparam          => $sslcert::params::dhparampempath,

@@ -33,6 +33,9 @@ class role::nginx::donut_go2tech {
     use_default_location => false,
   }
 
+  $ssl-cert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
+  $ssl-key = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
+
   nginx::resource::vhost { 'donut.go2tech.de':
     server_name          => [ 'donut.go2tech.de' ],
     ipv6_enable          => true,
@@ -42,8 +45,8 @@ class role::nginx::donut_go2tech {
     listen_port          => 443,
     ssl_port             => 443,
     ssl                  => true,
-    ssl_cert             => '/etc/letsencrypt/live/droidwiki.de/fullchain.pem',
-    ssl_key              => '/etc/letsencrypt/live/droidwiki.de/privkey.pem',
+    ssl_cert             => $ssl-cert,
+    ssl_key              => $ssl-key,
     ssl_dhparam          => $sslcert::params::dhparampempath,
     http2                => on,
     add_header           => { 'X-Delivered-By' => $facts['fqdn'] },
