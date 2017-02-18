@@ -55,7 +55,7 @@ class role::nginx::droidwiki {
       use_default_location => false,
     ;
     'droidwiki.de':
-      server_name      => [ '.droid.wiki', '.droidwiki.de' ],
+      server_name      => [ '.droid.wiki', '.droidwiki.de', '.droidwiki.org' ],
     ;
     'www.droidwiki.de':
       server_name      => [ 'www.droidwiki.de' ],

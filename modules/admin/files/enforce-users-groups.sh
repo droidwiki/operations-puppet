@@ -13,7 +13,8 @@ set -e
 ARCHIVE_DIR='/var/userarchive'
 EXCLUDE=("nobody" \
          "zuul" \      # zuul, was probably created manually at some time, and not as a system user
-         "ganglia" );  # ganglia user...
+         "ganglia" \   # ganglia user...
+         "vmail" );    # should be a system user, but isn't yet
 
 log() {
     logger $1
