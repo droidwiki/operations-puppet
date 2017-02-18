@@ -34,6 +34,8 @@ class role::nginx::gerrit_go2tech {
     http2                => on,
   }
 
+  monit::certcheck { 'gerrit.go2tech.de': }
+
   nginx::resource::vhost { 'gerrit.go2tech.de.80':
     server_name          => [ 'gerrit.go2tech.de' ],
     listen_port          => 80,

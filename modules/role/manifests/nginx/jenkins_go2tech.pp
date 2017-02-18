@@ -34,6 +34,8 @@ class role::nginx::jenkins_go2tech {
     http2                => on,
   }
 
+  monit::certcheck { 'jenkins.go2tech.de': }
+
   nginx::resource::vhost { 'jenkins.go2tech.de.80':
     server_name          => [ 'jenkins.go2tech.de' ],
     listen_port          => 80,

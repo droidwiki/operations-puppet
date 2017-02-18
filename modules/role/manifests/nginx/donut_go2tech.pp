@@ -56,6 +56,8 @@ class role::nginx::donut_go2tech {
     use_default_location => false,
   }
 
+  monit::certcheck { 'donut.go2tech.de': }
+
   nginx::resource::location {
     default:
       vhost    => 'donut.go2tech.de',

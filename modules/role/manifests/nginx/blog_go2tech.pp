@@ -36,6 +36,8 @@ class role::nginx::blog_go2tech {
     index_files          => [ 'index.php' ],
   }
 
+  monit::certcheck { 'blog.go2tech.de': }
+
   nginx::resource::vhost { 'blog.go2tech.de.80':
     server_name          => [ 'blog.go2tech.de' ],
     listen_port          => 80,
