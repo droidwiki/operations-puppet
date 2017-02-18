@@ -15,6 +15,9 @@ class role::nginx::gerrit_go2tech {
     mode   => '0755',
   }
 
+  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de-0001/fullchain.pem';
+  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de-0001/privkey.pem';
+
   nginx::resource::vhost { 'gerrit.go2tech.de':
     use_default_location => false,
     ipv6_enable          => true,
@@ -23,8 +26,8 @@ class role::nginx::gerrit_go2tech {
     listen_port          => 443,
     ssl_port             => 443,
     ssl                  => true,
-    ssl_cert             => '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem',
-    ssl_key              => '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem',
+    ssl_cert             => $sslcert,
+    ssl_key              => $sslkey,
     ssl_dhparam          => $sslcert::params::dhparampempath,
     ssl_stapling         => true,
     ssl_stapling_verify  => true,
@@ -65,7 +68,9 @@ class role::nginx::gerrit_go2tech {
   }
 
   nginx::resource::location { 'gerrit.go2tech.de/.well-known':
-    vhost    => 'gerrit.go2tech.de.80',
+    vhost    => 'gerrit.go2tech.de',
+    ssl      => true,
+    ssl_only => true,
     location => '^~ /.well-known/acme-challenge/',
     www_root => '/data/www/gerrit.go2tech.de/public_html/',
   }
