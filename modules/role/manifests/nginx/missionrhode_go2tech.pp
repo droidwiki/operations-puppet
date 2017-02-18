@@ -55,6 +55,8 @@ class role::nginx::missionrhode_go2tech {
     gzip_types           => 'text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript',
   }
 
+  monit::certcheck { 'missionrhode.go2tech.de': }
+
   nginx::resource::location {
     default:
       vhost    => 'missionrhode.go2tech.de',

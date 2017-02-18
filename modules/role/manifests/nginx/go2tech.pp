@@ -47,6 +47,9 @@ class role::nginx::go2tech {
     use_default_location => false,
   }
 
+  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de-0001/fullchain.pem';
+  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de-0001/privkey.pem';
+
   nginx::resource::vhost { 'go2tech.de':
     server_name          => [ 'go2tech.de', 'bits.go2tech.de', '188.68.49.74' ],
     ipv6_enable          => true,
@@ -56,8 +59,8 @@ class role::nginx::go2tech {
     listen_port          => 443,
     ssl_port             => 443,
     ssl                  => true,
-    ssl_cert             => '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem',
-    ssl_key              => '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem',
+    ssl_cert             => $sslcert,
+    ssl_key              => $sslkey,
     ssl_dhparam          => $sslcert::params::dhparampempath,
     ssl_stapling         => true,
     ssl_stapling_verify  => true,
@@ -71,6 +74,8 @@ class role::nginx::go2tech {
     },
     use_default_location => false,
   }
+
+  monit::certcheck { 'go2tech.de': }
 
   nginx::resource::location {
     default:

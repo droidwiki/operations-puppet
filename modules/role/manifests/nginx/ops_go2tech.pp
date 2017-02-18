@@ -13,4 +13,6 @@ class role::nginx::ops_go2tech {
     ssl_key               => $sslkey,
     manage_http_redirects => true,
   }
+
+  monit::certcheck { 'ops.go2tech.de': }
 }

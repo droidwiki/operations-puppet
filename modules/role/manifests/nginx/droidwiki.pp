@@ -34,6 +34,8 @@ class role::nginx::droidwiki {
     manage_http_redirects => false,
   }
 
+  monit::certcheck { 'www.droidwiki.org': }
+
   # some redirects
   nginx::resource::vhost {
     default:

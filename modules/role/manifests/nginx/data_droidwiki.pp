@@ -3,10 +3,11 @@
 class role::nginx::data_droidwiki {
   $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
   $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
+  $domain = 'data.droidwiki.org';
 
-  droidwiki::nginx::mediawiki { 'data.droidwiki.org':
-    vhost_url             => 'data.droidwiki.org',
-    server_name           => [ 'data.droidwiki.org' ],
+  droidwiki::nginx::mediawiki { $domain:
+    vhost_url             => $domain,
+    server_name           => [ $domain ],
     manage_directories    => false,
     manage_http_redirects => true,
     html_root             => '/data/www/droidwiki.de/public_html',
@@ -15,6 +16,8 @@ class role::nginx::data_droidwiki {
     ssl_cert              => $sslcert,
     ssl_key               => $sslkey,
   }
+
+  monit::certcheck { $domain: }
 
   # some redirects
   nginx::resource::vhost {
