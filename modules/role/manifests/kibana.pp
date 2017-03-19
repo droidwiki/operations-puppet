@@ -1,5 +1,13 @@
 # Manages kibana and the kibana nginx host
 class role::kibana {
-  include kibana4
+  package { 'kibana':
+    ensure => '5.1.2',
+  }
+
+  service { 'kibana':
+    ensure  => 'running',
+    require => Package['kibana'],
+  }
+
   include role::nginx::kibana_go2tech
 }

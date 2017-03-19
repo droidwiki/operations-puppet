@@ -62,9 +62,6 @@
 [submodule "modules/file_concat"]
 	path = modules/file_concat
 	url = git@github.com:electrical/puppet-lib-file_concat.git
-[submodule "modules/kibana4"]
-	path = modules/kibana4
-	url = git@github.com:lesaux/puppet-kibana4.git
 [submodule "modules/redis"]
 	path = modules/redis
 	url = git@github.com:arioch/puppet-redis.git

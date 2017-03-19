@@ -18,7 +18,8 @@ class role::logstash(
   }
 
   class { 'logstash':
-    manage_repo  => true,
+    version      => '1:5.1.2-1',
+    manage_repo  => false,
   }
 
   logstash::configfile { 'input-redis-log':
