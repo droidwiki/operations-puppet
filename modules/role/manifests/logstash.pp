@@ -22,6 +22,10 @@ class role::logstash(
     manage_repo => false,
   }
 
+  # needed for filter-mediawiki
+  logstash::plugin { 'logstash-filter-anonymize': }
+  logstash::plugin { 'logstash-filter-multiline': }
+
   logstash::configfile { 'input-redis-log':
     content => template('role/logstash/redis_input.erb'),
   }
