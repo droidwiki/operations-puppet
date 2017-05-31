@@ -19,8 +19,8 @@ ganglia::gmetad::trusted_hosts: []
 
 # config parameters for postfix
 postfix::my_hostname: go2tech.de
-postfix::keypath: /etc/letsencrypt/live/blog.go2tech.de/privkey.pem
-postfix::certpath: /etc/letsencrypt/live/blog.go2tech.de/fullchain.pem
+postfix::keypath: /etc/letsencrypt/live/blog.go2tech.de-0001/privkey.pem
+postfix::certpath: /etc/letsencrypt/live/blog.go2tech.de-0001/fullchain.pem
 postfix::vmaildbpass: >
     ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
     DQYJKoZIhvcNAQEBBQAEggEAk4OaayYYiTr55g/oFAIayj65Wf8Zy6xwqUpz
@@ -31,6 +31,11 @@ postfix::vmaildbpass: >
     i1JB/RL4vluR/OQfdK/EanyPuYqm3ANGnZDneiXDTjMeq8azywj44QXPufG7
     TOrfjjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBj5LROC9BDVPE1gYl1
     14tCgBD4TuxwpNAwC1bUN3AcXxcw]
+monit::postfix::certcheck:
+  'mail_go2tech.de':
+    host: 'go2tech.de'
+    port: 587
+    protocol: smtp
 
 # mariadb settings
 role::mariadb::isSlave: true

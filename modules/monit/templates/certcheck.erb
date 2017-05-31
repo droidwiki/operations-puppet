@@ -1,9 +1,9 @@
 #
 # THIS FILE IS MANAGED BY PUPPET
 #
-check host <%= @name %> with address <%= @name %>
+check host <%= @name %> with address <%= @host %>
   if failed
-    port 443
-    protocol https
-    and certificate valid > 15 days
+    port <%= @port %>
+    protocol <%= @protocol %>
+    and certificate valid > <%= @cert_valid_greater %> days
   then alert
