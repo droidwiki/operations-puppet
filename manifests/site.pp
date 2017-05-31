@@ -33,6 +33,9 @@ node 'eclair.dwnet' {
   include role::elasticsearch
   include role::logstash
   include role::kibana
+
+  include zotero
+  include citoid
 }
 
 node 'donut.dwnet' {

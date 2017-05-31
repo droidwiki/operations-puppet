@@ -8,6 +8,7 @@ class role::logstash(
   $redis_input_data_type     = 'list',
   $redis_input_key           = 'logstash',
   $rsyslog_input_port        = 1514,
+  $gelf_input_port           = 12201,
   $es_output_flush_size      = 5000,
   $es_output_host            = '127.0.0.1',
   $es_output_port            = 9200,
@@ -34,6 +35,11 @@ class role::logstash(
     content => template('role/logstash/rsyslog_input.erb'),
   }
 
+  # implemented for citoid
+  logstash::configfile { 'input-gelf-log':
+    content => template('role/logstash/gelf_input.erb'),
+  }
+
   $es_output_index = 'logstash-%{+YYYY.MM.dd}'
 
   logstash::configfile { 'output-es-log':
@@ -46,6 +52,10 @@ class role::logstash(
 
   logstash::configfile { 'filter_syslog':
     source => 'puppet:///modules/role/logstash/filter-syslog.conf',
+  }
+
+  logstash::configfile { 'filter_gelf':
+    source => 'puppet:///modules/role/logstash/filter-gelf.conf',
   }
 
   file { '/usr/local/bin/logstash_delete_index.sh':
