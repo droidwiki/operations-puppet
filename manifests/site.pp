@@ -1,7 +1,6 @@
 # site.pp
 node 'eclair.dwnet' {
   include droidwiki::default
-  # include role::gerrit
   include role::gitlab
   include role::mariadb
   include role::webserver
