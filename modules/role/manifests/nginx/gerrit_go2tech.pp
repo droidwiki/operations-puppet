@@ -18,6 +18,11 @@ class role::nginx::gerrit_go2tech {
   $sslcert = '/etc/letsencrypt/live/blog.go2tech.de-0001/fullchain.pem';
   $sslkey = '/etc/letsencrypt/live/blog.go2tech.de-0001/privkey.pem';
 
+  nginx::resource::upstream { 'gitlab_upstream':
+    members               => [ 'unix:/var/opt/gitlab/gitlab-workhorse/socket' ],
+    upstream_fail_timeout => 0,
+  }
+
   nginx::resource::vhost { 'gerrit.go2tech.de':
     use_default_location => false,
     ipv6_enable          => true,
@@ -57,11 +62,13 @@ class role::nginx::gerrit_go2tech {
     ssl                   => true,
     ssl_only              => true,
     location              => '/',
-    proxy                 => 'http://127.0.0.1:8081',
+    proxy                 => 'http://gitlab_upstream',
     proxy_set_header      => [
       'Host $host',
       'X-Real-IP $remote_addr',
       'X-Forwarded-For $remote_addr',
+      'X-Forwarded-Ssl on',
+      'X-Forwarded-Proto $scheme',
     ],
     proxy_connect_timeout => '300',
     location_cfg_append   => {
