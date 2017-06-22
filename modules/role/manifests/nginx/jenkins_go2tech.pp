@@ -71,15 +71,6 @@ class role::nginx::jenkins_go2tech {
         'port_in_redirect' => 'off',
       },
     ;
-    'jenkins.go2tech.de/zull':
-      location    => '/zuul/',
-      www_root    => '/data/www/jenkins.go2tech.de/public_html/',
-      index_files => [ 'index.html' ],
-    ;
-    'jenkins.go2tech.de/zuul/status.json':
-      location => '/zuul/status.json',
-      proxy    => 'http://127.0.0.1:8001/status.json',
-    ;
   }
 
   nginx::resource::location { 'jenkins.go2tech.de/.well-known':
