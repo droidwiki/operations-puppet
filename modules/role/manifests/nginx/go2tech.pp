@@ -18,6 +18,27 @@ class role::nginx::go2tech {
     mode   => '0755',
   }
 
+  package { 'fcgiwrap':
+    ensure => 'present',
+  }
+
+  service { 'fcgiwrap':
+    ensure  => 'running',
+    require => Package['fcgiwrap'],
+  }
+
+  file { '/data/www/go2tech.de/public_html/cgi-bin':
+    ensure => 'directory',
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0755',
+  }
+
+  file { '/data/www/go2tech.de/public_html/cgi-bin/mailgraph.cgi':
+    ensure => 'link',
+    target => '/usr/lib/cgi-bin/mailgraph.cgi',
+  }
+
   nginx::resource::vhost { '_':
     www_root             => '/data/www/go2tech.de/public_html',
     ipv6_enable          => true,
@@ -128,5 +149,9 @@ class role::nginx::go2tech {
         'X-Forwarded-For $remote_addr',
       ],
       proxy_connect_timeout => '300',
+    ;
+    'go2tech.de/cgi-bin/':
+      location => '/cgi-bin/',
+      fastcgi  => 'unix:/var/run/fcgiwrap.socket',
   }
 }

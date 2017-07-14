@@ -6,6 +6,7 @@ node 'eclair.dwnet' {
   include role::webserver
   include role::mediawiki
   include role::mailserver
+  include mailgraph
   include role::ircbot
   include role::jenkinsmaster
   include role::puppetmaster
