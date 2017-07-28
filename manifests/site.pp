@@ -52,6 +52,7 @@ node 'donut.dwnet' {
 
   include role::nginx::droidwiki
   include role::nginx::data_droidwiki
+  include role::datawiki
   include role::nginx::donut_go2tech
   include role::nginx::missionrhode_go2tech
 }
