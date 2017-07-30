@@ -219,6 +219,19 @@ define droidwiki::nginx::mediawiki (
       },
       fastcgi       => '127.0.0.1:9000',
     ;
+    "${vhost_url}/api":
+      location              => '/api',
+      proxy                 => "http://127.0.0.1:7231/${vhost_url}",
+      proxy_set_header      => [
+        'Host $host',
+        'X-Real-IP $remote_addr',
+        'X-Forwarded-For $remote_addr',
+      ],
+      proxy_connect_timeout => '300',
+      location_cfg_append   => {
+        'port_in_redirect' => 'off',
+      },
+    ;
   }
 
   # without a different script and article path, the / location already exists. Duplicate locations

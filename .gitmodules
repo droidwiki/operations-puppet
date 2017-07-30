@@ -86,3 +86,6 @@
 [submodule "modules/gitlab"]
 	path = modules/gitlab
 	url = https://github.com/vshn/puppet-gitlab.git
+[submodule "modules/nodejs"]
+	path = modules/nodejs
+	url = git@github.com:voxpupuli/puppet-nodejs.git

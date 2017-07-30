@@ -150,6 +150,16 @@ class role::nginx::go2tech {
       ],
       proxy_connect_timeout => '300',
     ;
+    'go2tech.de/cxserver/':
+      location              => '/cxserver/',
+      proxy                 => 'http://donut.dwnet:7232/',
+      proxy_set_header      => [
+        'Host $host',
+        'X-Real-IP $remote_addr',
+        'X-Forwarded-For $remote_addr',
+      ],
+      proxy_connect_timeout => '300',
+    ;
     'go2tech.de/cgi-bin/':
       location => '/cgi-bin/',
       fastcgi  => 'unix:/var/run/fcgiwrap.socket',
