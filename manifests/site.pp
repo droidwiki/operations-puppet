@@ -55,4 +55,9 @@ node 'donut.dwnet' {
   include role::datawiki
   include role::nginx::donut_go2tech
   include role::nginx::missionrhode_go2tech
+
+  role::nginx::wiki{ 'endroidwikiwiki':
+    domain      => 'en.droidwiki.org',
+    server_name => [ 'en.droidwiki.org' ]
+  }
 }
