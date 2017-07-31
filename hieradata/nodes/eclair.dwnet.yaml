@@ -61,6 +61,8 @@ gitlab::logging:
   svlogd_size: '200 * 1024 * 1024'
 gitlab::unicorn:
   port: 8081
+gitlab::postgresql:
+  shared_buffers: 256MB
 gitlab::git_data_dirs:
   default:
     path: '/data/development/git'
