@@ -90,7 +90,3 @@ gitlab::gitlab_rails:
       base: 'OU=users,DC=go2tech,DC=de'
       group_base: 'OU=groups,DC=go2tech,DC=de'
       user_filter: ''
-pam::limits_fragments:
- elasticsearch:
-   list:
-     - 'elasticsearch hard memlock 100000'
