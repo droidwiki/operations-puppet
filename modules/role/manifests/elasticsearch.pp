@@ -8,13 +8,20 @@ class role::elasticsearch {
     manage_repo  => true,
     repo_version => '5.x',
     version      => '5.1.2',
+    jvm_options => [
+      '-Xms1500m',
+      '-Xmx1500m',
+    ],
   }
 
   elasticsearch::instance { 'es-01':
     config        => {
-      'network.host' => '0.0.0.0',
+      'network.host'             => '0.0.0.0',
     },
-    init_defaults => { },
+    init_defaults => {
+      'MAX_LOCKED_MEMORY' => '100000',
+      'ES_JAVA_OPTS'      => '-server',
+    },
     datadir       => '/data/elasticsearch/',
   }
 }
