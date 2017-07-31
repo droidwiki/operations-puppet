@@ -39,12 +39,12 @@ class restbase (
   }
 
   file { '/data/mediawiki/services/restbase/projects/droidwiki.yaml':
-    ensure  => 'present',
-    owner   => 'www-data',
-    group   => 'www-data',
-    mode    => '0644',
-    source  => 'puppet:///modules/restbase/droidwiki.yaml',
-    notify  => Service['restbase'],
+    ensure => 'present',
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0644',
+    source => 'puppet:///modules/restbase/droidwiki.yaml',
+    notify => Service['restbase'],
   }
 
   file { '/etc/init/restbase.conf':
