@@ -1,0 +1,55 @@
+# Number of worker processes to spawn.
+# Set to 0 to run everything in a single process without clustering.
+# Use 'ncpu' to run as many workers as there are CPU units
+num_workers: ncpu
+
+# Log error messages and gracefully restart a worker if v8 reports that it
+# uses more heap (note: not RSS) than this many megabytes.
+worker_heap_limit_mb: 500
+
+# Logger info
+logging:
+  level: warn
+  streams:
+  # Use gelf-stream -> logstash
+  - type: gelf
+    host: eclair.dwnet
+    port: 12201
+
+services:
+  - name: cxserver
+    # a relative path or the name of an npm package, if different from name
+    module: ./app.js
+    # optionally, a version constraint of the npm package
+    # version: ^0.4.0
+    # per-service config
+    conf:
+      port: 7232
+      # interface: localhost # uncomment to only listen on localhost
+      # More per-service config settings
+      # The location of the spec, defaults to spec.yaml if not specified
+      # spec: ./spec.yaml
+      # allow cross-domain requests to the API (default *)
+      cors: '*'
+      # to disable use:
+      # cors: false
+      # to restrict to a particular domain, use:
+      # cors: restricted.domain.org
+      # URL of the outbound proxy to use (complete with protocol)
+      # proxy: http://my.proxy.org:8080
+      # the list of domains for which not to use the proxy defined above
+      # no_proxy_list:
+      #   - domain1.com
+      #   - domain2.org
+      user_agent: cxserver
+      restbase_req:
+        method: '{{request.method}}'
+        uri: https://{{domain}}/api/v1/{+path}
+        query: '{{ default(request.query, {}) }}'
+        headers: '{{request.headers}}'
+        body: '{{request.body}}'
+      jwt:
+        secret: ''
+        algorithms:
+          - HS256
+      registry: ./registry.wikimedia.yaml
