@@ -147,13 +147,14 @@ define droidwiki::nginx::mediawiki (
       }
     ;
     "${vhost_url}/${mediawiki_scriptpath}images":
-      location    => "/${mediawiki_scriptpath}images",
+      location    => "~ ^/(${mediawiki_scriptpath})?images/*",
       # workaround for missing way for locations in location
       # https://github.com/jfryman/puppet-nginx/issues/692
       raw_prepend => [
         "location ~ ^/${mediawiki_scriptpath}images/thumb/(archive/)?[0-9a-f]/[0-9a-f][0-9a-f]/([^/]+)/([0-9]+)px-.*\$ {",
         '   try_files $uri $uri/ @thumb;',
         '}',
+        'add_header Access-Control-Allow-Origin *;',
       ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}images/deleted":
