@@ -10,7 +10,7 @@ class role::logstash(
   $rsyslog_input_port        = 1514,
   $gelf_input_port           = 12201,
   $es_output_flush_size      = 5000,
-  $es_output_host            = '127.0.0.1',
+  $es_output_host            = '188.68.49.74',
   $es_output_port            = 9200,
   $es_output_idle_flush_time = 1,
 ) {
@@ -20,7 +20,6 @@ class role::logstash(
 
   class { 'logstash':
     version     => '1:5.1.2-1',
-    manage_repo => false,
   }
 
   # needed for filter-mediawiki
@@ -40,6 +39,10 @@ class role::logstash(
     content => template('role/logstash/gelf_input.erb'),
   }
 
+  logstash::configfile { 'input-nginx-log':
+    content => template('role/logstash/nginx_input.erb'),
+  }
+
   $es_output_index = 'logstash-%{+YYYY.MM.dd}'
 
   logstash::configfile { 'output-es-log':
@@ -56,6 +59,10 @@ class role::logstash(
 
   logstash::configfile { 'filter_gelf':
     source => 'puppet:///modules/role/logstash/filter-gelf.conf',
+  }
+
+  logstash::configfile { 'filter-nginx':
+    source => 'puppet:///modules/role/logstash/filter-nginx.conf',
   }
 
   file { '/usr/local/bin/logstash_delete_index.sh':

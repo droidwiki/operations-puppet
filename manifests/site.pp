@@ -46,6 +46,7 @@ node 'donut.dwnet' {
   include role::parsoid
   include role::webserver
   include role::mediawiki
+  include role::logstash
   include role::jobrunner
   include role::ganglia
   include certbot
