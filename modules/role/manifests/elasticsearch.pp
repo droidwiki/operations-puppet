@@ -7,7 +7,7 @@ class role::elasticsearch {
   class { 'elasticsearch':
     manage_repo  => true,
     repo_version => '5.x',
-    version      => '5.1.2',
+    version      => '5.5.1',
     jvm_options  => [
       '-Xms1500m',
       '-Xmx1500m',
