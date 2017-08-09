@@ -26,6 +26,9 @@ class role::logstash(
   logstash::plugin { 'logstash-filter-anonymize': }
   logstash::plugin { 'logstash-filter-multiline': }
 
+  # accept logs from filebeat
+  logstash::plugin { 'logstash-input-beats': }
+
   logstash::configfile { 'input-redis-log':
     content => template('role/logstash/redis_input.erb'),
   }
@@ -41,6 +44,10 @@ class role::logstash(
 
   logstash::configfile { 'input-nginx-log':
     content => template('role/logstash/nginx_input.erb'),
+  }
+
+  logstash::configfile { 'input-beats':
+    content => template('role/logstash/beats_input.erb'),
   }
 
   $es_output_index = 'logstash-%{+YYYY.MM.dd}'

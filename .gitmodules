@@ -89,3 +89,6 @@
 [submodule "modules/nodejs"]
 	path = modules/nodejs
 	url = git@github.com:voxpupuli/puppet-nodejs.git
+[submodule "modules/filebeat"]
+	path = modules/filebeat
+	url = git@github.com:pcfens/puppet-filebeat.git

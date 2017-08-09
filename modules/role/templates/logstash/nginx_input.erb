@@ -1,7 +1,15 @@
 input {
   file {
-    path => ["/var/log/nginx/*access*", "/var/log/nginx/*error*"]
+    path => "/var/log/nginx/*access*"
     exclude => "*.gz"
     type => "nginx"
+    tags => ["nginx", "nginx-access"]
+  }
+
+  file {
+    path => "/var/log/nginx/*error*"
+    exclude => "*.gz"
+    type => "nginx"
+    tags => ["nginx", "nginx-error"]
   }
 }

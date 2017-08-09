@@ -6,6 +6,5 @@ output {
         hosts           => [ "http://<%= @es_output_host %>:<%= @es_output_port %>" ]
         idle_flush_time => <%= @es_output_idle_flush_time %>
         index           => "<%= @es_output_index %>"
-        manage_template => false
     }
 }
