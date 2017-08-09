@@ -19,7 +19,7 @@ class role::logstash(
   }
 
   class { 'logstash':
-    version     => '1:5.1.2-1',
+    version     => '1:5.5.1-1',
   }
 
   # needed for filter-mediawiki
