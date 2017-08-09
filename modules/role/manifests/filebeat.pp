@@ -2,10 +2,10 @@
 class role::filebeat {
   class { 'filebeat':
     outputs => {
-      'logstash'     => {
-       'hosts' => [
-         'eclair.dwnet:5044'
-       ],
+      'logstash' => {
+      'hosts'    => [
+          'eclair.dwnet:5044'
+        ],
       },
     },
   }
