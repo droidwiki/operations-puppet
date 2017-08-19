@@ -92,3 +92,16 @@ gitlab::gitlab_rails:
       base: 'OU=users,DC=go2tech,DC=de'
       group_base: 'OU=groups,DC=go2tech,DC=de'
       user_filter: ''
+
+# mariadb settings
+mysql::server::root_password: >
+    ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEArgQjByhFDMmlfUIoro4eh2+FrAJGE9Io72nU
+    26WADS7rOsTI2R4iZWgw419WrwdCuJoqBYB3PM5yKA1HOORID/pmOLZkPlQF
+    6yrDbp+clj6D57Dj7xOZjLoU9+wDtIK3opGEO2dFcRs3osl08EMnrQJ7elw5
+    L+GXes7gM3vjAvbXkxbWz7IeaKO/LKKuTP9KcJrJArjoWCL22Zq2u0WxQQuo
+    YM2raxh+ZvbLZh2PR/snKqzC94HN+8CrMAPZ0Rc1/fgBb7rwa72Q80U3Lev1
+    6xcqmfwC8seaYg626dx53rCShUnHnymVxLlakxjg/y5g2iQGO7Ki2F6duD+E
+    5gcbgjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBRzxxD3VVEF7yT6m9u
+    SZkHgBBz9i+59ZCWvHlwci7YL+BO]
+role::mariadb::serverId: 2

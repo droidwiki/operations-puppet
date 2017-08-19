@@ -2,6 +2,7 @@
 # mariadb in the future.
 class role::mariadb(
   $isSlave = false,
+  $serverId = 1,
 ) {
   file { '/data/backup':
     ensure => 'directory',
@@ -27,7 +28,51 @@ class role::mariadb(
     mailcontent         => hiera( 'automysqlbackup::backup::mailcontent' ),
   }
 
+  apt::source { 'mariadb':
+    location => 'http://mirrors.n-ix.net/mariadb/repo/10.0/ubuntu',
+    release  => 'trusty',
+    repos    => 'main',
+    key      => {
+      id     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
+      server => 'hkp://keyserver.ubuntu.com:80',
+    },
+    include => {
+      src   => false,
+      deb   => true,
+    },
+  }
+
   if ($isSlave) {
+    class {'::mysql::server':
+      package_name     => 'mariadb-server',
+      service_name     => 'mysql',
+      override_options => {
+        mysqld => {
+          'pid-file'        => '/var/run/mysqld/mysqld.pid',
+          'datadir'         => '/data/mariadb/datadir',
+          'bind-address'    => $facts['networking']['ip'],
+          'server-id'       => $facts['mysql_server_id'],
+          'replicate-do-db' => ['droidwikiwiki', 'devwiki', 'graphite', 'missionrhode', 'opswiki', 'reviewdb', 'vmail', 'wordpress', 'datawiki', 'endroidwikiwiki'],
+          'relay-log'       => 'mysql-relay-bin',
+          'read-only'       => '1'
+        },
+        mysqld_safe => {
+          'socket' => '/var/run/mysqld/mysqld.sock',
+          'nice'   => '0',
+        },
+      }
+    }
+
+    class {'::mysql::client':
+      package_name    => 'mariadb-client',
+      bindings_enable => true,
+    }
+
+    Apt::Source['mariadb'] ~>
+    Class['apt::update'] ->
+    Class['::mysql::server'] ->
+    Class['::mysql::client']
+
     file { '/data/mariadb':
       ensure => 'directory',
       owner  => 'root',
