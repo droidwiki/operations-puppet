@@ -7,7 +7,7 @@ class cxserver {
   }
 
   vcsrepo { '/data/mediawiki/services/cxserver':
-    ensure   => 'latest',
+    ensure   => 'present',
     owner    => 'www-data',
     group    => 'www-data',
     provider => git,
@@ -31,7 +31,7 @@ class cxserver {
   }
 
   file { '/data/mediawiki/services/cxserver/config.yaml':
-    ensure  => 'present',
+    ensure  => 'file',
     owner   => 'www-data',
     group   => 'www-data',
     mode    => '0644',
