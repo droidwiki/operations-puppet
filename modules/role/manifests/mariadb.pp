@@ -36,9 +36,9 @@ class role::mariadb(
       id     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
       server => 'hkp://keyserver.ubuntu.com:80',
     },
-    include => {
-      src   => false,
-      deb   => true,
+    include  => {
+      src => false,
+      deb => true,
     },
   }
 
@@ -47,7 +47,7 @@ class role::mariadb(
       package_name     => 'mariadb-server',
       service_name     => 'mysql',
       override_options => {
-        mysqld => {
+        mysqld      => {
           'pid-file'        => '/var/run/mysqld/mysqld.pid',
           'datadir'         => '/data/mariadb/datadir',
           'bind-address'    => $facts['networking']['ip'],
