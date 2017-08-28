@@ -92,3 +92,6 @@
 [submodule "modules/filebeat"]
 	path = modules/filebeat
 	url = git@github.com:pcfens/puppet-filebeat.git
+[submodule "modules/mysql"]
+	path = modules/mysql
+	url = git@github.com:puppetlabs/puppetlabs-mysql.git
