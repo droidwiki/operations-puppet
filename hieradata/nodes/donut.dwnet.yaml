@@ -1,2 +1,3 @@
 # define this server as the NFS host
 droidwiki::default::isNFSServer: true
+redis::bind: '0.0.0.0'

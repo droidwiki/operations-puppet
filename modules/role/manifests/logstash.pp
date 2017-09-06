@@ -1,7 +1,4 @@
 # Manages logstash
-# This class will install redis, which needs to be used as the
-# log target. This should, however, be changed in the future, so
-# that redis will be installed standalone outside this module.
 class role::logstash(
   $redis_input_host          = '127.0.0.1',
   $redis_input_port          = 6379,
@@ -14,10 +11,6 @@ class role::logstash(
   $es_output_port            = 9200,
   $es_output_idle_flush_time = 1,
 ) {
-  class { 'redis':
-    bind => '0.0.0.0';
-  }
-
   class { 'logstash':
     version     => '1:5.5.1-1',
   }
