@@ -1,0 +1,7 @@
+# No need to get submodules for linting
+git:
+    submodules: false
+
+rvm: 1.9.3
+env:
+  - PUPPET_VERSION=4.10.6
