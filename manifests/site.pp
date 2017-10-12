@@ -8,7 +8,6 @@ node 'eclair.dwnet' {
   include role::mailserver
   include mailgraph
   include role::ircbot
-  include role::jenkinsmaster
   include role::puppetmaster
   include role::deploymenthost
   include certbot
@@ -16,7 +15,6 @@ node 'eclair.dwnet' {
   include role::nginx::go2tech
   include role::nginx::www_go2tech
   include role::nginx::blog_go2tech
-  include jenkins
   include role::nginx::ops_go2tech
   include role::nginx::dev_go2tech
   include role::nginx::ganglia_go2tech
