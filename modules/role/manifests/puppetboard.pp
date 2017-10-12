@@ -1,8 +1,8 @@
 # Wrapper for managing puppetboard
 class role::puppetboard {
   class { 'puppetboard':
-    manage_virtualenv => 'latest',
-    puppetdb_port     => '8083',
+    manage_virtualenv => true,
+    puppetdb_port     => 8083,
     enable_query      => false,
   }
 
