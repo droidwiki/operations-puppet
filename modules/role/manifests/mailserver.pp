@@ -16,6 +16,6 @@ class role::mailserver {
 
   include postfix
 
-  $postfixCertcheck = hiera('monit::postfix::certcheck', {})
-  create_resources('monit::certcheck', $postfixCertcheck)
+  $postfixcertcheck = hiera('monit::postfix::certcheck', {})
+  create_resources('monit::certcheck', $postfixcertcheck)
 }

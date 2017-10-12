@@ -1,6 +1,6 @@
 # Default things to do for all servers.
 class droidwiki::default (
-  $isNFSServer = false,
+  $isnfsserver = false,
 ) {
   file { '/etc/hosts':
     ensure  => file,
@@ -31,7 +31,7 @@ class droidwiki::default (
     port   => '1514',
   }
 
-  if ($isNFSServer == false) {
+  if ($isnfsserver == false) {
     # all droidwiki servers should have access to the nfs shareddata
     class { '::nfs':
       client_enabled => true,

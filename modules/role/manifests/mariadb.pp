@@ -1,8 +1,8 @@
 # Manages automysqlbackup for now, will manage
 # mariadb in the future.
 class role::mariadb(
-  $isSlave = false,
-  $serverId = 1,
+  $isslave = false,
+  $serverid = 1,
 ) {
   file { '/data/backup':
     ensure => 'directory',
@@ -42,7 +42,7 @@ class role::mariadb(
     },
   }
 
-  if ($isSlave) {
+  if ($isslave) {
     class {'::mysql::server':
       package_name     => 'mariadb-server',
       service_name     => 'mysql',
@@ -68,10 +68,10 @@ class role::mariadb(
       bindings_enable => true,
     }
 
-    Apt::Source['mariadb'] ~>
-    Class['apt::update'] ->
-    Class['::mysql::server'] ->
-    Class['::mysql::client']
+    Apt::Source['mariadb']
+    ~> Class['apt::update']
+    -> Class['::mysql::server']
+    -> Class['::mysql::client']
 
     file { '/data/mariadb':
       ensure => 'directory',

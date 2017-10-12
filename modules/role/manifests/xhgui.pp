@@ -9,9 +9,9 @@ class role::xhgui {
     require  => [ Package['git'] ],
     source   => 'https://gerrit.wikimedia.org/r/operations/software/xhprof',
     revision => 'wmf_deploy',
-  } ->
+  }
 
-  file { '/data/xhprof/profiles':
+  -> file { '/data/xhprof/profiles':
     ensure => directory,
     owner  => 'www-data',
     group  => 'www-data',
@@ -26,16 +26,16 @@ class role::xhgui {
     require  => [ Package['git'] ],
     source   => 'https://gerrit.wikimedia.org/r/operations/software/xhgui',
     revision => 'wmf_deploy',
-  } ->
+  }
 
-  file { '/data/xhgui/cache':
+  -> file { '/data/xhgui/cache':
     ensure => directory,
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
-  } ->
+  }
 
-  droidwiki::nginx::hhvmvhost { 'xhgui.go2tech.de':
+  -> droidwiki::nginx::hhvmvhost { 'xhgui.go2tech.de':
     vhost_url => 'xhgui.go2tech.de',
     www_root  => '/data/xhgui/webroot',
   }

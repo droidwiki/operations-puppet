@@ -3,6 +3,7 @@
 # Run 'rake lint' to lint Puppet files. Requires 'puppet-lint'.
 #
 require 'puppet-lint/tasks/puppet-lint'
+require 'puppet-syntax/tasks/puppet-syntax'
 
 # Work around bug in puppet-lint configuration
 # https://github.com/rodjek/puppet-lint/issues/331
@@ -15,4 +16,7 @@ PuppetLint::RakeTask.new(:lint) do |config|
   config.fail_on_warnings = true
 end
 
-task :default => [:lint]
+task :default => [
+  :lint,
+  :syntax,
+]

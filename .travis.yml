@@ -2,6 +2,6 @@
 git:
     submodules: false
 
-rvm: 1.9.3
+rvm: 2.2
 env:
   - PUPPET_VERSION=4.10.6

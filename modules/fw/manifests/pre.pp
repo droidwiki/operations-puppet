@@ -128,26 +128,26 @@ class fw::pre {
   }
 
   # dwnet network, trusted source and destination ips
-  $trustedHosts = [
+  $trustedhosts = [
     # v22015112656329114@netcup, go2tech.de
     '188.68.49.74',
     # v22015052656325188@netcup, droidwiki.de
     '37.120.178.25',
   ]
 
-  $trustedHosts.each |Integer $index, String $ipAddress| {
-    $inputCount = 114 + $index
-    $outputCount = $inputCount + 1
-    firewall { "${outputCount} allow outgoing traffic to ${ipAddress}":
+  $trustedhosts.each |Integer $index, String $ipaddress| {
+    $inputcount = 114 + $index
+    $outputcount = $inputcount + 1
+    firewall { "${outputcount} allow outgoing traffic to ${ipaddress}":
       proto       => 'all',
       chain       => 'OUTPUT',
-      destination => $ipAddress,
+      destination => $ipaddress,
       action      => 'accept',
     }
 
-    firewall { "${inputCount} allow incoming traffic from ${ipAddress}":
+    firewall { "${inputcount} allow incoming traffic from ${ipaddress}":
       proto  => 'all',
-      source => $ipAddress,
+      source => $ipaddress,
       action => 'accept',
     }
   }
