@@ -75,6 +75,11 @@ class role::webserver {
         provider       => 'apt',
         package_prefix => 'php-',
       },
+      # needed by WodPress with Memcache object cache
+      memcache  => {
+        provider       => 'apt',
+        package_prefix => 'php-',
+      },
       apcu      => {
         provider       => 'apt',
         package_prefix => 'php-',
