@@ -38,7 +38,8 @@ monit::postfix::certcheck:
     protocol: smtp
 
 # mariadb settings
-role::mariadb::isSlave: true
+role::mariadb::isslave: true
+role::mariadb::serverid: 2
 
 # logstash settings
 role::logstash::redis_input_host: 37.120.178.25
@@ -104,4 +105,3 @@ mysql::server::root_password: >
     6xcqmfwC8seaYg626dx53rCShUnHnymVxLlakxjg/y5g2iQGO7Ki2F6duD+E
     5gcbgjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBRzxxD3VVEF7yT6m9u
     SZkHgBBz9i+59ZCWvHlwci7YL+BO]
-role::mariadb::serverId: 2
