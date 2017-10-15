@@ -65,8 +65,8 @@ class role::webserver {
     pear         => true,
     phpunit      => false,
 
-    extensions => {
-      xml  => {},
+    extensions   => {
+      xml       => {},
       imagick   => {
         provider       => 'apt',
         package_prefix => 'php-',
@@ -99,7 +99,7 @@ class role::webserver {
         provider => 'apt',
       },
       redis     => {
-        provider => 'apt',
+        provider       => 'apt',
         package_prefix => 'php-',
       },
       mysql     => {
