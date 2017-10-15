@@ -95,3 +95,9 @@
 [submodule "modules/mysql"]
 	path = modules/mysql
 	url = git@github.com:puppetlabs/puppetlabs-mysql.git
+[submodule "modules/php"]
+	path = modules/php
+	url = git@github.com:voxpupuli/puppet-php.git
+[submodule "modules/archive"]
+	path = modules/archive
+	url = git@github.com:voxpupuli/puppet-archive.git

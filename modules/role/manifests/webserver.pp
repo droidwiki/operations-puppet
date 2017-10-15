@@ -50,10 +50,64 @@ class role::webserver {
     package_source => 'nginx-mainline',
   }
 
-  class { 'hhvm': }
+  package { 'hhvm':
+    ensure => 'absent',
+  }
+
+  class { '::php::globals':
+    php_version => '7.0',
+  }
+  -> class { '::php':
+    manage_repos => true,
+    fpm          => true,
+    dev          => true,
+    composer     => true,
+    pear         => true,
+    phpunit      => false,
+
+    extensions => {
+      xml  => {},
+      imagick   => {
+        provider       => 'apt',
+        package_prefix => 'php-',
+      },
+      memcached => {
+        provider       => 'apt',
+        package_prefix => 'php-',
+      },
+      apcu      => {
+        provider       => 'apt',
+        package_prefix => 'php-',
+        settings       => {
+          'apc/stat'       => '1',
+          'apc/stat_ctime' => '1',
+        },
+        sapi           => 'fpm',
+      },
+      opcache   => {
+        provider => 'apt',
+      },
+      json      => {
+        provider => 'apt',
+      },
+      mbstring  => {
+        provider => 'apt',
+      },
+      redis     => {
+        provider => 'apt',
+        package_prefix => 'php-',
+      },
+      mysql     => {
+        provider => 'apt',
+      },
+      curl      => {
+        provider => 'apt',
+      },
+    },
+  }
 
   monit::service { 'nginx': }
-  monit::service { 'hhvm': }
+  monit::service { 'php7.0-fpm': }
 
   file { '/data/www':
     ensure => 'directory',
