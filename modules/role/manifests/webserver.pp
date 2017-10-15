@@ -111,6 +111,15 @@ class role::webserver {
     },
   }
 
+  # legacy: map phph (used for hhvm without JIT) to php binary
+  file { '/usr/bin/phph':
+    ensure => 'present',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/role/phph',
+  }
+
   monit::service { 'nginx': }
   monit::service { 'php7.0-fpm': }
 
