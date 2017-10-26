@@ -2,9 +2,9 @@
 # THIS FILE IS MANAGED BY PUPPET
 #
 
-check process hhvm with pidfile /var/run/hhvm/pid
-   start program = "/etc/init.d/hhvm start" with timeout 60 seconds
-   stop program = "/etc/init.d/hhvm stop"
+check process php7.0-fpm with pidfile /var/run/php/php7.0-fpm.pid
+   start program = "/etc/init.d/php7.0-fpm start" with timeout 60 seconds
+   stop program = "/etc/init.d/php7.0-fpm stop"
    if cpu > 60% for 2 cycles then alert
    if cpu > 80% for 5 cycles then restart
    if loadavg(5min) greater than 10 for 8 cycles then restart
