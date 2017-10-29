@@ -10,13 +10,12 @@ class restbase (
   }
 
   vcsrepo { '/data/mediawiki/services/restbase':
-    ensure   => 'latest',
+    ensure   => present,
     owner    => 'www-data',
     group    => 'www-data',
     provider => git,
     require  => [ Package['git'] ],
     source   => 'https://github.com/wikimedia/restbase.git',
-    revision => 'master',
     notify   => Exec['restbase npm install']
   }
 
