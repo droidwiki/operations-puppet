@@ -15,7 +15,7 @@ class role::logstash(
     version     => '1:5.5.1-1',
   }
 
-  $prefix = "logstash-"
+  $prefix = 'logstash-'
 
   # needed for filter-mediawiki
   logstash::plugin { 'logstash-filter-anonymize': }
@@ -71,7 +71,7 @@ class role::logstash(
     ensure => absent,
   }
 
-  curator::config { "cleanup_logstash":
+  curator::config { 'cleanup_logstash':
     content => template('role/logstash/curator/cleanup.yaml.erb')
   }
 
@@ -79,12 +79,12 @@ class role::logstash(
     ensure => absent,
   }
 
-  cron { "logstash_cleanup_indices_logstash":
+  cron { 'logstash_cleanup_indices_logstash':
     ensure  => 'present',
-    command => "/usr/bin/curator --config /etc/curator/config.yaml /etc/curator/cleanup_logstash.yaml > /dev/null",
+    command => '/usr/bin/curator --config /etc/curator/config.yaml /etc/curator/cleanup_logstash.yaml > /dev/null',
     user    => 'root',
     hour    => 0,
     minute  => 42,
-    require => Curator::Config["cleanup_logstash"],
+    require => Curator::Config['cleanup_logstash'],
   }
 }

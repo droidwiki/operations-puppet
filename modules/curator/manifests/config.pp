@@ -1,3 +1,4 @@
+# Creates a configuration file for elasticsearch-curator.
 define curator::config(
     $ensure  = present,
     $content = undef,
