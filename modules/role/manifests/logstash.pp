@@ -15,6 +15,8 @@ class role::logstash(
     version     => '1:5.5.1-1',
   }
 
+  $prefix = "logstash-"
+
   # needed for filter-mediawiki
   logstash::plugin { 'logstash-filter-anonymize': }
   logstash::plugin { 'logstash-filter-multiline': }
@@ -43,7 +45,7 @@ class role::logstash(
     content => template('role/logstash/beats_input.erb'),
   }
 
-  $es_output_index = 'logstash-%{+YYYY.MM.dd}'
+  $es_output_index = "${prefix}%{+YYYY.MM.dd}"
 
   logstash::configfile { 'output-es-log':
     content => template('role/logstash/es_output.erb'),
@@ -66,18 +68,23 @@ class role::logstash(
   }
 
   file { '/usr/local/bin/logstash_delete_index.sh':
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0555',
-    source => 'puppet:///modules/role/logstash/scripts/logstash_delete_index.sh',
+    ensure => absent,
+  }
+
+  curator::config { "cleanup_logstash":
+    content => template('role/logstash/curator/cleanup.yaml.erb')
   }
 
   cron { 'logstash_delete_index':
+    ensure => absent,
+  }
+
+  cron { "logstash_cleanup_indices_logstash":
     ensure  => 'present',
-    command => "/usr/local/bin/logstash_delete_index.sh ${es_output_host}:${es_output_port} \"logstash-$(date -d '-31days' +\\%Y.\\%m.\\%d)\"",
+    command => "/usr/bin/curator --config /etc/curator/config.yaml /etc/curator/cleanup_logstash.yaml > /dev/null",
     user    => 'root',
     hour    => 0,
     minute  => 42,
-    require => File['/usr/local/bin/logstash_delete_index.sh'],
+    require => Curator::Config["cleanup_logstash"],
   }
 }
