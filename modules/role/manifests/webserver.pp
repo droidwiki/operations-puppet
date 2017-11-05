@@ -91,6 +91,7 @@ class role::webserver {
       },
       opcache   => {
         provider => 'apt',
+        zend     => true,
       },
       json      => {
         provider => 'apt',
@@ -104,6 +105,11 @@ class role::webserver {
       },
       mysql     => {
         provider => 'apt',
+        so_name  => 'mysqli',
+      },
+      mongodb   => {
+        provider       => 'apt',
+        package_prefix => 'php-',
       },
       curl      => {
         provider => 'apt',
