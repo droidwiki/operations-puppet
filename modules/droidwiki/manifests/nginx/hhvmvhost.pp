@@ -1,5 +1,6 @@
 # a template for a simple hhvm configuration of nginx
 define droidwiki::nginx::hhvmvhost (
+  $ensure               = 'present',
   $vhost_url            = undef,
   $custom_server_name   = undef,
   $auth_basic           = undef,
@@ -17,16 +18,24 @@ define droidwiki::nginx::hhvmvhost (
     $server_name = [ $vhost_url ]
   }
 
+  if ( $ensure != 'present' ) {
+    $file_ensure = $ensure
+  } else {
+    $file_ensure = 'directory'
+  }
+
   if ( $www_root == undef ) {
     file { "/data/www/${vhost_url}":
-      ensure => 'directory',
+      ensure => $file_ensure,
+      force  => true,
       owner  => 'www-data',
       group  => 'www-data',
       mode   => '0755',
     }
 
     file { "/data/www/${vhost_url}/public_html":
-      ensure => 'directory',
+      ensure => $file_ensure,
+      force  => true,
       owner  => 'www-data',
       group  => 'www-data',
       mode   => '0755',
@@ -38,6 +47,7 @@ define droidwiki::nginx::hhvmvhost (
   }
 
   nginx::resource::vhost { $vhost_url:
+    ensure               => $ensure,
     use_default_location => false,
     ipv6_enable          => $ipv6_enable,
     ipv6_listen_options  => '',
@@ -46,6 +56,7 @@ define droidwiki::nginx::hhvmvhost (
   }
 
   nginx::resource::location { "${vhost_url}/ .php":
+    ensure               => $ensure,
     vhost                => $vhost_url,
     auth_basic           => $auth_basic,
     auth_basic_user_file => $auth_basic_user_file,
