@@ -18,14 +18,15 @@ class role::mariadb(
   include automysqlbackup
 
   automysqlbackup::backup { 'automysqlbackup':
-    do_monthly          => '0',
-    do_weekly           => '0',
-    mysql_dump_username => hiera( 'automysqlbackup::backup::mysql_dump_username' ),
-    mysql_dump_password => hiera( 'automysqlbackup::backup::mysql_dump_password' ),
-    db_exclude          => hiera( 'automysqlbackup::backup::db_exclude' ),
-    table_exclude       => hiera( 'automysqlbackup::backup::table_exclude' ),
-    mail_address        => hiera( 'automysqlbackup::backup::mail_address' ),
-    mailcontent         => hiera( 'automysqlbackup::backup::mailcontent' ),
+    do_monthly                   => '0',
+    do_weekly                    => '0',
+    mysql_dump_username          => hiera( 'automysqlbackup::backup::mysql_dump_username' ),
+    mysql_dump_password          => hiera( 'automysqlbackup::backup::mysql_dump_password' ),
+    mysql_dump_use_separate_dirs => 'yes',
+    db_exclude                   => hiera( 'automysqlbackup::backup::db_exclude' ),
+    table_exclude                => hiera( 'automysqlbackup::backup::table_exclude' ),
+    mail_address                 => hiera( 'automysqlbackup::backup::mail_address' ),
+    mailcontent                  => hiera( 'automysqlbackup::backup::mailcontent' ),
   }
 
   apt::source { 'mariadb':
