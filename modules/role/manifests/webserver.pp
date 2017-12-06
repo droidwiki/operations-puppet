@@ -107,10 +107,6 @@ class role::webserver {
         provider => 'apt',
         so_name  => 'mysqli',
       },
-      mongodb   => {
-        provider       => 'apt',
-        package_prefix => 'php-',
-      },
       curl      => {
         provider => 'apt',
       },
