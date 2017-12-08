@@ -65,6 +65,11 @@ class role::webserver {
     pear         => true,
     phpunit      => false,
 
+    settings     => {
+      'PHP/upload_max_filesize' => '100M',
+      'PHP/post_max_size'       => '100M',
+    },
+
     extensions   => {
       xml       => {},
       imagick   => {
