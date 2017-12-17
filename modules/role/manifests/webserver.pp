@@ -1,6 +1,8 @@
 # Generic class for a webserver installation
 # currently only handles the firewall rules
-class role::webserver {
+class role::webserver(
+  $php_version = '7.0',
+) {
   firewall { '300 accept incoming http traffic':
     proto  => 'tcp',
     dport  => '80',
@@ -55,7 +57,7 @@ class role::webserver {
   }
 
   class { '::php::globals':
-    php_version => '7.0',
+    php_version => $php_version,
   }
   -> class { '::php':
     manage_repos => true,
@@ -115,6 +117,9 @@ class role::webserver {
       curl      => {
         provider => 'apt',
       },
+      ldap      => {
+        provider => 'apt',
+      }
     },
   }
 

@@ -3,7 +3,9 @@ node 'eclair.dwnet' {
   include droidwiki::default
   include role::gitlab
   include role::mariadb
-  include role::webserver
+  class { 'role::webserver':
+    php_version => '7.1'
+  }
   include role::mediawiki
   include role::mailserver
   include mailgraph
@@ -11,6 +13,7 @@ node 'eclair.dwnet' {
   include role::puppetmaster
   include role::deploymenthost
   include certbot
+  include mailadmin
 
   include role::nginx::go2tech
   include role::nginx::www_go2tech
