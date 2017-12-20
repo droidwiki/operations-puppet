@@ -79,12 +79,17 @@ class zotero {
     notify  => Service['zotero'],
   }
 
+  # should be reomved once the file is removed from node
   file { '/etc/init/zotero.conf':
+    ensure => absent,
+  }
+
+  file { '/etc/systemd/system/zotero.service':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    content => template('zotero/upstart.conf.erb'),
+    content => template('zotero/zotero.service.erb'),
     notify  => Service['zotero'],
   }
 
@@ -93,8 +98,7 @@ class zotero {
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
-    provider   => 'upstart',
-    require    => File['/etc/init/zotero.conf'],
-    subscribe  => File['/etc/init/zotero.conf'],
+    require    => File['/etc/systemd/system/zotero.service'],
+    subscribe  => File['/etc/systemd/system/zotero.service'],
   }
 }

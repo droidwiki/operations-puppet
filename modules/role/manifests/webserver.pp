@@ -73,7 +73,6 @@ class role::webserver(
     },
 
     extensions   => {
-      xml       => {},
       imagick   => {
         provider       => 'apt',
         package_prefix => 'php-',
@@ -121,6 +120,10 @@ class role::webserver(
         provider => 'apt',
       }
     },
+  }
+
+  if $facts['os']['name'] == 'Ubuntu' and versioncmp($facts['os']['release']['full'], '16.04') < 0 {
+    php::extension { 'xml': }
   }
 
   # legacy: map phph (used for hhvm without JIT) to php binary

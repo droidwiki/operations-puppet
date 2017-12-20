@@ -1,25 +1,21 @@
 # NOTE: This file is managed by Puppet
-description	"Zotero service"
+[Unit]
+Description="Zotero service"
 
-# wann starten bzw. stoppen?
-start on runlevel [2345]
-stop on runlevel [!2345]
-
-setuid "zotero"
-setgid "zotero"
-
-respawn
-respawn limit 5 10
-
-# wait 60 seconds for a graceful restart before killing the master
-kill timeout 60
-
-env LD_LIBRARY_PATH=/usr/lib/xulrunner-24.0/xulrunner/
-
-exec /lib64/ld-linux-x86-64.so.2                                        \
+[Service]
+User=zotero
+Group=zotero
+Environment= LD_LIBRARY_PATH=/usr/lib/xulrunner-24.0/xulrunner/
+Restart=always
+WorkingDirectory=<%= @base_path %>
+ExecStart=/lib64/ld-linux-x86-64.so.2                                   \
  /usr/lib/xulrunner-24.0/xulrunner-sdk/sdk/bin/xpcshell                 \
  -g /usr/lib/xulrunner-24.0/xulrunner                                   \
  -a <%= @base_path %>/translation-server                                \
  -mn                                                                    \
  -v 180 <%= @base_path %>/translation-server/translation-server/init.js \
  >> <%= @log_dir %>/zotero.log 2>&1
+
+[Install]
+WantedBy=multi-user.target
+

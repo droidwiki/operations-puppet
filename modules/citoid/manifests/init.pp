@@ -28,12 +28,17 @@ class citoid {
     notify => Service['citoid'],
   }
 
+  # should be removed after file is removed from node
   file { '/etc/init/citoid.conf':
+    ensure => absent,
+  }
+
+  file { '/etc/systemd/system/citoid.service':
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => 'puppet:///modules/citoid/citoid.init.conf',
+    source => 'puppet:///modules/citoid/citoid.service',
     notify => Service['citoid'],
   }
 
