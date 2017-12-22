@@ -68,8 +68,8 @@ class role::nginx::go2tech {
     use_default_location => false,
   }
 
-  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de-0001/privkey.pem';
+  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem';
+  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem';
 
   nginx::resource::vhost { 'go2tech.de':
     server_name          => [ 'go2tech.de', 'bits.go2tech.de', '188.68.49.74' ],

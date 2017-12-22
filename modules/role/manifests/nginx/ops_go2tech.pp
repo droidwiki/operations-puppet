@@ -1,8 +1,8 @@
 # vhost and locations for ops.go2tech.de
 # ALWAYS PAIR WITH CERTBOT!
 class role::nginx::ops_go2tech {
-  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de-0001/privkey.pem';
+  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem';
+  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem';
 
   droidwiki::nginx::mediawiki { 'ops.go2tech.de':
     vhost_url             => 'ops.go2tech.de',

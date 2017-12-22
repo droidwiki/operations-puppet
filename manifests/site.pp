@@ -1,7 +1,6 @@
 # site.pp
 node 'eclair.dwnet' {
   include droidwiki::default
-  include role::gitlab
   include role::mariadb
   class { 'role::webserver':
     php_version => '7.1'
@@ -21,8 +20,6 @@ node 'eclair.dwnet' {
   include role::nginx::ops_go2tech
   include role::nginx::dev_go2tech
   include role::nginx::ganglia_go2tech
-  include role::nginx::gerrit_go2tech
-  include role::nginx::git_go2tech
   include role::nginx::puppetboard_go2tech
 
   include role::puppetboard

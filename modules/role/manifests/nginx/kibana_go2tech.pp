@@ -15,8 +15,8 @@ class role::nginx::kibana_go2tech {
     mode   => '0755',
   }
 
-  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de-0001/privkey.pem';
+  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem';
+  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem';
 
   nginx::resource::vhost { 'kibana.go2tech.de':
     use_default_location => false,

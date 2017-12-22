@@ -80,9 +80,6 @@
 [submodule "modules/nfs"]
 	path = modules/nfs
 	url = git@github.com:derdanne/puppet-nfs.git
-[submodule "modules/gitlab"]
-	path = modules/gitlab
-	url = https://github.com/vshn/puppet-gitlab.git
 [submodule "modules/nodejs"]
 	path = modules/nodejs
 	url = git@github.com:voxpupuli/puppet-nodejs.git
