@@ -29,9 +29,23 @@ class role::mariadb(
     mailcontent                  => hiera( 'automysqlbackup::backup::mailcontent' ),
   }
 
+  if ($::lsbdistcodename == 'trusty') {
+    # mariadb on mirrors.n-ix.net for trusty
+    apt::key { 'mariadb_trusty_nix':
+      id     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
+      server => 'hkp://keyserver.ubuntu.com:80',
+    }
+  } else {
+    # mariadb on mirrors.n-ix.net for xenial
+    apt::key { 'mariadb_xenial_nix':
+      id     => '177F4010FE56CA3336300305F1656F24C74CD1D8',
+      server => 'hkp://keyserver.ubuntu.com:80',
+    }
+  }
+
   apt::source { 'mariadb':
-    location => 'http://mirrors.n-ix.net/mariadb/repo/10.0/ubuntu',
-    release  => 'trusty',
+    location => 'http://mirrors.n-ix.net/mariadb/repo/10.2/ubuntu',
+    release  => $::lsbdistcodename,
     repos    => 'main',
     key      => {
       id     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
