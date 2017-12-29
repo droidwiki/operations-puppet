@@ -2,9 +2,7 @@
 node 'eclair.dwnet' {
   include droidwiki::default
   include role::mariadb
-  class { 'role::webserver':
-    php_version => '7.1'
-  }
+  include role::webserver
   include role::mediawiki
   include role::mailserver
   include mailgraph
