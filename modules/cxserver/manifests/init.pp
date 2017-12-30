@@ -43,7 +43,7 @@ class cxserver {
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
-    mode   => '0755',
+    mode   => '0664',
     source => 'puppet:///modules/cxserver/cxserver.service',
     notify => Service['cxserver'],
   }

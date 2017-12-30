@@ -88,7 +88,7 @@ class zotero {
     ensure  => present,
     owner   => 'root',
     group   => 'root',
-    mode    => '0444',
+    mode    => '0664',
     content => template('zotero/zotero.service.erb'),
     notify  => Service['zotero'],
   }

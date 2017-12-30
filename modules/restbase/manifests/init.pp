@@ -50,7 +50,7 @@ class restbase (
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
-    mode   => '0755',
+    mode   => '0664',
     source => 'puppet:///modules/restbase/restbase.service',
     notify => Service['restbase'],
   }

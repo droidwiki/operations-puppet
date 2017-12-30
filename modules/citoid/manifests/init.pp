@@ -37,7 +37,7 @@ class citoid {
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
-    mode   => '0755',
+    mode   => '0664',
     source => 'puppet:///modules/citoid/citoid.service',
     notify => Service['citoid'],
   }

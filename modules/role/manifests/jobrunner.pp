@@ -47,7 +47,7 @@ class role::jobrunner {
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
-    mode   => '0755',
+    mode   => '0664',
     source => 'puppet:///modules/role/jobrunner.service',
     notify => Service['jobrunner'],
   }
@@ -56,7 +56,7 @@ class role::jobrunner {
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
-    mode   => '0755',
+    mode   => '0664',
     source => 'puppet:///modules/role/jobchron.service',
     notify => Service['jobchron'],
   }
