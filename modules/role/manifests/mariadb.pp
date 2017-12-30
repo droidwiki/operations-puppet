@@ -67,7 +67,6 @@ class role::mariadb(
           'datadir'         => '/data/mariadb/datadir',
           'bind-address'    => $facts['networking']['ip'],
           'server-id'       => $facts['mysql_server_id'],
-          'replicate-do-db' => ['droidwikiwiki', 'devwiki', 'graphite', 'missionrhode', 'opswiki', 'reviewdb', 'vmail', 'wordpress', 'datawiki', 'endroidwikiwiki'],
           'relay-log'       => 'mysql-relay-bin',
           'read-only'       => '1'
         },
