@@ -46,7 +46,7 @@ class restbase (
     notify => Service['restbase'],
   }
 
-  file { '/etc/init/restbase.conf':
+  file { '/etc/systemd/system/restbase.service':
     ensure => 'present',
     owner  => 'root',
     group  => 'root',

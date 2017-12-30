@@ -1,22 +1,15 @@
 # NOTE: This file is managed by Puppet
-# Upstart job for <%= @title %>
+# systemd service for <%= @title %>
+[Unit]
+Description="RESTBase service"
 
-description "RESTBase service"
+[Service]
+User=www-data
+Group=www-data
+Environment= NODE_PATH="/data/mediawiki/services/restbase/node_modules"
+Restart=always
+WorkingDirectory=/data/mediawiki/services/restbase
+ExecStart=/usr/bin/nodejs server.js
 
-start on (local-filesystems and net-device-up IFACE!=lo)
-stop on runlevel [!2345]
-
-# up ulimit -n a bit
-
-setuid "www-data"
-setgid "www-data"
-
-env NODE_PATH="/data/mediawiki/services/restbase/node_modules"
-
-respawn
-
-# wait 60 seconds for a graceful restart before killing the master
-kill timeout 60
-
-chdir /data/mediawiki/services/restbase
-exec /usr/bin/nodejs server.js
+[Install]
+WantedBy=multi-user.target
