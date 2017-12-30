@@ -1,0 +1,14 @@
+[Unit]
+Description="Mediawiki job queue chron loop"
+After=php7.1-fpm.service
+
+[Service]
+EnvironmentFile=/etc/default/jobrunner
+User=www-data
+Group=www-data
+SyslogIdentifier=jobchron
+ExecStart=/usr/bin/php /data/mediawiki/services/jobrunner/redisJobChronService --config-file=${JOBRUNNER_CONFIG} ${DAEMON_OPTS}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

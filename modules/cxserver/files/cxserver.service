@@ -1,16 +1,15 @@
-# Upstart job configuration for cxserver
+# NOTE: This file is managed by Puppet
+# systemd service for <%= @title %>
+[Unit]
+Description="CXServer service"
 
-description "cxserver service"
+[Service]
+User=www-data
+Group=www-data
+Environment= NODE_PATH="/data/mediawiki/services/cxserver/node_modules"
+Restart=always
+WorkingDirectory=/data/mediawiki/services/cxserver
+ExecStart=/usr/bin/npm start
 
-start on (local-filesystems and net-device-up IFACE!=lo)
-stop on runlevel [!2345]
-
-setuid "www-data"
-setgid "www-data"
-
-env NODE_PATH="//data/mediawiki/services/cxserver/node_modules"
-
-chdir "/data/mediawiki/services/cxserver"
-exec npm start
-
-respawn
+[Install]
+WantedBy=multi-user.target

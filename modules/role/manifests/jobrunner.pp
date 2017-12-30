@@ -43,21 +43,21 @@ class role::jobrunner {
     notify => Service['jobrunner'],
   }
 
-  file { '/etc/init/jobrunner.conf':
+  file { '/etc/systemd/system/jobrunner.service':
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => 'puppet:///modules/role/jobrunner.init.conf',
+    source => 'puppet:///modules/role/jobrunner.service',
     notify => Service['jobrunner'],
   }
 
-  file { '/etc/init/jobchron.conf':
+  file { '/etc/systemd/system/jobchron.service':
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => 'puppet:///modules/role/jobchron.init.conf',
+    source => 'puppet:///modules/role/jobchron.service',
     notify => Service['jobchron'],
   }
 

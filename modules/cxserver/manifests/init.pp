@@ -39,7 +39,7 @@ class cxserver {
     notify  => Service['cxserver'],
   }
 
-  file { '/etc/init/cxserver.conf':
+  file { '/etc/systemd/system/cxserver.service':
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
