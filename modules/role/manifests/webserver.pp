@@ -136,7 +136,7 @@ class role::webserver(
   }
 
   monit::service { 'nginx': }
-  monit::service { 'php7.0-fpm': }
+  monit::service { "php${php_version}-fpm": }
 
   file { '/data/www':
     ensure => 'directory',
