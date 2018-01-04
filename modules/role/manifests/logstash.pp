@@ -10,9 +10,11 @@ class role::logstash(
   $es_output_host            = '188.68.49.74',
   $es_output_port            = 9200,
   $es_output_idle_flush_time = 1,
+  $manage_repo               = false,
 ) {
   class { 'logstash':
     version     => '1:5.5.1-1',
+    manage_repo => $manage_repo
   }
 
   $prefix = 'logstash-'

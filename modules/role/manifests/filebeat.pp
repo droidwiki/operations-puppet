@@ -1,7 +1,10 @@
 # Installs and configures filebeat
-class role::filebeat {
+class role::filebeat(
+  $manage_repo = true,
+) {
   class { 'filebeat':
-    outputs => {
+    manage_repo => $manage_repo,
+    outputs     => {
       'logstash' => {
       'hosts'    => [
           'eclair.dwnet:5044'
