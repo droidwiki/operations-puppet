@@ -63,12 +63,12 @@ class role::mariadb(
       service_name     => 'mysql',
       override_options => {
         mysqld      => {
-          'pid-file'        => '/var/run/mysqld/mysqld.pid',
-          'datadir'         => '/data/mariadb/datadir',
-          'bind-address'    => $facts['networking']['ip'],
-          'server-id'       => $facts['mysql_server_id'],
-          'relay-log'       => 'mysql-relay-bin',
-          'read-only'       => '1'
+          'pid-file'     => '/var/run/mysqld/mysqld.pid',
+          'datadir'      => '/data/mariadb/datadir',
+          'bind-address' => $facts['networking']['ip'],
+          'server-id'    => $facts['mysql_server_id'],
+          'relay-log'    => 'mysql-relay-bin',
+          'read-only'    => '1'
         },
         mysqld_safe => {
           'socket' => '/var/run/mysqld/mysqld.sock',
