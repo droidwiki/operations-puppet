@@ -1,7 +1,7 @@
 # Generic class for a webserver installation
 # currently only handles the firewall rules
 class role::webserver(
-  $php_version = '7.1',
+  $php_version = '7.2',
 ) {
   firewall { '300 accept incoming http traffic':
     proto  => 'tcp',
