@@ -3,7 +3,9 @@ node 'eclair.dwnet' {
   include droidwiki::default
   include role::mariadb
   include role::webserver
-  include role::mediawiki
+  class { 'role::mediawiki':
+    isslave => true,
+  }
   include role::mailserver
   include mailgraph
   include role::ircbot
