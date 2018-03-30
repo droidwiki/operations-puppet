@@ -126,13 +126,9 @@ class role::webserver(
     php::extension { 'xml': }
   }
 
-  # legacy: map phph (used for hhvm without JIT) to php binary
+  # Remove when applied to all servers (30.03.2018)
   file { '/usr/bin/phph':
-    ensure => 'present',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-    source => 'puppet:///modules/role/phph',
+    ensure => 'absent',
   }
 
   monit::service { 'nginx': }

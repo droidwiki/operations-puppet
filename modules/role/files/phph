@@ -1,4 +1,0 @@
-#!/bin/bash
-# THIS FILE IS MANAGED BY PUPPET!
-
-php $@
