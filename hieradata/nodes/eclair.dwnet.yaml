@@ -39,7 +39,6 @@ monit::postfix::certcheck:
 
 # mariadb settings
 role::mariadb::isslave: true
-role::mariadb::serverid: 2
 
 # logstash settings
 role::logstash::redis_input_host: 37.120.178.25
