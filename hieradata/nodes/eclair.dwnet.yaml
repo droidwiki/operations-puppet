@@ -50,49 +50,6 @@ role::logstash::es_output_host: 127.0.0.1
 role::logstash::es_output_port: 9200
 role::logstash::es_output_idle_flush_time: 1
 
-# gitlab configuration
-gitlab::external_url: 'https://gerrit.go2tech.de'
-gitlab::nginx:
-  enable: false
-gitlab::web_server:
-  external_users:
-    - 'www-data'
-gitlab::logging:
-  svlogd_size: '200 * 1024 * 1024'
-gitlab::unicorn:
-  port: 8081
-gitlab::postgresql:
-  shared_buffers: 256MB
-gitlab::git_data_dirs:
-  default:
-    path: '/data/development/git'
-gitlab::gitlab_rails:
-  ldap_enabled: true
-  ldap_servers:
-    go2tech:
-      label: 'go2tech.de LDAP'
-      host: 'localhost'
-      port: 389
-      uid: 'uid'
-      method: 'plain'
-      bind_dn: 'CN=gerrit,OU=users,DC=go2tech,DC=de'
-      password: >
-        ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
-        DQYJKoZIhvcNAQEBBQAEggEAMa9LgZNFtezSAu48KzRVUWqVO6+WPupeFVkJ
-        1Lj+dVDdh7naEMX1jd2tcMC/QCqlwA4s3XbVvenGbUJbYaJ1+GZuWP0PDKPP
-        a2QAGiNFoBDziO7A48CQzQdUA9xOUzAMq24ClUUilKKAUBK3AmnJ4QO2zoHq
-        RxMpFRf3IepQHHK9suQU4dOdhkkax+Im3PYbQaZD+MBD02otSd9H5w2JJ3ul
-        mF8hvTxEBS5JZHVzUBfvP6HLgRiWLNYHtq3aKJiSmFsWfGcAi5eqzJjBEVGL
-        aDn0rTRFXMiyTMDg6pEAzqfkGdiX1PtJdmxmUYNVB4yXJ7CStgNPz0UJoH/L
-        RDRd+jA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBA3LW01GJrtdb/yfEFI
-        +r1zgBA+ZZAXHRa73EuJ7u4ZxMko]
-      active_directory: false
-      allow_username_or_email_login: false
-      block_auto_created_users: false
-      base: 'OU=users,DC=go2tech,DC=de'
-      group_base: 'OU=groups,DC=go2tech,DC=de'
-      user_filter: ''
-
 # mariadb settings
 mysql::server::root_password: >
     ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
