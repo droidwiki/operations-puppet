@@ -107,9 +107,6 @@ define droidwiki::nginx::mediawiki (
       ipv6_listen_options  => '',
       listen_port          => 80,
       ssl                  => false,
-      add_header           => {
-        'X-Delivered-By' => $facts['fqdn'],
-      },
       vhost_cfg_append     => {
         'return' => "301 https://${vhost_url}\$request_uri",
       },
@@ -218,7 +215,7 @@ define droidwiki::nginx::mediawiki (
       fastcgi_param => {
         'SCRIPT_FILENAME' => '$document_root/thumb.php',
       },
-      fastcgi       => '127.0.0.1:9000',
+      fastcgi       => 'mediawikibackend',
     ;
     "${vhost_url}/api":
       location              => '/api',
@@ -246,7 +243,7 @@ define droidwiki::nginx::mediawiki (
       fastcgi_param => {
         'SCRIPT_FILENAME' => '$document_root/index.php',
       },
-      fastcgi       => '127.0.0.1:9000',
+      fastcgi       => 'mediawikibackend',
     }
 
     nginx::resource::location { "${vhost_url}/${mediawiki_scriptpath}":
@@ -262,7 +259,7 @@ define droidwiki::nginx::mediawiki (
         '   try_files $uri $uri/ =404;',
         '   fastcgi_param HTTP_ACCEPT_ENCODING "";',
         '   include /etc/nginx/fastcgi_params;',
-        '   fastcgi_pass 127.0.0.1:9000;',
+        '   fastcgi_pass mediawikibackend;',
         '}',
       ],
     }
@@ -274,17 +271,7 @@ define droidwiki::nginx::mediawiki (
       ssl           => $ssl,
       ssl_only      => $ssl,
       try_files     => [ '$uri', '$uri/', '@rewrite' ],
-      raw_prepend   => [
-        'set $hhvmServer 127.0.0.1:9000;',
-        'if ($http_x_droidwiki_debug) {',
-        '   set $hhvmServer 188.68.49.74:9000;',
-        '   add_header X-Delivered-By eclair.dwnet;',
-        '}',
-        'if ($http_x_droidwiki_debug = "") {',
-        "   add_header X-Delivered-By ${facts['fqdn']};",
-        '}',
-      ],
-      fastcgi       => '$hhvmServer',
+      fastcgi       => 'mediawikibackend',
       fastcgi_param => {
         'HTTP_ACCEPT_ENCODING' => '""',
       }

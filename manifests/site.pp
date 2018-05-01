@@ -17,8 +17,6 @@ node 'eclair.dwnet' {
   include role::nginx::go2tech
   include role::nginx::www_go2tech
   include role::nginx::blog_go2tech
-  include role::nginx::ops_go2tech
-  include role::nginx::dev_go2tech
   include role::nginx::ganglia_go2tech
   include role::nginx::puppetboard_go2tech
 
@@ -36,6 +34,13 @@ node 'eclair.dwnet' {
 }
 
 node 'donut.dwnet' {
+  nginx::resource::upstream { 'mediawikibackend':
+    members => [
+      '127.0.0.1:9000',
+      '188.68.49.74:9000',
+    ],
+  }
+
   include droidwiki::default
   include redis
   include role::mariadb
@@ -53,6 +58,7 @@ node 'donut.dwnet' {
 
   include role::nginx::droidwiki
   include role::nginx::data_droidwiki
+  include role::nginx::ops_go2tech
   include role::datawiki
   include role::nginx::donut_go2tech
   include role::nginx::missionrhode_go2tech

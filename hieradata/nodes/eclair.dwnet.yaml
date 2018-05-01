@@ -77,3 +77,8 @@ mailadmin::ldap_search_pw: >
     JPfLgCDcXiIaai6UodMysTFH0e6O53b3MCs4N8ciy511NHs4mg==]
 mailadmin::ldap_dn_string: 'dc=go2tech,dc=de'
 mailadmin::ldap_query_string: '(&(cn={username})(memberOf=cn=EMailAdministrator,ou=groups,dc=go2tech,dc=de))'
+
+# php configuration
+php::fpm::pools:
+  www:
+    listen: '0.0.0.0:9000'

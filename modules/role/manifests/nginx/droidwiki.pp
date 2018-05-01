@@ -51,7 +51,6 @@ class role::nginx::droidwiki {
       ssl_dhparam          => $sslcert::params::dhparampempath,
       http2                => on,
       add_header           => {
-        'X-Delivered-By'            => $facts['fqdn'],
         'Strict-Transport-Security' => '"max-age=31536000; includeSubdomains; preload"',
       },
       vhost_cfg_append     => {
@@ -69,9 +68,6 @@ class role::nginx::droidwiki {
       server_name => [ '.droid.wiki', '.droidwiki.org', '.droidwiki.de' ],
       listen_port => 80,
       ssl         => false,
-      add_header  => {
-        'X-Delivered-By' => $facts['fqdn'],
-      },
       index_files => [],
     ;
   }
