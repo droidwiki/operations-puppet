@@ -1,6 +1,6 @@
 # defines hosts and locations for ganglia.go2tech.de
 class role::nginx::ganglia_go2tech {
-  file { "/data/www/ganglia.go2tech.de":
+  file { '/data/www/ganglia.go2tech.de':
     ensure => 'directory',
     force  => true,
     owner  => 'www-data',
@@ -8,7 +8,7 @@ class role::nginx::ganglia_go2tech {
     mode   => '0755',
   }
 
-  file { "/data/www/ganglia.go2tech.de/public_html":
+  file { '/data/www/ganglia.go2tech.de/public_html':
     ensure => 'directory',
     force  => true,
     owner  => 'www-data',
@@ -25,10 +25,10 @@ class role::nginx::ganglia_go2tech {
     www_root             => '/data/www/ganglia.go2tech.de/public_html',
   }
 
-  nginx::resource::location { "ganglia.go2tech.de/ .php":
-    ensure               => 'present',
-    vhost                => 'ganglia.go2tech.de',
-    location             => '~ \.php',
-    fastcgi              => '127.0.0.1:9000',
+  nginx::resource::location { 'ganglia.go2tech.de/ .php':
+    ensure   => 'present',
+    vhost    => 'ganglia.go2tech.de',
+    location => '~ \.php',
+    fastcgi  => '127.0.0.1:9000',
   }
 }
