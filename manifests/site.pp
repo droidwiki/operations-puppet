@@ -2,23 +2,16 @@
 node 'eclair.dwnet' {
   include droidwiki::default
   include role::mariadb
-  include role::webserver
+  include role::php
   class { 'role::mediawiki':
     isslave => true,
   }
   include role::mailserver
-  include mailgraph
   include role::ircbot
   include role::puppetmaster
   include role::deploymenthost
   include certbot
   include mailadmin
-
-  include role::nginx::go2tech
-  include role::nginx::www_go2tech
-  include role::nginx::blog_go2tech
-  include role::nginx::ganglia_go2tech
-  include role::nginx::puppetboard_go2tech
 
   include role::puppetboard
 
@@ -31,21 +24,32 @@ node 'eclair.dwnet' {
   include role::nodejs
   include zotero
   include citoid
+
+  # ganglia legacy options
+  file { '/data/www/ganglia.go2tech.de':
+    ensure => 'directory',
+    force  => true,
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0755',
+  }
+
+  file { '/data/www/ganglia.go2tech.de/public_html':
+    ensure => 'directory',
+    force  => true,
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0755',
+  }
 }
 
 node 'donut.dwnet' {
-  nginx::resource::upstream { 'mediawikibackend':
-    members => [
-      '127.0.0.1:9000',
-      '188.68.49.74:9000',
-    ],
-  }
-
   include droidwiki::default
   include redis
   include role::mariadb
   include role::parsoid
   include role::webserver
+  include role::php
   include role::mediawiki
   include role::filebeat
   include role::jobrunner
@@ -62,6 +66,11 @@ node 'donut.dwnet' {
   include role::datawiki
   include role::nginx::donut_go2tech
   include role::nginx::missionrhode_go2tech
+  include role::nginx::puppetboard_go2tech
+  include role::nginx::blog_go2tech
+  include role::nginx::ganglia_go2tech
+  include role::nginx::kibana_go2tech
+  include role::nginx::go2tech
 
   role::nginx::wiki{ 'endroidwikiwiki':
     domain      => 'en.droidwiki.org',

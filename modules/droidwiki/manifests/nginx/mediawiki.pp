@@ -33,11 +33,13 @@ define droidwiki::nginx::mediawiki (
     # FIXME: make HSTS configurable, currently any https mediawiki host uses HSTS
     $add_header = {
       'X-Delivered-By'            => $facts['fqdn'],
+      'X-Upstream'                => '$upstream_addr',
       'Strict-Transport-Security' => '"max-age=31536000; includeSubdomains; preload"',
     }
   } else {
     $add_header = {
       'X-Delivered-By' => $facts['fqdn'],
+      'X-Upstream'     => '$upstream_addr',
     }
   }
 

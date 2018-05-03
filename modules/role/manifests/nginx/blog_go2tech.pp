@@ -1,22 +1,22 @@
 # vhosts and locations for blog.go2tech.de
 # ALWAYS PAIR WITH CERTBOT!
 class role::nginx::blog_go2tech {
-  file { '/data/www/blog.go2tech.de':
+  file { '/data/shareddata/www/blog.go2tech.de':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
   }
 
-  file { '/data/www/blog.go2tech.de/public_html':
+  file { '/data/shareddata/www/blog.go2tech.de/public_html':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
   }
 
-  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem';
+  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
+  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
 
   nginx::resource::vhost { 'blog.go2tech.de':
     listen_port          => 443,
@@ -32,7 +32,7 @@ class role::nginx::blog_go2tech {
     ssl_stapling         => true,
     ssl_stapling_verify  => true,
     http2                => on,
-    www_root             => '/data/www/blog.go2tech/public_html/',
+    www_root             => '/data/shareddata/www/blog.go2tech.de/public_html/',
     index_files          => [ 'index.php' ],
   }
 
@@ -69,6 +69,6 @@ class role::nginx::blog_go2tech {
     ssl_only => true,
     vhost    => 'blog.go2tech.de',
     location => '~ \.php$',
-    fastcgi  => '127.0.0.1:9000',
+    fastcgi  => 'mediawikibackend',
   }
 }

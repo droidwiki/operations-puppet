@@ -1,46 +1,21 @@
 # Class for go2tech.de nginx configurations
 class role::nginx::go2tech {
-  file { '/data/www/go2tech.de':
+  file { '/data/shareddata/www/go2tech.de':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
   }
 
-  file { '/data/www/go2tech.de/go2tech.de.crt':
-    ensure => absent,
-  }
-
-  file { '/data/www/go2tech.de/public_html':
+  file { '/data/shareddata/www/go2tech.de/public_html':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
-  }
-
-  package { 'fcgiwrap':
-    ensure => 'present',
-  }
-
-  service { 'fcgiwrap':
-    ensure  => 'running',
-    require => Package['fcgiwrap'],
-  }
-
-  file { '/data/www/go2tech.de/public_html/cgi-bin':
-    ensure => 'directory',
-    owner  => 'www-data',
-    group  => 'www-data',
-    mode   => '0755',
-  }
-
-  file { '/data/www/go2tech.de/public_html/cgi-bin/mailgraph.cgi':
-    ensure => 'link',
-    target => '/usr/lib/cgi-bin/mailgraph.cgi',
   }
 
   nginx::resource::vhost { '_':
-    www_root             => '/data/www/go2tech.de/public_html',
+    www_root             => '/data/shareddata/www/go2tech.de/public_html',
     ipv6_enable          => true,
     listen_options       => 'default_server',
     index_files          => [ 'missing.php' ],
@@ -68,14 +43,14 @@ class role::nginx::go2tech {
     use_default_location => false,
   }
 
-  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem';
+  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
+  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
 
   nginx::resource::vhost { 'go2tech.de':
     server_name          => [ 'go2tech.de', 'bits.go2tech.de', '188.68.49.74' ],
     ipv6_enable          => true,
     ipv6_listen_options  => '',
-    www_root             => '/data/www/go2tech.de/public_html',
+    www_root             => '/data/shareddata/www/go2tech.de/public_html',
     index_files          => [ 'index.php' ],
     listen_port          => 443,
     ssl_port             => 443,
@@ -106,7 +81,7 @@ class role::nginx::go2tech {
     ;
     'go2tech.de mail-admin':
       location      => '/mail-admin',
-      www_root      => '/data/www/go2tech.de/mail-admin/public/',
+      www_root      => '/data/shareddata/www/go2tech.de/mail-admin/public/',
       # The current path nginx will try to serve would be:
       #  /data/www/go2tech.de/mail-admin/public/mail-admin/build/app.css
       # which does not exist, manually rewrite the url to remove the 2nd mail-admin
@@ -121,8 +96,8 @@ class role::nginx::go2tech {
     ;
     'go2tech.de mail-admin php':
       location           => '~ ^/mail-admin/index\.php(/|$)',
-      www_root           => '/data/www/go2tech.de/mail-admin/public/',
-      fastcgi            => '127.0.0.1:9000',
+      www_root           => '/data/shareddata/www/go2tech.de/mail-admin/public/',
+      fastcgi            => 'mediawikibackend',
       fastcgi_split_path => '^(.+\.php)(/.*)$',
       raw_prepend        => [
         # The current $fastcgi_script_name is /mail-admin/index.php which does not eixst
@@ -138,20 +113,7 @@ class role::nginx::go2tech {
     ;
     'go2tech.de php':
       location => '~ \.php$',
-      fastcgi  => '127.0.0.1:9000',
-    ;
-    'go2tech.de/webssh':
-      location              => '/webssh',
-      proxy                 => 'https://127.0.0.1:4200/',
-      proxy_set_header      => [
-        'Host $host',
-        'X-Real-IP $remote_addr',
-        'X-Forwarded-For $remote_addr',
-      ],
-      proxy_connect_timeout => '300',
-      location_cfg_append   => {
-        'port_in_redirect' => 'off',
-      },
+      fastcgi  => 'mediawikibackend',
     ;
     'go2tech.de/monit':
       location            => '/monit',
@@ -164,7 +126,7 @@ class role::nginx::go2tech {
       rewrite_rules         => [
         '^/monit/(.*) /$1 break',
       ],
-      proxy                 => 'http://127.0.0.1:2812',
+      proxy                 => 'http://eclair.dwnet:2812',
       proxy_set_header      => [
         'Host $host',
         'X-Real-IP $remote_addr',
@@ -174,7 +136,7 @@ class role::nginx::go2tech {
     ;
     'go2tech.de/citoid/':
       location              => '/citoid/',
-      proxy                 => 'http://127.0.0.1:1970/',
+      proxy                 => 'http://eclair.dwnet:1970/',
       proxy_set_header      => [
         'Host $host',
         'X-Real-IP $remote_addr',
@@ -192,8 +154,5 @@ class role::nginx::go2tech {
       ],
       proxy_connect_timeout => '300',
     ;
-    'go2tech.de/cgi-bin/':
-      location => '/cgi-bin/',
-      fastcgi  => 'unix:/var/run/fcgiwrap.socket',
   }
 }

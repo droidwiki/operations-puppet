@@ -62,3 +62,15 @@ monit::admin_pass: >
     ZK0HeNZxSwkliDfpPktIqU/vH3V2EpmjL4piNALzgdxJlfJdqHBro8XXxgi8
     dKgRbTA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDZ+3Z+mnnRDcb6n5vL
     VsHsgBBw4XW0OlOtmehCSpVWTyU1]
+
+nginx::nginx_upstreams:
+  mediawikibackend:
+    ensure: present
+    members:
+     - 37.120.178.25:9000
+     - 188.68.49.74:9000
+
+# php configuration
+php::fpm::pools:
+  www:
+    listen: '0.0.0.0:9000'

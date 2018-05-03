@@ -1,22 +1,22 @@
 # defines hosts and locations for kibana.go2tech.de
 # ALWAYS PAIR WITH CERTBOT!
 class role::nginx::kibana_go2tech {
-  file { '/data/www/kibana.go2tech.de':
+  file { '/data/shareddata/www/kibana.go2tech.de':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
   }
 
-  file { '/data/www/kibana.go2tech.de/public_html':
+  file { '/data/shareddata/www/kibana.go2tech.de/public_html':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
   }
 
-  $sslcert = '/etc/letsencrypt/live/blog.go2tech.de/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/blog.go2tech.de/privkey.pem';
+  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
+  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
 
   nginx::resource::vhost { 'kibana.go2tech.de':
     use_default_location => false,
@@ -53,8 +53,8 @@ class role::nginx::kibana_go2tech {
     ssl_only              => true,
     location              => '/',
     auth_basic            => 'Private data, login only',
-    auth_basic_user_file  => '/data/www/kibana.go2tech.de/users.htpasswd',
-    proxy                 => 'http://127.0.0.1:5601',
+    auth_basic_user_file  => '/data/shareddata/www/kibana.go2tech.de/users.htpasswd',
+    proxy                 => 'http://188.68.49.74:5601',
     proxy_set_header      => [
       'Host $host',
       'X-Real-IP $remote_addr',
@@ -71,7 +71,7 @@ class role::nginx::kibana_go2tech {
     ssl      => true,
     ssl_only => true,
     location => '^~ /.well-known/acme-challenge/',
-    www_root => '/data/www/kibana.go2tech.de/public_html/',
+    www_root => '/data/shareddata/www/kibana.go2tech.de/public_html/',
   }
 
   nginx::resource::location { 'kibana.go2tech.de.80/':
