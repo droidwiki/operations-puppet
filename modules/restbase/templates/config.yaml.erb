@@ -63,10 +63,10 @@ services:
           - type: default
             name: http
             options:
-            allow:
-              - pattern: /^https?:\/\/[a-zA-Z0-9\.]+\/w\/api\.php/
-                forward_headers: true
-              - pattern: /^https?:\/\//
+              allow:
+                - pattern: /^https?:\/\/[a-zA-Z0-9\.]+\/w\/api\.php/
+                  forward_headers: true
+                - pattern: /^https?:\/\//
         paths:
           /{domain:www.droidwiki.org}: *droidwiki.org
           /{domain:en.droidwiki.org}: *droidwiki.org
