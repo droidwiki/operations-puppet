@@ -1,0 +1,15 @@
+# NOTE: This file is managed by Puppet
+# systemd service for <%= @title %>
+[Unit]
+Description="mobileapps service"
+
+[Service]
+User=www-data
+Group=www-data
+Environment= NODE_PATH="/data/mediawiki/services/mobileapps/node_modules"
+Restart=always
+WorkingDirectory=/data/mediawiki/services/mobileapps
+ExecStart=/usr/bin/nodejs server.js
+
+[Install]
+WantedBy=multi-user.target

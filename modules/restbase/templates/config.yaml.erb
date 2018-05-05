@@ -3,7 +3,7 @@
 # - sqlite backend
 # - parsoid at http://localhost:8142
 # - wiki at http://localhost/w/api.php
-# 
+#
 # Quick setup:
 # - npm install
 #   If you see errors about sqlite, you might have to `apt-get install
@@ -25,6 +25,11 @@ droidwiki.org: &droidwiki.org
           baseUriTemplate: "{{'https://{domain}:7231/{domain}/v1'}}"
         parsoid:
           host: http://37.120.178.25:8142
+        mobileapps:
+          host: http://donut.dwnet:6927
+        summary:
+          implementation: mcs
+          host: http://donut.dwnet:6927
         table:
           backend: sqlite
           dbname: db.sqlite3
@@ -42,7 +47,7 @@ droidwiki.org: &droidwiki.org
 services:
   - name: restbase
     module: hyperswitch
-    conf: 
+    conf:
       port: 7231
       host: 0.0.0.0
       salt: secret
@@ -73,3 +78,4 @@ info:
 logging:
   name: restbase
   level: info
+
