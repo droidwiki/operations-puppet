@@ -16,9 +16,9 @@ class role::puppetboard {
   }
 
   file { '/etc/uwsgi/apps-available/puppetboard.ini':
-    ensure  => present,
-    source  => 'puppet:///modules/role/puppetboard/puppetboard.ini',
-    notify  => Service['uwsgi'],
+    ensure => present,
+    source => 'puppet:///modules/role/puppetboard/puppetboard.ini',
+    notify => Service['uwsgi'],
   }
 
   package { 'flask':
