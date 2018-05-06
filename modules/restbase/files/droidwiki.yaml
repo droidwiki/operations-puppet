@@ -131,5 +131,9 @@ paths:
                     dependent_content_types:
                       - name: remaining
                         value_type: json
+            /events:
+              x-modules:
+                - path: sys/events.js
+                  options: '{{merge({"skip_updates": options.skip_updates}, options.events)}}'
         options: '{{options}}'
 
