@@ -221,7 +221,11 @@ define droidwiki::nginx::mediawiki (
     ;
     "${vhost_url}/api":
       location              => '/api',
-      proxy                 => "http://127.0.0.1:7231/${vhost_url}",
+      rewrite_rules         => [
+        '^  $request_uri',
+        '^/api(/.*)  $1  break',
+      ],
+      proxy                 => "http://127.0.0.1:7231/${vhost_url}\$uri",
       proxy_set_header      => [
         'Host $host',
         'X-Real-IP $remote_addr',
