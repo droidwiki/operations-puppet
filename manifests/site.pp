@@ -58,7 +58,6 @@ node 'donut.dwnet' {
   include role::nfs_server
   include role::nodejs
   include restbase
-  include cxserver
   include mobileapps
 
   include role::nginx::droidwiki

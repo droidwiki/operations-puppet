@@ -18,10 +18,6 @@ paths:
                 - path: v1/content.yaml
                   options:
                     response_cache_control: '{{options.purged_cache_control}}'
-                - path: v1/content_segments.yaml
-                  options:
-                    response_cache_control: '{{options.purged_cache_control}}'
-                    cx_host: '{{options.transform.cx_host}}'
                 - path: v1/mobileapps.yaml
                   options: '{{merge({"response_cache_control": options.purged_cache_control},
                                 options.mobileapps)}}'
@@ -53,8 +49,6 @@ paths:
             /transform:
               x-modules:
                 - path: v1/transform.yaml
-                - path: v1/transform-lang.js
-                  options: '{{options.transform}}'
             /data:
               x-modules:
                 - path: v1/citoid.js
