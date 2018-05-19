@@ -16,6 +16,7 @@ node 'eclair.dwnet' {
   include role::puppetboard
 
   include role::ganglia
+  include role::memcached
 
   include role::elasticsearch
   include role::logstash
@@ -54,6 +55,7 @@ node 'donut.dwnet' {
   include role::filebeat
   include role::jobrunner
   include role::ganglia
+  include role::memcached
   include certbot
   include role::nfs_server
   include role::nodejs
