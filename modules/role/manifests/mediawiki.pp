@@ -52,6 +52,13 @@ class role::mediawiki(
     mode    => '0444',
   }
 
+  apt::ppa { 'ppa:legoktm/mediawiki-lts': }
+
+  package { 'php-wikidiff2':
+    ensure  => '1.5.1-5ppa1~xenial1',
+    require => Apt::Ppa['ppa:legoktm/mediawiki-lts'],
+  }
+
   if ($isslave) {
     $wikis = [
       'droidwikiwiki',
