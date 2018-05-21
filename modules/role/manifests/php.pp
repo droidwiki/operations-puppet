@@ -3,6 +3,17 @@
 class role::php(
   $php_version = '7.2',
 ) {
+  # wikidiff2 apt repository
+  apt::source { 'ppa-floriansw-droidwiki':
+    location     => 'http://ppa.launchpad.net/floriansw/droidwiki/ubuntu',
+    release      => 'bionic',
+    repos        => 'main',
+    key          => {
+      'id' => '6F80C4BEE4B4D93724159E10D56BC20EA6DCA5A9',
+    },
+    architecture => 'amd64',
+  }
+
   class { '::php::globals':
     php_version => $php_version,
   }
@@ -65,8 +76,13 @@ class role::php(
       },
       ldap      => {
         provider => 'apt',
+      },
+      wikidiff2 => {
+        provider       => 'apt',
+        package_prefix => 'php-',
       }
     },
+    require      => Apt::Source['ppa-floriansw-droidwiki'],
   }
 
   if $facts['os']['name'] == 'Ubuntu' and versioncmp($facts['os']['release']['full'], '16.04') < 0 {
