@@ -3,7 +3,9 @@ class role::filebeat(
   $manage_repo = true,
 ) {
   class { 'filebeat':
-    manage_repo => $manage_repo,
+    package_ensure => '5.5.1',
+    major_version  => '5',
+    manage_repo    => $manage_repo,
     outputs     => {
       'logstash' => {
       'hosts'    => [
