@@ -13,7 +13,7 @@ class role::logstash(
   $manage_repo               = false,
 ) {
   class { 'logstash':
-    version     => '1:6.2.4-1',
+    version     => '1:5.5.1-1',
     manage_repo => $manage_repo
   }
 
