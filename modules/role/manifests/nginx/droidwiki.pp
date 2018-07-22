@@ -36,6 +36,8 @@ class role::nginx::droidwiki {
 
   monit::certcheck { 'www.droidwiki.org': }
 
+  $droidwiki_domains = [ '.droid.wiki', '.droidwiki.de', '.droid-wiki.org', '.droidwiki.org' ]
+
   # some redirects
   nginx::resource::vhost {
     default:
@@ -59,13 +61,13 @@ class role::nginx::droidwiki {
       use_default_location => false,
     ;
     'droidwiki.de':
-      server_name      => [ '.droid.wiki', '.droidwiki.de', '.droidwiki.org' ],
+      server_name      => $droidwiki_domains,
     ;
     'www.droidwiki.de':
       server_name      => [ 'www.droidwiki.de' ],
     ;
     'droidwiki.de.80':
-      server_name => [ '.droid.wiki', '.droidwiki.org', '.droidwiki.de' ],
+      server_name => [ $droidwiki_domains ],
       listen_port => 80,
       ssl         => false,
       index_files => [],
