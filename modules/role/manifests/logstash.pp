@@ -69,16 +69,8 @@ class role::logstash(
     source => 'puppet:///modules/role/logstash/filter-nginx.conf',
   }
 
-  file { '/usr/local/bin/logstash_delete_index.sh':
-    ensure => absent,
-  }
-
   curator::config { 'cleanup_logstash':
     content => template('role/logstash/curator/cleanup.yaml.erb')
-  }
-
-  cron { 'logstash_delete_index':
-    ensure => absent,
   }
 
   cron { 'logstash_cleanup_indices_logstash':
