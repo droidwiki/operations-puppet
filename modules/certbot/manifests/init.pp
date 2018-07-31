@@ -1,12 +1,10 @@
 # Module, which manages the certbot automatic renewel
 # of certificates. Unfortunately, currently does not
 # handle the the process of getting a new certificate.
-class certbot {
-  # remove old version of certbot for trusty - 17. Feb 2018
-  file { '/usr/local/sbin/certbot-auto':
-    ensure => 'absent',
-  }
-
+class certbot(
+  $mode = 'webroot',
+  $hook = 'service nginx restart',
+) {
   apt::ppa { 'ppa:certbot/certbot': }
 
   package { 'certbot':
@@ -17,8 +15,16 @@ class certbot {
     ]
   }
 
+  if ($mode == 'standalone') {
+    firewall { '304 accept incoming http traffic':
+      proto  => 'tcp',
+      dport  => '80',
+      action => 'accept',
+    }
+  }
+
   cron { 'letsencrypt renew cron':
-    command => '/usr/bin/certbot renew --quiet --no-self-upgrade --renew-hook "service nginx restart"',
+    command => "/usr/bin/certbot renew --quiet --no-self-upgrade --renew-hook \"${hook}\"",
     user    => root,
     hour    => 2,
     minute  => 30,
