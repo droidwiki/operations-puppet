@@ -49,7 +49,7 @@
 # will use the second mail server in the list and so on. By default Monit uses
 # port 25 - it is possible to override this with the PORT option.
 #
- set mailserver bits.go2tech.de port 587 username "monit@go2tech.de" password "<%= @mail_pass %>" using TLSV1 with timeout 30 seconds
+ set mailserver mail.droidwiki.org port 587 username "monit@go2tech.de" password "<%= @mail_pass %>" using TLSV1 with timeout 30 seconds
 # set mailserver bits.go2tech.de port 587               # primary mailserver
 #                backup.bar.baz port 10025,  # backup mailserver on port 10025
 #                localhost                   # fallback relay

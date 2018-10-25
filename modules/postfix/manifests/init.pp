@@ -26,12 +26,6 @@ class postfix(
     require => Package['postfix'],
   }
 
-  # FIXME: Remove this after some days (e.g. after the 20th November), so
-  # there's enough time, that the file is removed.
-  file { '/etc/postfix/go2tech.de.crt':
-    ensure => absent,
-  }
-
   file { '/etc/postfix/main.cf':
     ensure  => 'file',
     owner   => 'root',
