@@ -1,3 +1,6 @@
 # define this server as the NFS host
 droidwiki::default::isnfsserver: true
 redis::bind: '0.0.0.0'
+
+nginx::tls::fullchain: /etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem
+nginx::tls::privkey: /etc/letsencrypt/live/droidwiki.de-0001/privkey.pem

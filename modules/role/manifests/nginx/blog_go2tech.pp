@@ -15,9 +15,6 @@ class role::nginx::blog_go2tech {
     mode   => '0755',
   }
 
-  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
-
   nginx::resource::vhost { 'blog.go2tech.de':
     listen_port          => 443,
     use_default_location => false,
@@ -26,8 +23,8 @@ class role::nginx::blog_go2tech {
     server_name          => [ 'blog.go2tech.de' ],
     ssl_port             => 443,
     ssl                  => true,
-    ssl_cert             => $sslcert,
-    ssl_key              => $sslkey,
+    ssl_cert             => hiera('nginx::tls::fullchain'),
+    ssl_key              => hiera('nginx::tls::privkey'),
     ssl_dhparam          => $sslcert::params::dhparampempath,
     ssl_stapling         => true,
     ssl_stapling_verify  => true,

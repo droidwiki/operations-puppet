@@ -1,9 +1,6 @@
 # data.droidwiki.de class
 # ALWAYS PAIR WITH CERTBOT!
 class role::nginx::data_droidwiki {
-  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
-
   role::nginx::wiki{ 'datawiki':
     domain      => 'data.droidwiki.org',
     server_name => [ 'data.droid.wiki', 'data.droidwiki.org', 'data.droidwiki.de' ]
@@ -17,8 +14,8 @@ class role::nginx::data_droidwiki {
       ipv6_listen_options  => '',
       ssl_port             => 443,
       ssl                  => true,
-      ssl_cert             => $sslcert,
-      ssl_key              => $sslkey,
+      ssl_cert             => hiera('nginx::tls::fullchain'),
+      ssl_key              => hiera('nginx::tls::privkey'),
       ssl_stapling         => true,
       ssl_stapling_verify  => true,
       ssl_dhparam          => $sslcert::params::dhparampempath,

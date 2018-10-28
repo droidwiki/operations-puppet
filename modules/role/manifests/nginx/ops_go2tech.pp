@@ -1,16 +1,13 @@
 # vhost and locations for ops.go2tech.de
 # ALWAYS PAIR WITH CERTBOT!
 class role::nginx::ops_go2tech {
-  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
-
   droidwiki::nginx::mediawiki { 'ops.go2tech.de':
     vhost_url             => 'ops.go2tech.de',
     server_name           => [ 'ops.go2tech.de' ],
     listen_port           => 443,
     ssl                   => true,
-    ssl_cert              => $sslcert,
-    ssl_key               => $sslkey,
+    ssl_cert              => hiera('nginx::tls::fullchain'),
+    ssl_key               => hiera('nginx::tls::privkey'),
     manage_http_redirects => true,
   }
 

@@ -19,8 +19,8 @@ class role::nginx::droidwiki {
     mode   => '0755',
   }
 
-  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
+  $sslcert = hiera('nginx::tls::fullchain');
+  $sslkey = hiera('nginx::tls::privkey');
 
   droidwiki::nginx::mediawiki { 'www.droidwiki.org':
     vhost_url             => 'www.droidwiki.org',

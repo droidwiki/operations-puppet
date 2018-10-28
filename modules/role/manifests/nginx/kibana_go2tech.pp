@@ -15,9 +15,6 @@ class role::nginx::kibana_go2tech {
     mode   => '0755',
   }
 
-  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
-
   nginx::resource::vhost { 'kibana.go2tech.de':
     use_default_location => false,
     ipv6_enable          => true,
@@ -26,8 +23,8 @@ class role::nginx::kibana_go2tech {
     listen_port          => 443,
     ssl_port             => 443,
     ssl                  => true,
-    ssl_cert             => $sslcert,
-    ssl_key              => $sslkey,
+    ssl_cert             => hiera('nginx::tls::fullchain'),
+    ssl_key              => hiera('nginx::tls::privkey'),
     ssl_dhparam          => $sslcert::params::dhparampempath,
     ssl_stapling         => true,
     ssl_stapling_verify  => true,

@@ -4,8 +4,6 @@ define role::nginx::wiki(
   $domain      = Undef,
   $server_name = Undef
 ) {
-  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
   validate_string($domain)
   if ($server_name == Undef) {
     $server_name = [ $domain ]
@@ -19,8 +17,8 @@ define role::nginx::wiki(
     html_root             => '/data/www/droidwiki.de/public_html',
     listen_port           => 443,
     ssl                   => true,
-    ssl_cert              => $sslcert,
-    ssl_key               => $sslkey,
+    ssl_cert              => hiera('nginx::tls::fullchain'),
+    ssl_key               => hiera('nginx::tls::privkey'),
   }
 
   monit::certcheck { $domain: }

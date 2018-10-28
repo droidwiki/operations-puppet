@@ -7,10 +7,6 @@ class role::nginx::missionrhode_go2tech {
     mode   => '0755',
   }
 
-  file { '/data/www/missionrhode.go2tech.de/missionrhode.go2tech.de.2017.crt':
-    ensure => 'absent',
-  }
-
   file { '/data/www/missionrhode.go2tech.de/public_html':
     ensure => 'directory',
     owner  => 'www-data',
@@ -18,17 +14,14 @@ class role::nginx::missionrhode_go2tech {
     mode   => '0755',
   }
 
-  $sslcert = '/etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem';
-  $sslkey = '/etc/letsencrypt/live/droidwiki.de-0001/privkey.pem';
-
   nginx::resource::vhost { 'missionrhode.go2tech.de':
     listen_port          => 443,
     ipv6_enable          => true,
     ipv6_listen_options  => '',
     ssl                  => true,
     ssl_port             => 443,
-    ssl_cert             => $sslcert,
-    ssl_key              => $sslkey,
+    ssl_cert             => hiera('nginx::tls::fullchain'),
+    ssl_key              => hiera('nginx::tls::privkey'),
     ssl_stapling         => true,
     ssl_stapling_verify  => true,
     ssl_dhparam          => $sslcert::params::dhparampempath,
