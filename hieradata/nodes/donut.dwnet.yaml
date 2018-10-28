@@ -2,5 +2,5 @@
 droidwiki::default::isnfsserver: true
 redis::bind: '0.0.0.0'
 
-nginx::tls::fullchain: /etc/letsencrypt/live/droidwiki.de-0001/fullchain.pem
-nginx::tls::privkey: /etc/letsencrypt/live/droidwiki.de-0001/privkey.pem
+nginx::tls::fullchain: /etc/letsencrypt/live/www.droidwiki.org/fullchain.pem
+nginx::tls::privkey: /etc/letsencrypt/live/www.droidwiki.org/privkey.pem
