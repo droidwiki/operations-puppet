@@ -62,18 +62,3 @@ mysql::server::root_password: >
     5gcbgjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBRzxxD3VVEF7yT6m9u
     SZkHgBBz9i+59ZCWvHlwci7YL+BO]
 
-mailadmin::datadir: /data/www/go2tech.de/mail-admin
-mailadmin::ldap_base_dn: 'OU=users,DC=go2tech,DC=de'
-mailadmin::ldap_search_dn: 'CN=mail-admin,OU=users,DC=go2tech,DC=de'
-mailadmin::ldap_search_pw: >
-    ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEw
-    DQYJKoZIhvcNAQEBBQAEggEAZ5R+fvLrr9HFAx/C7UODSEOTlWPAL0lqwrnU
-    HoyLLdzf+k8WRb1SvutK6cXVrgQD3DVsg4Qbb/kOnAcN062XtRCIgWM84XyB
-    Lm/ro1IGv1x3ow+PLTvXe4lQq+5LXi4sLrlMWhcPhAIoi0pFRcXbwi3tnriW
-    Mm3FDxs3fj4ahr3vKma2x4ddGv9oQ/2Nd44Te1FiJKnilJj3OC7IF8XUi2wo
-    0wHLuUahsRaU+z/F0ZlA4LObuA9+7XxNu8DgxSdX0hsEmTUBAlxZPuaxFmaF
-    zZi64QLSN4ae2TEK8zbYZU9yQ0mf3H5o3p5tUOlri/mz1CW6E1E21Asvt4yT
-    xjLlKzBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCCFEoLUNzM4ZU3YAiu
-    JPfLgCDcXiIaai6UodMysTFH0e6O53b3MCs4N8ciy511NHs4mg==]
-mailadmin::ldap_dn_string: 'dc=go2tech,dc=de'
-mailadmin::ldap_query_string: '(&(cn={username})(memberOf=cn=EMailAdministrator,ou=groups,dc=go2tech,dc=de))'

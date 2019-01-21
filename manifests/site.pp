@@ -14,7 +14,6 @@ node 'eclair.dwnet' {
     mode => 'standalone',
     hook => 'service postfix restart',
   }
-  include mailadmin
 
   include role::puppetboard
 
