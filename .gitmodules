@@ -101,3 +101,6 @@
 [submodule "modules/memcached"]
 	path = modules/memcached
 	url = https://github.com/saz/puppet-memcached.git
+[submodule "modules/bind"]
+	path = modules/bind
+	url = https://github.com/thias/puppet-bind.git

@@ -14,6 +14,7 @@ node 'eclair.dwnet' {
     mode => 'standalone',
     hook => 'service postfix restart',
   }
+  include role::dns
 
   include role::puppetboard
 
@@ -64,6 +65,9 @@ node 'donut.dwnet' {
   include restbase
   include mobileapps
 
+  class { 'role::dns':
+    type => 'master',
+  }
   include role::nginx::droidwiki
   include role::nginx::data_droidwiki
   include role::nginx::ops_go2tech
