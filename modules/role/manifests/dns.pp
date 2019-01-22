@@ -1,8 +1,8 @@
 # Installs and manages bind
 class role::dns(
   $type     = 'slave',
-  $masterIp = '37.120.178.25',
-  $slaveIp  = '188.68.49.74',
+  $master_ip = '37.120.178.25',
+  $slave_ip  = '188.68.49.74',
 ) {
   firewall { '700 allow outgoing dns requests':
     sport  => 53,
@@ -36,7 +36,7 @@ class role::dns(
       'go2tech.de' => [
         "type ${type}",
         'file "go2tech.de"',
-	$type ? { "slave" => "masters { ${masterIp}; }", default => "allow-transfer { ${slaveIp}; }" }
+        $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
     },
   }

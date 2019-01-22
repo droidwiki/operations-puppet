@@ -4,10 +4,10 @@ class droidwiki::ipv6 {
     source => 'puppet:///modules/droidwiki/50-IPv6.conf',
   }
 
-  exec { 'my_command.sh':
-    command   => '/sbin/sysctl --system',
-    subscribe => [ 
-      File['/etc/sysctl.d/50-IPv6.conf'], 
+  exec { '/sbin/sysctl --system':
+    command     => '/sbin/sysctl --system',
+    subscribe   => [
+      File['/etc/sysctl.d/50-IPv6.conf'],
     ],
     refreshonly => true,
   }

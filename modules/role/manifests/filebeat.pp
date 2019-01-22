@@ -6,7 +6,7 @@ class role::filebeat(
     package_ensure => '5.5.1',
     major_version  => '5',
     manage_repo    => $manage_repo,
-    outputs     => {
+    outputs        => {
       'logstash' => {
       'hosts'    => [
           'eclair.dwnet:5044'
