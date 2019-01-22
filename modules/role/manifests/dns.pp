@@ -30,8 +30,7 @@ class role::dns(
     listen_on_addr    => [ 'any' ],
     listen_on_v6_addr => [ 'any' ],
     allow_query       => [ 'any' ],
-    allow_query_cache => [ 'any' ],
-    recursion         => 'false',
+    recursion         => 'no',
     allow_transfer    => [ 'none' ],
     zones             => {
       'go2tech.de' => [
