@@ -1,25 +1,22 @@
 @       IN      SOA     root-dns.go2tech.de. admin.go2tech.de. (
-                              2         ; Serial
+                              4         ; Serial
                           28800         ; Refresh
                            7200         ; Retry
                         1209600         ; Expire
                           86400 )       ; Negative Cache TTL
 ;
 
-; Name servers
 go2tech.de.    IN      NS      root-dns.go2tech.de.
 go2tech.de.    IN      NS      second-dns.go2tech.de.
 
-; A records for name servers
 second-dns           IN      A       188.68.49.74
 second-dns           IN      AAAA    2a03:4000:6:d06b::1
 root-dns             IN      A       37.120.178.25
 root-dns             IN      AAAA    2a03:4000:6:80b1::1
 
-; Other A records
 *               IN      A       46.38.231.243
 @               IN      TXT     "google-site-verification=mG-fAEENy-lJI4ROKniipuAcRpvOC0UyM5OJstY9sSY"
 @               IN      A       46.38.231.243
-@               IN      MX 1    mail.droidwiki.org
+                IN      MX 1    mail.droidwiki.org.
 donut           IN      A       37.120.178.25
 
