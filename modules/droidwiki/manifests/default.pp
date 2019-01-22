@@ -7,6 +7,7 @@ class droidwiki::default (
     content => template('droidwiki/hosts.default.erb'),
   }
 
+  include droidwiki::ipv6
   include firewall
   include git
 
