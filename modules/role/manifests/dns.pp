@@ -18,6 +18,20 @@ class role::dns(
     action => 'accept',
   }
 
+  firewall { '702 allow outgoing dns requests':
+    sport  => 53,
+    proto  => 'tcp',
+    chain  => 'OUTPUT',
+    action => 'accept',
+  }
+
+  firewall { '703 allow incoming dns requests':
+    dport  => 53,
+    proto  => 'tcp',
+    chain  => 'INPUT',
+    action => 'accept',
+  }
+
   file { '/etc/bind/zones':
     ensure => 'directory',
     owner  => 'bind',
