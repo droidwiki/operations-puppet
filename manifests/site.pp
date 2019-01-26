@@ -21,10 +21,6 @@ node 'eclair.dwnet' {
   include role::ganglia
   include role::memcached
 
-  include role::elasticsearch
-  include role::logstash
-  include role::kibana
-
   include role::nodejs
   include zotero
   include citoid
@@ -55,7 +51,6 @@ node 'donut.dwnet' {
   include role::webserver
   include role::php
   include role::mediawiki
-  include role::filebeat
   include role::jobrunner
   include role::ganglia
   include role::memcached
@@ -77,7 +72,6 @@ node 'donut.dwnet' {
   include role::nginx::puppetboard_go2tech
   include role::nginx::blog_go2tech
   include role::nginx::ganglia_go2tech
-  include role::nginx::kibana_go2tech
   include role::nginx::go2tech
 
   role::nginx::wiki{ 'endroidwikiwiki':

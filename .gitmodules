@@ -53,9 +53,6 @@
 [submodule "modules/tagmail"]
 	path = modules/tagmail
 	url = https://github.com/puppetlabs/puppetlabs-tagmail.git
-[submodule "modules/logstash"]
-	path = modules/logstash
-	url = https://github.com/elastic/puppet-logstash.git
 [submodule "modules/file_concat"]
 	path = modules/file_concat
 	url = https://github.com/electrical/puppet-lib-file_concat.git
@@ -65,15 +62,9 @@
 [submodule "modules/rsyslog"]
 	path = modules/rsyslog
 	url = https://github.com/saz/puppet-rsyslog.git
-[submodule "modules/elasticsearch"]
-	path = modules/elasticsearch
-	url = https://github.com/elastic/puppet-elasticsearch.git
 [submodule "modules/datacat"]
 	path = modules/datacat
 	url = https://github.com/richardc/puppet-datacat.git
-[submodule "modules/java"]
-	path = modules/java
-	url = https://github.com/puppetlabs/puppetlabs-java.git
 [submodule "modules/sysctl"]
 	path = modules/sysctl
 	url = https://github.com/thias/puppet-sysctl.git
@@ -83,9 +74,6 @@
 [submodule "modules/nodejs"]
 	path = modules/nodejs
 	url = https://github.com/voxpupuli/puppet-nodejs.git
-[submodule "modules/filebeat"]
-	path = modules/filebeat
-	url = https://github.com/pcfens/puppet-filebeat.git
 [submodule "modules/mysql"]
 	path = modules/mysql
 	url = https://github.com/puppetlabs/puppetlabs-mysql.git
@@ -95,9 +83,6 @@
 [submodule "modules/archive"]
 	path = modules/archive
 	url = https://github.com/voxpupuli/puppet-archive.git
-[submodule "modules/kibana"]
-	path = modules/kibana
-	url = https://github.com/elastic/puppet-kibana.git
 [submodule "modules/memcached"]
 	path = modules/memcached
 	url = https://github.com/saz/puppet-memcached.git
