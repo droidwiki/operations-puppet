@@ -1,0 +1,5 @@
+dns_rfc2136_server = 37.120.178.25
+dns_rfc2136_port = 53
+dns_rfc2136_name = letsencrypt.
+dns_rfc2136_secret = <%= scope().call_function('hiera', ['bind::key::letsencrypt']) %>
+dns_rfc2136_algorithm = HMAC-SHA512

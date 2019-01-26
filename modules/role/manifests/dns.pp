@@ -33,6 +33,12 @@ class role::dns(
   }
 
   file { '/etc/bind/zones':
+    ensure => 'absent',
+    force  => true,
+    recurse => true,
+  }
+
+  file { '/var/lib/bind/zones':
     ensure => 'directory',
     owner  => 'bind',
     group  => 'bind',
@@ -40,31 +46,41 @@ class role::dns(
 
   include bind
   bind::server::conf { '/etc/bind/named.conf':
-    directory         => '/etc/bind/zones',
+    directory         => '/var/lib/bind/zones',
     listen_on_addr    => [ 'any' ],
     listen_on_v6_addr => [ 'any' ],
     allow_query       => [ 'any' ],
     recursion         => 'no',
     allow_transfer    => [ 'none' ],
+    keys              => {
+      'letsencrypt.' => [
+        'algorithm hmac-sha512',
+        "secret \"${hiera('bind::key::letsencrypt')}\"",
+      ],
+    },
     zones             => {
       'go2tech.de'     => [
         "type ${type}",
         'file "go2tech.de"',
+        $type ? { 'master' => 'update-policy { grant letsencrypt. name _acme-challenge.go2tech.de. txt; }', default => '// omitting update-policy on slave' },
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
       'droidwiki.org'  => [
         "type ${type}",
         'file "droidwiki.org"',
+        $type ? { 'master' => 'update-policy { grant letsencrypt. name _acme-challenge.droidwiki.org. txt; }', default => '// omitting update-policy on slave' },
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
       'droid.wiki'     => [
         "type ${type}",
         'file "droid.wiki"',
+        $type ? { 'master' => 'update-policy { grant letsencrypt. name _acme-challenge.droid.wiki. txt; }', default => '// omitting update-policy on slave' },
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
       'droid-wiki.org' => [
         "type ${type}",
         'file "droid-wiki.org"',
+        $type ? { 'master' => 'update-policy { grant letsencrypt. name _acme-challenge.droid-wiki.org. txt; }', default => '// omitting update-policy on slave' },
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
     },
@@ -72,8 +88,13 @@ class role::dns(
 
   if $type == 'master' {
     bind::server::file { [ 'go2tech.de', 'droidwiki.org', 'droid.wiki', 'droid-wiki.org' ]:
-      zonedir     => '/etc/bind/zones',
+      zonedir     => '/var/lib/bind/zones',
       source_base => 'puppet:///modules/role/dns/',
+    }
+
+    file { '/etc/bind/rfc2136_letsencrypt.ini':
+      content => template('role/dns/rfc2136_letsencrypt.ini.erb'),
+      mode    => '0600',
     }
   }
 }

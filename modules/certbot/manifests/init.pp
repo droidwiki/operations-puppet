@@ -15,12 +15,12 @@ class certbot(
     ]
   }
 
-  if ($mode == 'standalone') {
-    firewall { '304 accept incoming http traffic':
-      proto  => 'tcp',
-      dport  => '80',
-      action => 'accept',
-    }
+  package { 'python3-certbot-dns-rfc2136':
+    ensure  => 'present',
+    require => [
+      Apt::Ppa['ppa:certbot/certbot'],
+      Exec['apt_update'],
+    ]
   }
 
   cron { 'letsencrypt renew cron':

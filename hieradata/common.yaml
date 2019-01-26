@@ -74,3 +74,16 @@ nginx::nginx_upstreams:
 php::fpm::pools:
   www:
     listen: '0.0.0.0:9000'
+
+bind::key::letsencrypt: >
+    ENC[PKCS7,MIIBygYJKoZIhvcNAQcDoIIBuzCCAbcCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAYKuj5rjRWspR9Y0PrjgURsj3W53V7Ye1RHNP
+    WtWBmCG8Og6N0i8yROJa+9XvtqDDiR86Sa3dkHIRuZRH/I1G6VJz1qCpN8aF
+    oVXKQV+LPXmiMLdXfOu6DSOk1Ac6t6841EQPLAh3mvHHR3xzvlpEyxGy0whX
+    o3dvtmNjivcCEnBhwWIs9H5l84pOd8/b7KC46Wb+RisvI35S7qxC2L6dYe8O
+    e4t1CIwiibO8ATCbumuf8mNKbyFhEI5ELabU1iPadPfXUUVaFaBJTtYRgek+
+    mJcaBvR3OfTgx/nRpiSjxwgMdyp/cHVU73S5WJI9jwlZzKL3xdxe8NpcRqgM
+    F3sfPzCBjAYJKoZIhvcNAQcBMB0GCWCGSAFlAwQBKgQQr9XHrkcSsy0CmCX8
+    h39jBIBgqjaR0UiSoaIpfqcntS0MUhT/2fpjz4Oi6LiqD07VNx9VOu02t/jd
+    BNkrqOIlYre801B6mGjizWMDP8h7elPQwhyyWiHzc6kqlH5Ymv0/XJB+Ifwj
+    ic8/T+FI0hANCRii]
