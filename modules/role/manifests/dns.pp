@@ -47,16 +47,31 @@ class role::dns(
     recursion         => 'no',
     allow_transfer    => [ 'none' ],
     zones             => {
-      'go2tech.de' => [
+      'go2tech.de'    => [
         "type ${type}",
         'file "go2tech.de"',
+        $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
+      ],
+      'droidwiki.org' => [
+        "type ${type}",
+        'file "droidwiki.org"',
+        $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
+      ],
+      'droid.wiki' => [
+        "type ${type}",
+        'file "droid.wiki"',
+        $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
+      ],
+      'droid-wiki.org' => [
+        "type ${type}",
+        'file "droid-wiki.org"',
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
     },
   }
 
   if $type == 'master' {
-    bind::server::file { [ 'go2tech.de' ]:
+    bind::server::file { [ 'go2tech.de', 'droidwiki.org', 'droid.wiki', 'droid-wiki.org' ]:
       zonedir     => '/etc/bind/zones',
       source_base => 'puppet:///modules/role/dns/',
     }

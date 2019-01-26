@@ -1,0 +1,15 @@
+@       IN      SOA     root-dns.go2tech.de. admin.go2tech.de. (
+                              2         ; Serial
+                          28800         ; Refresh
+                           7200         ; Retry
+                        1209600         ; Expire
+                          86400 )       ; Negative Cache TTL
+;
+
+               IN NS   root-dns.go2tch.de.
+               IN NS   second-dns.go2tech.de.
+
+
+*               IN      A       46.38.231.243
+@               IN      A       46.38.231.243
+                IN      MX 1    mail.droidwiki.org.
