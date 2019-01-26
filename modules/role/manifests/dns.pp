@@ -47,17 +47,17 @@ class role::dns(
     recursion         => 'no',
     allow_transfer    => [ 'none' ],
     zones             => {
-      'go2tech.de'    => [
+      'go2tech.de'     => [
         "type ${type}",
         'file "go2tech.de"',
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
-      'droidwiki.org' => [
+      'droidwiki.org'  => [
         "type ${type}",
         'file "droidwiki.org"',
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
-      'droid.wiki' => [
+      'droid.wiki'     => [
         "type ${type}",
         'file "droid.wiki"',
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
