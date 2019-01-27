@@ -23,6 +23,14 @@ class certbot(
     ]
   }
 
+  if ($mode == 'standalone') {
+    firewall { '304 accept incoming http traffic':
+      proto  => 'tcp',
+      dport  => '80',
+      action => 'accept',
+    }
+  }
+
   cron { 'letsencrypt renew cron':
     command => "/usr/bin/certbot renew --quiet --no-self-upgrade --renew-hook \"${hook}\"",
     user    => root,

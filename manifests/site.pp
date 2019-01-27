@@ -10,6 +10,10 @@ node 'eclair.dwnet' {
   include role::ircbot
   include role::puppetmaster
   include role::deploymenthost
+  class { 'certbot':
+    mode => 'standalone',
+    hook => 'service postfix restart',
+  }
   include role::dns
 
   include role::puppetboard
