@@ -32,12 +32,6 @@ class role::dns(
     action => 'accept',
   }
 
-  file { '/etc/bind/zones':
-    ensure => 'absent',
-    force  => true,
-    recurse => true,
-  }
-
   file { '/var/lib/bind/zones':
     ensure => 'directory',
     owner  => 'bind',
