@@ -31,11 +31,26 @@ postfix::vmaildbpass: >
     i1JB/RL4vluR/OQfdK/EanyPuYqm3ANGnZDneiXDTjMeq8azywj44QXPufG7
     TOrfjjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBj5LROC9BDVPE1gYl1
     14tCgBD4TuxwpNAwC1bUN3AcXxcw]
-monit::postfix::certcheck:
-  'mail_droidwiki_org':
-    host: 'mail.droidwiki.org'
-    port: 587
-    protocol: smtp
+postfix::testuser::username: >
+    ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAMRFbZKNJIJwHr88ofIVE49iGIVs8l4cvMMHS
+    GaU5vfTdqMz3e8enH2828RzVJ+8yoGafELH5mc/cDwHE2Uf7E+IbsWqhDL//
+    t6+Gd4Qjmojj0LXJbzAcRaoFjYF56M/stQQwvPPZ8A4hkzp86kctAkqvsKx1
+    pp2nKCOLOijIQZy+V5/y+Eir/AIPPshqmJzWgCcOUq3ipF2f2PVQF2Kg+QM9
+    7FSvJasNYQU57MThHffv8jxoojPpEQbMezsyyAnzkgCeGTqU9xLFGDGV7srP
+    zrHgaKsEPP/rYZgfrkCcATw0bqzXve6bmHFlRWSbchyz+xNna71+wF9bzpfz
+    zc7bNzBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDpmXzG0sH03Jjk8PHK
+    Ol+RgCDAD0/CACyB2D493HSoNnDLUxuOwCVfLo/931ywkWyQaA==]
+postfix::testuser::password: >
+    ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAAoERKwluXHLRuauFf33Yw+T3ukFPLrAyuWMo
+    kSX1KUsLXQ1UyywTxrAU5ekLigfx4dr+eS9E7sgNEWdym3CeInIl0HVYDWJT
+    ZiMg9jy+n7+N+vXPH86oaEmo9RwwbAim4WQ8oz8zo/ezzfEIvL+Npo+b35Fs
+    dIjZeAI3CHKwpvHf8EsHicitlCSy06fW9LcxX4OseFORDSfX7wfAOT3cHFeS
+    TV9bRnyMvlkUPkNwb8gNEoG8vXl2XQJGaXSq54TecwBafH+2Df5FgPLuaUDI
+    qks+8JGJIjFJnEyop0GRKvDDvWj7t7rNHy3EkNeeLgQa/f+mA5PzZpUBAGBS
+    lsoijzBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAx2dI5b3ZjW3s/H2x/
+    /Y5dgCAkWYScdBHPbQ9MnF5FEb6x7+bIVxoUFmzfDOaw239PFA==]
 
 # mariadb settings
 role::mariadb::isslave: true

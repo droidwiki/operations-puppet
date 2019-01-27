@@ -95,4 +95,6 @@ class postfix(
     source => 'puppet:///modules/postfix/submission_header_cleanup',
     notify => Service['postfix'],
   }
+
+  monit::service { 'smtp': }
 }
