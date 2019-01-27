@@ -44,6 +44,8 @@ class role::dns(
     group  => 'bind',
   }
 
+  monit::service { 'bind9': }
+
   include bind
   bind::server::conf { '/etc/bind/named.conf':
     directory         => '/var/lib/bind/zones',
