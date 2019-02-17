@@ -4,7 +4,7 @@
 # Delete logs after 3 days, the logs are saved in logstash anyway
 /data/log/mediawiki/*.log {
     su <%= @user %> <%= @group %>
-    rotate 0
-    maxage 3
+    rotate 3
+    maxage 5
     missingok
 }
