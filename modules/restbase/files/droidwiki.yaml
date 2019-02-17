@@ -61,12 +61,27 @@ paths:
     x-modules:
       - spec:
           paths:
-            /table:
+            /table: &sys_table
               x-modules:
                 - path: sys/table.js
                   options:
                     conf: '{{options.table}}'
-            /key_value:
+            /parsoid_bucket:
+              x-modules:
+                - path: sys/multi_content_bucket.js
+                  options:
+                    table_name_prefix: parsoid_ng
+                    renew_expiring: true
+                    grace_ttl: '{{default(options.parsoid.grace_ttl, 86400)}}'
+                    index_ttl: '{{default(options.parsoid.index_ttl, 864000)}}'
+                    delete_probability: '{{default(options.parsoid.delete_probability, 1)}}'
+                    main_content_type:
+                      name: html
+                      value_type: blob
+                    dependent_content_types:
+                      - name: data-parsoid
+                        value_type: json
+            /key_value: &sys_key_value
               x-modules:
                 - path: sys/key_value.js
             /key_rev_value:
@@ -75,38 +90,23 @@ paths:
             /page_revisions:
               x-modules:
                 - path: sys/page_revisions.js
-            /post_data:
+            /post_data: &sys_post_data
               x-modules:
                 - path: sys/post_data.js
             /action:
               x-modules:
                 - path: sys/action.js
-                  options: '{{options.action}}'
+                  options: "{{options.action}}"
             /page_save:
               x-modules:
                 - path: sys/page_save.js
-            /parsoid_bucket:
-              x-modules:
-                - path: sys/multi_content_bucket.js
-                  options:
-                    grace_ttl: '{{default(options.parsoid.grace_ttl, 86400)}}'
-                    renew_expiring: true
-                    delete_probability: '{{default(options.parsoid.delete_probability, 1)}}'
-                    table_name_prefix: parsoid_ng
-                    main_content_type:
-                      name: html
-                      value_type: blob
-                    dependent_content_types:
-                      - name: data-parsoid
-                        value_type: json
-                      - name: section-offsets
-                        value_type: json
             /parsoid:
               x-modules:
                 - path: sys/parsoid.js
-                  options:
+                  options: &parsoid_options
                     parsoidHost: '{{options.parsoid.host}}'
                     response_cache_control: '{{options.purged_cache_control}}'
+                    grace_ttl: '{{default(options.parsoid.grace_ttl, 86400)}}'
             /mobileapps:
               x-modules:
                 - path: sys/mobileapps.js
