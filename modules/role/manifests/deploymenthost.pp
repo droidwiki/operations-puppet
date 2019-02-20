@@ -9,6 +9,14 @@ class role::deploymenthost {
     action => 'accept',
   }
 
+  firewall { '800 allow connections through git:// protocol IPv6':
+    dport    => 9418,
+    proto    => 'tcp',
+    chain    => 'OUTPUT',
+    action   => 'accept',
+    provider => 'ip6tables',
+  }
+
   package { 'rsync':
     ensure => present,
   }

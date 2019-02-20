@@ -29,6 +29,13 @@ class certbot(
       dport  => '80',
       action => 'accept',
     }
+
+    firewall { '304 accept incoming http traffic IPv6':
+      proto    => 'tcp',
+      dport    => '80',
+      action   => 'accept',
+      provider => 'ip6tables',
+    }
   }
 
   cron { 'letsencrypt renew cron':

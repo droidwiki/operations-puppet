@@ -11,11 +11,27 @@ class role::dns(
     action => 'accept',
   }
 
+  firewall { '700 allow outgoing dns requests IPv6':
+    sport    => 53,
+    proto    => 'udp',
+    chain    => 'OUTPUT',
+    action   => 'accept',
+    provider => 'ip6tables',
+  }
+
   firewall { '701 allow incoming dns requests':
     dport  => 53,
     proto  => 'udp',
     chain  => 'INPUT',
     action => 'accept',
+  }
+
+  firewall { '701 allow incoming dns requests IPv6':
+    dport    => 53,
+    proto    => 'udp',
+    chain    => 'INPUT',
+    action   => 'accept',
+    provider => 'ip6tables',
   }
 
   firewall { '702 allow outgoing dns requests':
@@ -25,11 +41,27 @@ class role::dns(
     action => 'accept',
   }
 
+  firewall { '702 allow outgoing dns requests IPv6':
+    sport    => 53,
+    proto    => 'tcp',
+    chain    => 'OUTPUT',
+    action   => 'accept',
+    provider => 'ip6tables',
+  }
+
   firewall { '703 allow incoming dns requests':
     dport  => 53,
     proto  => 'tcp',
     chain  => 'INPUT',
     action => 'accept',
+  }
+
+  firewall { '703 allow incoming dns requests IPv6':
+    dport    => 53,
+    proto    => 'tcp',
+    chain    => 'INPUT',
+    action   => 'accept',
+    provider => 'ip6tables',
   }
 
   file { '/var/lib/bind/zones':
