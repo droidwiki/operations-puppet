@@ -89,3 +89,6 @@
 [submodule "modules/bind"]
 	path = modules/bind
 	url = https://github.com/thias/puppet-bind.git
+[submodule "modules/docker"]
+	path = modules/docker
+	url = https://github.com/puppetlabs/puppetlabs-docker.git

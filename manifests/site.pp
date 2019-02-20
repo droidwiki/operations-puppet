@@ -15,6 +15,7 @@ node 'eclair.dwnet' {
     hook => 'service postfix restart',
   }
   include role::dns
+  include role::concourse
 
   include role::puppetboard
 
@@ -73,6 +74,7 @@ node 'donut.dwnet' {
   include role::nginx::blog_go2tech
   include role::nginx::ganglia_go2tech
   include role::nginx::go2tech
+  include role::nginx::ci_go2tech
 
   role::nginx::wiki{ 'endroidwikiwiki':
     domain      => 'en.droidwiki.org',

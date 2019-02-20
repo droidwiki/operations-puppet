@@ -12,7 +12,42 @@ class droidwiki::default (
   include git
 
   resources { 'firewall':
-    purge   => true
+    purge => false,
+  }
+
+  firewallchain { 'INPUT:filter:IPv4':
+    ensure => present,
+    purge  => true,
+  }
+
+  firewallchain { 'OUTPUT:filter:IPv4':
+    ensure => present,
+    purge  => true,
+  }
+
+  firewallchain { 'FORWARD:filter:IPv4':
+    ensure => present,
+    purge  => true,
+    ignore => [
+      'docker',
+      'DOCKER',
+      'br-'
+    ],
+  }
+
+  firewallchain { 'INPUT:filter:IPv6':
+    ensure => present,
+    purge  => true,
+  }
+
+  firewallchain { 'OUTPUT:filter:IPv6':
+    ensure => present,
+    purge  => true,
+  }
+
+  firewallchain { 'FORWARD:filter:IPv6':
+    ensure => present,
+    purge  => true,
   }
 
   Firewall {
