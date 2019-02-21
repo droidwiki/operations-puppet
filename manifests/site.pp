@@ -7,7 +7,6 @@ node 'eclair.dwnet' {
     isslave => true,
   }
   include role::mailserver
-  include role::ircbot
   include role::puppetmaster
   include role::deploymenthost
   class { 'certbot':
