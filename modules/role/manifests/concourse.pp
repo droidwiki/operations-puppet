@@ -1,7 +1,16 @@
 # Manages the dockerized Concourse
 class role::concourse {
-  include 'docker'
-  class {'docker::compose':
+  file { '/data/docker':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+  }
+
+  class { 'docker':
+    extra_parameters => ['-g /data/docker']
+  }
+
+  class { 'docker::compose':
     ensure  => present,
     version => '1.23.2',
   }
