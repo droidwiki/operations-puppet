@@ -23,3 +23,8 @@ services:
       CONCOURSE_GITHUB_CLIENT_ID: <%= scope().call_function('hiera', ['concourse::github::client_id']) %>
       CONCOURSE_GITHUB_CLIENT_SECRET: <%= scope().call_function('hiera', ['concourse::github::client_secret']) %>
       CONCOURSE_MAIN_TEAM_GITHUB_ORG: droidwiki
+      CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+
