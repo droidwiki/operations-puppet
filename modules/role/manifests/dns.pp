@@ -115,9 +115,22 @@ class role::dns(
   }
 
   if $type == 'master' {
+    exec { 'rndc freeze':
+      command     => '/usr/sbin/rndc freeze',
+      user        => root,
+      group       => root,
+    }
+
+    exec { 'rndc thaw':
+      command     => '/usr/sbin/rndc thaw',
+      user        => root,
+      group       => root,
+      require     => File['/var/lib/bind/zones/go2tech.de', '/var/lib/bind/zones/droidwiki.org', '/var/lib/bind/zones/droid.wiki', '/var/lib/bind/zones/droid-wiki.org'],
+    }
+
     bind::server::file { [ 'go2tech.de', 'droidwiki.org', 'droid.wiki', 'droid-wiki.org' ]:
-      zonedir     => '/var/lib/bind/zones',
-      source_base => 'puppet:///modules/role/dns/',
+      zonedir      => '/var/lib/bind/zones',
+      source_base  => 'puppet:///modules/role/dns/',
     }
 
     file { '/etc/bind/rfc2136_letsencrypt.ini':

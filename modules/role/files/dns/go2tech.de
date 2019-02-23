@@ -1,5 +1,5 @@
 @       IN      SOA     root-dns.go2tech.de. admin.go2tech.de. (
-                     2019021601         ; Serial
+                     2019022312         ; Serial
                           28800         ; Refresh
                            7200         ; Retry
                         1209600         ; Expire
