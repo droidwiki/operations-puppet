@@ -7,6 +7,8 @@ services:
       POSTGRES_DB: concourse
       POSTGRES_USER: dev
       POSTGRES_PASSWORD: dev
+    volumes:
+     - /data/concourse/postgres-data:/var/lib/postgresql/data
 
   web:
     image: concourse/concourse:4.2.2
