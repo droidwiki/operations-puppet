@@ -12,10 +12,11 @@ services:
 
   web:
     image: concourse/concourse:4.2.2
-    command: quickstart
-    privileged: true
+    command: web
+    links: [db]
     depends_on: [db]
     ports: ["8080:8080"]
+    volumes: ["./keys/web:/concourse-keys"]
     environment:
       CONCOURSE_POSTGRES_HOST: db
       CONCOURSE_POSTGRES_USER: dev
@@ -25,9 +26,22 @@ services:
       CONCOURSE_GITHUB_CLIENT_ID: <%= scope().call_function('hiera', ['concourse::github::client_id']) %>
       CONCOURSE_GITHUB_CLIENT_SECRET: <%= scope().call_function('hiera', ['concourse::github::client_secret']) %>
       CONCOURSE_MAIN_TEAM_GITHUB_ORG: droidwiki
-      CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
-      CONCOURSE_EPHEMERAL: "true"
     dns:
       - 8.8.8.8
       - 8.8.4.4
 
+  worker:
+    image: concourse/concourse:4.2.2
+    command: worker
+    privileged: true
+    links: [web]
+    depends_on: [web]
+    volumes: ["./keys/worker:/concourse-keys"]
+    environment:
+      CONCOURSE_TSA_HOST: web:2222
+      CONCOURSE_GARDEN_NETWORK: "true"
+      CONCOURSE_EPHEMERAL: "true"
+      CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
