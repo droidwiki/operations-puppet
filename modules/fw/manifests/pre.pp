@@ -9,8 +9,15 @@ class fw::pre {
     action => 'accept',
   }
 
-  firewall { '000 accept all icmp IPv6':
+  firewall { '000 accept all icmpv6 IPv6':
     proto    => 'ipv6-icmp',
+    action   => 'accept',
+    provider => 'ip6tables',
+  }
+
+  firewall { '000 accept all outgoing icmpv6 IPv6':
+    proto    => 'ipv6-icmp',
+    chain    => 'OUTPUT',
     action   => 'accept',
     provider => 'ip6tables',
   }
