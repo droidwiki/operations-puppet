@@ -1,5 +1,5 @@
 @       IN      SOA     root-dns.go2tech.de. admin.go2tech.de. (
-                     2019021601         ; Serial
+                     2019030401         ; Serial
                           28800         ; Refresh
                            7200         ; Retry
                         1209600         ; Expire
@@ -11,5 +11,7 @@
 
 
 *               IN      A       46.38.231.243
+*               IN      AAAA    2a03:4000:6:80b1::1
 @               IN      A       46.38.231.243
+@               IN      AAAA    2a03:4000:6:80b1::1
                 IN      MX 1    mail.droidwiki.org.
