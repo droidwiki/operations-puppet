@@ -11,7 +11,7 @@ services:
      - /data/concourse/postgres-data:/var/lib/postgresql/data
 
   web:
-    image: concourse/concourse:4.2.2
+    image: concourse/concourse:5
     command: web
     links: [db]
     depends_on: [db]
@@ -31,7 +31,7 @@ services:
       - 8.8.4.4
 
   worker:
-    image: concourse/concourse:4.2.2
+    image: concourse/concourse:5
     command: worker
     privileged: true
     links: [web]
@@ -39,7 +39,6 @@ services:
     volumes: ["./keys/worker:/concourse-keys"]
     environment:
       CONCOURSE_TSA_HOST: web:2222
-      CONCOURSE_GARDEN_NETWORK: "true"
       CONCOURSE_EPHEMERAL: "true"
       CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
     dns:
