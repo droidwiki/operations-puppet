@@ -1,4 +1,7 @@
 # define this server as the NFS host
+admin::groups:
+  - deployment
+
 droidwiki::default::isnfsserver: true
 redis::bind: '0.0.0.0'
 
