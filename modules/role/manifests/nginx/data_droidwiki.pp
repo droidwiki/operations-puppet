@@ -7,7 +7,7 @@ class role::nginx::data_droidwiki {
   }
 
   # some redirects
-  nginx::resource::vhost {
+  nginx::resource::server {
     default:
       listen_port          => 443,
       ipv6_enable          => true,
@@ -22,9 +22,9 @@ class role::nginx::data_droidwiki {
       http2                => on,
       add_header           => {
         'X-Delivered-By'            => $facts['fqdn'],
-        'Strict-Transport-Security' => '"max-age=31536000; includeSubdomains; preload"',
+        'Strict-Transport-Security' => 'max-age=31536000; includeSubdomains; preload',
       },
-      vhost_cfg_append     => {
+      server_cfg_append    => {
         'return' => '301 https://data.droidwiki.org$request_uri',
       },
       use_default_location => false,

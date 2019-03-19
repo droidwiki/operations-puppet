@@ -39,7 +39,7 @@ class role::nginx::droidwiki {
   $droidwiki_domains = [ '.droid.wiki', '.droidwiki.de', '.droid-wiki.org', '.droidwiki.org' ]
 
   # some redirects
-  nginx::resource::vhost {
+  nginx::resource::server {
     default:
       listen_port          => 443,
       ipv6_enable          => true,
@@ -53,9 +53,9 @@ class role::nginx::droidwiki {
       ssl_dhparam          => $sslcert::params::dhparampempath,
       http2                => on,
       add_header           => {
-        'Strict-Transport-Security' => '"max-age=31536000; includeSubdomains; preload"',
+        'Strict-Transport-Security' => 'max-age=31536000; includeSubdomains; preload',
       },
-      vhost_cfg_append     => {
+      server_cfg_append    => {
         'return' => '301 https://www.droidwiki.org$request_uri',
       },
       use_default_location => false,
@@ -67,7 +67,7 @@ class role::nginx::droidwiki {
       server_name      => [ 'www.droidwiki.de' ],
     ;
     'droidwiki.de.80':
-      server_name => [ $droidwiki_domains ],
+      server_name => $droidwiki_domains,
       listen_port => 80,
       ssl         => false,
       index_files => [],

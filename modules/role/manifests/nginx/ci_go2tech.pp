@@ -15,7 +15,7 @@ class role::nginx::ci_go2tech {
     mode   => '0755',
   }
 
-  nginx::resource::vhost { 'ci.go2tech.de':
+  nginx::resource::server { 'ci.go2tech.de':
     use_default_location => false,
     ipv6_enable          => true,
     ipv6_listen_options  => '',
@@ -31,7 +31,7 @@ class role::nginx::ci_go2tech {
     http2                => on,
   }
 
-  nginx::resource::vhost { 'ci.go2tech.de.80':
+  nginx::resource::server { 'ci.go2tech.de.80':
     server_name          => [ 'ci.go2tech.de' ],
     listen_port          => 80,
     ipv6_enable          => true,
@@ -45,7 +45,7 @@ class role::nginx::ci_go2tech {
   }
 
   nginx::resource::location { 'ci.go2tech.de/':
-    vhost                 => 'ci.go2tech.de',
+    server                => 'ci.go2tech.de',
     ssl                   => true,
     ssl_only              => true,
     location              => '/',
@@ -62,7 +62,7 @@ class role::nginx::ci_go2tech {
   }
 
   nginx::resource::location { 'ci.go2tech.de.80/':
-    vhost               => 'ci.go2tech.de.80',
+    server              => 'ci.go2tech.de.80',
     location            => '/',
     location_custom_cfg => {
       'return ' => '301 https://ci.go2tech.de$request_uri',

@@ -14,7 +14,7 @@ class role::nginx::puppetboard_go2tech {
     mode   => '0755',
   }
 
-  nginx::resource::vhost { 'puppetboard.go2tech.de':
+  nginx::resource::server { 'puppetboard.go2tech.de':
     use_default_location => false,
     ipv6_enable          => true,
     ipv6_listen_options  => '',
@@ -22,7 +22,7 @@ class role::nginx::puppetboard_go2tech {
   }
 
   nginx::resource::location { 'puppetboard.go2tech.de/ .php':
-    vhost                => 'puppetboard.go2tech.de',
+    server               => 'puppetboard.go2tech.de',
     auth_basic           => 'Puppetboard',
     auth_basic_user_file => '/data/www/puppetboard.go2tech.de/access.htpasswd',
     location             => '/',

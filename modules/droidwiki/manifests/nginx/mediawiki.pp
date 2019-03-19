@@ -34,7 +34,7 @@ define droidwiki::nginx::mediawiki (
     $add_header = {
       'X-Delivered-By'            => $facts['fqdn'],
       'X-Upstream'                => '$upstream_addr',
-      'Strict-Transport-Security' => '"max-age=31536000; includeSubdomains; preload"',
+      'Strict-Transport-Security' => 'max-age=31536000; includeSubdomains; preload',
     }
   } else {
     $add_header = {
@@ -69,7 +69,7 @@ define droidwiki::nginx::mediawiki (
     $server_names = [ $vhost_url ]
   }
 
-  nginx::resource::vhost { $vhost_url:
+  nginx::resource::server { $vhost_url:
     listen_port          => $listen_port,
     ipv6_enable          => $ipv6_enable,
     ipv6_listen_options  => '',
@@ -86,7 +86,7 @@ define droidwiki::nginx::mediawiki (
     server_name          => $server_names,
     www_root             => $mediawiki_wwwroot,
     index_files          => [ 'index.php' ],
-    vhost_cfg_append     => {
+    server_cfg_append    => {
       'error_page 500 502 503 504' => '/500.html',
       'error_page 403'             => '/403.html',
       'gzip'                       => 'on',
@@ -103,13 +103,13 @@ define droidwiki::nginx::mediawiki (
   }
 
   if ( $ssl and $manage_http_redirects ) {
-    nginx::resource::vhost { "${vhost_url}.80":
+    nginx::resource::server { "${vhost_url}.80":
       server_name          => $server_names,
       ipv6_enable          => $ipv6_enable,
       ipv6_listen_options  => '',
       listen_port          => 80,
       ssl                  => false,
-      vhost_cfg_append     => {
+      server_cfg_append    => {
         'return' => "301 https://${vhost_url}\$request_uri",
       },
       index_files          => [],
@@ -119,7 +119,7 @@ define droidwiki::nginx::mediawiki (
 
   nginx::resource::location {
     default:
-      vhost               => $vhost_url,
+      server              => $vhost_url,
       location_custom_cfg => {},
       ssl                 => $ssl,
       ssl_only            => $ssl,
@@ -133,11 +133,8 @@ define droidwiki::nginx::mediawiki (
       www_root => $public_html,
     ;
     "${vhost_url}/":
-      location            => '/',
-      # FIXME: https://github.com/jfryman/puppet-nginx/issues/470
-      location_custom_cfg => {
-        'try_files' => "\$uri @rewrite",
-      }
+      location  => '/',
+      try_files => [ '$uri', '@rewrite' ]
     ;
     "${vhost_url} @rewrite":
       location            => '@rewrite',
@@ -158,50 +155,26 @@ define droidwiki::nginx::mediawiki (
     ;
     "${vhost_url}/${mediawiki_scriptpath}images/deleted":
       location            => "^~ /${mediawiki_scriptpath}images/deleted",
-      # FIXME: https://github.com/jfryman/puppet-nginx/issues/470
-      location_custom_cfg => {
-        'try_files' => 'fail @rewrite',
-      },
       try_files           => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}cache":
       location            => "^~ /${mediawiki_scriptpath}cache",
-      # FIXME: https://github.com/jfryman/puppet-nginx/issues/470
-      location_custom_cfg => {
-        'try_files' => 'fail @rewrite',
-      },
       try_files           => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}languages":
       location            => "^~ /${mediawiki_scriptpath}languages",
-      # FIXME: https://github.com/jfryman/puppet-nginx/issues/470
-      location_custom_cfg => {
-        'try_files' => 'fail @rewrite',
-      },
       try_files           => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}maintenance":
       location            => "^~ /${mediawiki_scriptpath}maintenance/",
-      # FIXME: https://github.com/jfryman/puppet-nginx/issues/470
-      location_custom_cfg => {
-        'try_files' => 'fail @rewrite',
-      },
       try_files           => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}serialized":
       location            => "^~ /${mediawiki_scriptpath}serialized",
-      # FIXME: https://github.com/jfryman/puppet-nginx/issues/470
-      location_custom_cfg => {
-        'try_files' => 'fail @rewrite',
-      },
       try_files           => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/ .svn .git":
       location            => '~ /.(svn|git)(/|$)',
-      # FIXME: https://github.com/jfryman/puppet-nginx/issues/470
-      location_custom_cfg => {
-        'try_files' => 'fail @rewrite',
-      },
       try_files           => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/ .ht":
@@ -242,7 +215,7 @@ define droidwiki::nginx::mediawiki (
   # aren't allowed, which is why the both locations are in an if clause.
   if ( $mediawiki_scriptpath != $mediawiki_articlepath ) {
     nginx::resource::location { "${vhost_url}/${mediawiki_articlepath}":
-      vhost         => $vhost_url,
+      server        => $vhost_url,
       ssl           => $ssl,
       ssl_only      => $ssl,
       location      => "/${mediawiki_articlepath}",
@@ -253,7 +226,7 @@ define droidwiki::nginx::mediawiki (
     }
 
     nginx::resource::location { "${vhost_url}/${mediawiki_scriptpath}":
-      vhost               => $vhost_url,
+      server              => $vhost_url,
       location            => "/${mediawiki_scriptpath}",
       location_custom_cfg => {},
       ssl                 => $ssl,
@@ -273,7 +246,7 @@ define droidwiki::nginx::mediawiki (
     # otherwise, the .php handler is added to the top level location
     nginx::resource::location { "${vhost_url}/ .php":
       location      => '~ \.php$',
-      vhost         => $vhost_url,
+      server        => $vhost_url,
       ssl           => $ssl,
       ssl_only      => $ssl,
       try_files     => [ '$uri', '$uri/', '@rewrite' ],
@@ -285,7 +258,7 @@ define droidwiki::nginx::mediawiki (
 
     nginx::resource::location { "${vhost_url}/w/":
       location            => '^~ /w/',
-      vhost               => $vhost_url,
+      server              => $vhost_url,
       ssl                 => $ssl,
       ssl_only            => $ssl,
       # FIXME: https://github.com/jfryman/puppet-nginx/issues/470

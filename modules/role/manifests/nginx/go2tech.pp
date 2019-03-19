@@ -14,7 +14,7 @@ class role::nginx::go2tech {
     mode   => '0755',
   }
 
-  nginx::resource::vhost { '_':
+  nginx::resource::server { '_':
     www_root             => '/data/shareddata/www/go2tech.de/public_html',
     ipv6_enable          => true,
     listen_options       => 'default_server',
@@ -24,26 +24,26 @@ class role::nginx::go2tech {
   }
 
   nginx::resource::location { '_ php':
-    vhost    => '_',
+    server   => '_',
     location => '~ \.php$',
     fastcgi  => '127.0.0.1:9000',
   }
 
-  nginx::resource::vhost { 'go2tech.de.80':
+  nginx::resource::server { 'go2tech.de.80':
     server_name          => [ 'go2tech.de', 'www.go2tech.de' ],
     ipv6_enable          => true,
     ipv6_listen_options  => '',
     add_header           => {
       'X-Delivered-By' => $facts['fqdn'],
     },
-    vhost_cfg_append     => {
+    server_cfg_append    => {
       'return' => '301 https://$host$request_uri',
     },
     index_files          => [],
     use_default_location => false,
   }
 
-  nginx::resource::vhost { 'go2tech.de':
+  nginx::resource::server { 'go2tech.de':
     server_name          => [ 'go2tech.de', 'bits.go2tech.de', '188.68.49.74' ],
     ipv6_enable          => true,
     ipv6_listen_options  => '',
@@ -60,9 +60,9 @@ class role::nginx::go2tech {
     http2                => on,
     add_header           => {
       'X-Delivered-By'            => $facts['fqdn'],
-      'Strict-Transport-Security' => '"max-age=31536000; preload"',
+      'Strict-Transport-Security' => 'max-age=31536000; preload',
     },
-    vhost_cfg_append     => {
+    server_cfg_append    => {
       'error_page 404' => '/404.html',
     },
     use_default_location => false,
@@ -72,7 +72,7 @@ class role::nginx::go2tech {
 
   nginx::resource::location {
     default:
-      vhost    => 'go2tech.de',
+      server   => 'go2tech.de',
       ssl      => true,
       ssl_only => true,
     ;

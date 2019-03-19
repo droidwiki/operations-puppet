@@ -19,21 +19,21 @@ class role::nginx::donut_go2tech {
     mode   => '0755',
   }
 
-  nginx::resource::vhost { 'donut.go2tech.de.80':
+  nginx::resource::server { 'donut.go2tech.de.80':
     server_name          => [ 'donut.go2tech.de' ],
     ipv6_enable          => true,
     ipv6_listen_options  => '',
     add_header           => {
       'X-Delivered-By' => $facts['fqdn'],
     },
-    vhost_cfg_append     => {
+    server_cfg_append    => {
       'return' => '301 https://$host$request_uri',
     },
     index_files          => [],
     use_default_location => false,
   }
 
-  nginx::resource::vhost { 'donut.go2tech.de':
+  nginx::resource::server { 'donut.go2tech.de':
     server_name          => [ 'donut.go2tech.de' ],
     ipv6_enable          => true,
     ipv6_listen_options  => '',
@@ -47,7 +47,7 @@ class role::nginx::donut_go2tech {
     ssl_dhparam          => $sslcert::params::dhparampempath,
     http2                => on,
     add_header           => { 'X-Delivered-By' => $facts['fqdn'] },
-    vhost_cfg_append     => {
+    server_cfg_append    => {
       'error_page 404' => '/404.html',
     },
     use_default_location => false,
@@ -57,7 +57,7 @@ class role::nginx::donut_go2tech {
 
   nginx::resource::location {
     default:
-      vhost    => 'donut.go2tech.de',
+      server   => 'donut.go2tech.de',
       ssl      => true,
       ssl_only => true,
     ;

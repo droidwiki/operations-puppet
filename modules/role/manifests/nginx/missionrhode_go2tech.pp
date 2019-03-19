@@ -14,7 +14,7 @@ class role::nginx::missionrhode_go2tech {
     mode   => '0755',
   }
 
-  nginx::resource::vhost { 'missionrhode.go2tech.de':
+  nginx::resource::server { 'missionrhode.go2tech.de':
     listen_port          => 443,
     ipv6_enable          => true,
     ipv6_listen_options  => '',
@@ -28,13 +28,13 @@ class role::nginx::missionrhode_go2tech {
     http2                => 'on',
     add_header           => {
       'X-Delivered-By'            => $facts['fqdn'],
-      'Strict-Transport-Security' => '"max-age=31536000; includeSubdomains; preload"',
+      'Strict-Transport-Security' => 'max-age=31536000; includeSubdomains; preload',
     },
     server_name          => [ 'missionrhode.go2tech.de' ],
     use_default_location => false,
     www_root             => '/data/www/missionrhode.go2tech.de/public_html',
     index_files          => [ 'index.php' ],
-    vhost_cfg_append     => {
+    server_cfg_append    => {
       'gzip'              => 'on',
       'gzip_comp_level'   => '2',
       'gzip_http_version' => '1.0',
@@ -52,15 +52,13 @@ class role::nginx::missionrhode_go2tech {
 
   nginx::resource::location {
     default:
-      vhost    => 'missionrhode.go2tech.de',
+      server   => 'missionrhode.go2tech.de',
       ssl      => true,
       ssl_only => true,
     ;
     'missionrhode.go2tech.de/':
       location            => '/',
-      location_custom_cfg => {
-        'try_files' => '$uri $uri/ /index.php?$args',
-      },
+      try_files => [ '$uri', '$uri/', '/index.php?$args' ]
     ;
     'missionrhode.go2tech.de php':
       location  => '~ \.php$',
@@ -70,14 +68,14 @@ class role::nginx::missionrhode_go2tech {
   }
 
   # some redirects
-  nginx::resource::vhost {
+  nginx::resource::server {
     default:
       ipv6_enable          => true,
       ipv6_listen_options  => '',
       add_header           => {
         'X-Delivered-By'            => $facts['fqdn'],
       },
-      vhost_cfg_append     => {
+      server_cfg_append    => {
         'return' => '301 https://missionrhode.go2tech.de$request_uri',
       },
       use_default_location => false,
