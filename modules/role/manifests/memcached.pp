@@ -13,7 +13,7 @@ class role::memcached {
   }
 
   class { 'memcached':
-    listen_ip => '0.0.0.0',
+    listen_ip => $facts['networking']['interfaces']['eth1']['ip'],
     user      => 'memcache',
   }
 }
