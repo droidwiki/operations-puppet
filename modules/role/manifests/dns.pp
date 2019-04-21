@@ -111,6 +111,12 @@ class role::dns(
         $type ? { 'master' => 'update-policy { grant letsencrypt. name _acme-challenge.droid-wiki.org. txt; }', default => '// omitting update-policy on slave' },
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
+      'floriansw.de' => [
+        "type ${type}",
+        'file "floriansw.de"',
+        $type ? { 'master' => 'update-policy { grant letsencrypt. name _acme-challenge.floriansw.de. txt; }', default => '// omitting update-policy on slave' },
+        $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
+      ],
     },
   }
 
@@ -125,10 +131,10 @@ class role::dns(
       command     => '/usr/sbin/rndc thaw',
       user        => root,
       group       => root,
-      require     => File['/var/lib/bind/zones/go2tech.de', '/var/lib/bind/zones/droidwiki.org', '/var/lib/bind/zones/droid.wiki', '/var/lib/bind/zones/droid-wiki.org'],
+      require     => File['/var/lib/bind/zones/go2tech.de', '/var/lib/bind/zones/droidwiki.org', '/var/lib/bind/zones/droid.wiki', '/var/lib/bind/zones/droid-wiki.org', '/var/lib/bind/zones/floriansw.de'],
     }
 
-    bind::server::file { [ 'go2tech.de', 'droidwiki.org', 'droid.wiki', 'droid-wiki.org' ]:
+    bind::server::file { [ 'go2tech.de', 'droidwiki.org', 'droid.wiki', 'droid-wiki.org', 'floriansw.de' ]:
       zonedir      => '/var/lib/bind/zones',
       source_base  => 'puppet:///modules/role/dns/',
     }
