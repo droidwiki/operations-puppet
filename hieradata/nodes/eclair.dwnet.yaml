@@ -98,3 +98,8 @@ concourse::github::client_secret: >
     1zUDnjBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBD5bznotkDzUrcBCa9B
     WAzygDDXhdXIYSzJED59gnJspliZINIbDDWSXKNf9+atnl+iOO9Pj4Rr4T8H
     egDP62hDUvU=]
+
+# php configuration
+php::fpm::pools:
+  www:
+    listen: '172.16.0.2:9000'

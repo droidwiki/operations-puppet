@@ -5,6 +5,6 @@ class role::nfs_server {
   }
   nfs::server::export{ '/data/shareddata':
     ensure  => 'mounted',
-    clients => '188.68.49.74(rw,insecure,async,no_root_squash) localhost(rw)'
+    clients => '172.16.0.2(rw,insecure,async,no_root_squash) localhost(rw)'
   }
 }

@@ -26,6 +26,6 @@ class role::nginx::puppetboard_go2tech {
     auth_basic           => 'Puppetboard',
     auth_basic_user_file => '/data/www/puppetboard.go2tech.de/access.htpasswd',
     location             => '/',
-    uwsgi                => '188.68.49.74:3032',
+    uwsgi                => '172.16.0.2:3032',
   }
 }

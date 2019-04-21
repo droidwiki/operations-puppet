@@ -49,7 +49,7 @@ class role::nginx::ci_go2tech {
     ssl                   => true,
     ssl_only              => true,
     location              => '/',
-    proxy                 => 'http://188.68.49.74:8080',
+    proxy                 => 'http://172.16.0.2:8080',
     proxy_set_header      => [
       'Host $host',
       'X-Real-IP $remote_addr',

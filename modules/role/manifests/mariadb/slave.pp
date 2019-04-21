@@ -7,7 +7,7 @@ class role::mariadb::slave {
       mysqld      => {
         'pid-file'     => '/var/run/mysqld/mysqld.pid',
         'datadir'      => '/data/mariadb/datadir',
-        'bind-address' => $facts['networking']['ip'],
+        'bind-address' => $facts['networking']['interfaces']['eth1']['ip'],
         'server-id'    => $facts['mysql_server_id'],
         'relay-log'    => 'mysql-relay-bin',
         'read-only'    => '1'

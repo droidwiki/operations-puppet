@@ -20,6 +20,6 @@ class role::nginx::ganglia_go2tech {
     ensure   => 'present',
     server   => 'ganglia.go2tech.de',
     location => '~ \.php',
-    fastcgi  => '188.68.49.74:9000',
+    fastcgi  => '172.16.0.2:9000',
   }
 }

@@ -273,6 +273,8 @@ class fw::pre {
     '188.68.49.74',
     # v22015052656325188@netcup, droidwiki.de
     '37.120.178.25',
+    # VLAN
+    '172.16.0.0/12',
   ]
 
   $trustedhosts.each |Integer $index, String $ipaddress| {

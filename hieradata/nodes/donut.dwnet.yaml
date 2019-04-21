@@ -3,7 +3,12 @@ admin::groups:
   - deployment
 
 droidwiki::default::isnfsserver: true
-redis::bind: '0.0.0.0'
+redis::bind: '172.16.0.1'
 
 nginx::tls::fullchain: /etc/letsencrypt/live/droidwiki.org/fullchain.pem
 nginx::tls::privkey: /etc/letsencrypt/live/droidwiki.org/privkey.pem
+
+# php configuration
+php::fpm::pools:
+  www:
+    listen: '172.16.0.1:9000'

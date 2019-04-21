@@ -67,17 +67,12 @@ nginx::nginx_upstreams:
   mediawikibackend:
     ensure: present
     members:
-      '37.120.178.25:9000':
-        server: 37.120.178.25
+      '172.16.0.1:9000':
+        server: 172.16.0.1
         port: 9000
-      '188.68.49.74:9000':
-        server: 188.68.49.74
+      '172.16.0.2:9000':
+        server: 172.16.0.2
         port: 9000
-
-# php configuration
-php::fpm::pools:
-  www:
-    listen: '0.0.0.0:9000'
 
 bind::key::letsencrypt: >
     ENC[PKCS7,MIIBygYJKoZIhvcNAQcDoIIBuzCCAbcCAQAxggEhMIIBHQIBADAFMAACAQEw
