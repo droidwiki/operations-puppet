@@ -39,7 +39,6 @@ services:
     volumes: ["./keys/worker:/concourse-keys"]
     environment:
       CONCOURSE_TSA_HOST: web:2222
-      CONCOURSE_EPHEMERAL: "true"
       CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
       CONCOURSE_BAGGAGECLAIM_DRIVER: overlay
     dns:

@@ -21,16 +21,10 @@ class role::concourse {
     require  => [ Package['git'] ],
     source   => 'https://github.com/concourse/concourse.git',
     revision => 'master',
-    notify   => Docker_compose['concourse'],
   }
 
   file { '/data/concourse/docker-compose-droidwiki.yml':
     ensure  => present,
     content => template('role/concourse/docker-compose.yml.erb'),
-  }
-
-  docker_compose { 'concourse':
-    compose_files => ['/data/concourse/docker-compose-droidwiki.yml'],
-    ensure        => present,
   }
 }
