@@ -4,6 +4,7 @@ admin::groups:
 
 # enables this host to be the ganglia data collector
 ganglia::gmond::udp_recv_channel:
+  - bind: 172.16.0.2
   - port: 8649
 ganglia::gmond::tcp_accept_channel:
   - port: 8649
