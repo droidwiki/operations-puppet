@@ -269,10 +269,6 @@ class fw::pre {
 
   # dwnet network, trusted source and destination ips
   $trustedhosts = [
-    # v22015112656329114@netcup, go2tech.de
-    '188.68.49.74',
-    # v22015052656325188@netcup, droidwiki.de
-    '37.120.178.25',
     # VLAN
     '172.16.0.0/12',
   ]
@@ -291,33 +287,6 @@ class fw::pre {
       proto  => 'all',
       source => $ipaddress,
       action => 'accept',
-    }
-  }
-
-  # dwnet network, trusted source and destination ips
-  $trustedipv6hosts = [
-    # v22015112656329114@netcup, go2tech.de
-    '2a03:4000:6:d06b::1',
-    # v22015052656325188@netcup, droidwiki.de
-    '2a03:4000:6:80b1::1',
-  ]
-
-  $trustedipv6hosts.each |Integer $index, String $ipaddress| {
-    $inputcount = 114 + $index
-    $outputcount = $inputcount + 1
-    firewall { "${outputcount} allow outgoing traffic to ${ipaddress} IPv6":
-      proto       => 'all',
-      chain       => 'OUTPUT',
-      destination => $ipaddress,
-      action      => 'accept',
-      provider    => 'ip6tables',
-    }
-
-    firewall { "${inputcount} allow incoming traffic from ${ipaddress} IPv6":
-      proto    => 'all',
-      source   => $ipaddress,
-      action   => 'accept',
-      provider => 'ip6tables',
     }
   }
 }
