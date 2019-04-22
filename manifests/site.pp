@@ -58,7 +58,6 @@ node 'donut.dwnet' {
   include role::nfs_server
   include role::nodejs
   include restbase
-  include mobileapps
 
   class { 'role::dns':
     type => 'master',
