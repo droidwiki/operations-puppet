@@ -57,6 +57,7 @@ node 'donut.dwnet' {
   include certbot
   include role::nfs_server
   include role::nodejs
+  include parsoid
   include restbase
 
   class { 'role::dns':

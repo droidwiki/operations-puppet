@@ -1,0 +1,20 @@
+worker_heartbeat_timeout: 300000
+logging:
+    level: info
+services:
+  - module: ../src/lib/index.js
+    entrypoint: apiServiceWorker
+    conf:
+        mwApis:
+          - droidwikiwiki:
+            uri: 'https://www.droidwiki.org/w/api.php'
+            prefix: 'droidwikiwiki'
+          - endroidwikiwiki:
+            uri: 'https://en.droidwiki.org/w/api.php'
+            prefix: 'endroidwikiwiki'
+          - opswiki:
+            uri: 'http://ops.go2tech.de/w/api.php'
+            prefix: 'opswiki'
+        useSelser: true
+        serverInterface: '172.16.0.1'
+
