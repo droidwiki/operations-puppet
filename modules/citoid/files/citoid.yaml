@@ -33,7 +33,7 @@ services:
       # the port to bind to
       port: 1970
       # IP address to bind to, all IPs by default
-      # interface: localhost # uncomment to only listen on localhost
+      interface: 172.16.0.2 # uncomment to only listen on localhost
       # more per-service config settings
       # the location of the spec, defaults to spec.yaml if not specified
       # spec: ./spec.template.yaml
