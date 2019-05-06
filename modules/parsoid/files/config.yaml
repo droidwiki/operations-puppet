@@ -15,6 +15,9 @@ services:
           - opswiki:
             uri: 'http://ops.go2tech.de/w/api.php'
             prefix: 'opswiki'
+          - datawiki:
+            uri: 'https://data.droidwiki.org/w/api.php'
+            prefix: 'datawiki'
         useSelser: true
         serverInterface: '172.16.0.1'
 
