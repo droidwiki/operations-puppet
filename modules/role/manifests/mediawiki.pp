@@ -67,4 +67,9 @@ class role::mediawiki(
       }
     }
   }
+
+  # Image rendering
+  package { 'imagemagick':
+    ensure => present,
+  }
 }
