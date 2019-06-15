@@ -82,3 +82,9 @@ mua_client_restrictions = permit_mynetworks,permit_sasl_authenticated,reject
 # SPF Verifier
 policyd-spf_time_limit = 3600
 
+# SRS
+sender_canonical_maps = mysql:/etc/postfix/sql/no-srs.cf, tcp:127.0.0.1:10001
+sender_canonical_classes = envelope_sender
+recipient_canonical_maps = tcp:127.0.0.1:10002
+recipient_canonical_classes= envelope_recipient,header_recipient
+

@@ -53,6 +53,23 @@ postfix::testuser::password: >
     lsoijzBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAx2dI5b3ZjW3s/H2x/
     /Y5dgCAkWYScdBHPbQ9MnF5FEb6x7+bIVxoUFmzfDOaw239PFA==]
 
+postsrsd::secret: >
+    ENC[PKCS7,MIICfQYJKoZIhvcNAQcDoIICbjCCAmoCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAfO0vlJh2mJhwykAvndDd81PA3/wFI8Nxal4Q
+    yaup/mTjUk7TAhpKBK7IssLOaNhPjG14eWLhj6cSassEogXur3IZBvzHACBn
+    3mr3sn4zzsfxqr2t7dABTmqMgVMqMvuza99mA589uOtlsRSgQSv7MyX4A0dT
+    LxRoxphyzlJJExXDr6UpLoq7XJYZYkCbeHGlnmGbRDYpsWaNQi/E9f1bS7mM
+    wDULdBTk5d+mQJTwzuTC8Un1xGCqeSpcmlY8mDDmspTPh4qyPABnGAr5nXyh
+    YPh00I915U+XSfiH5Q+p582HyTliUg1LC6NPpwAQAIstQo6ulg8JP2SgM4sa
+    gpHQbjCCAT4GCSqGSIb3DQEHATAdBglghkgBZQMEASoEENcqaiP0h8pRi5JU
+    Mv6ufQSAggEQ9MHbdpmp3NC1h4dp5ZCus7asobVoj34QSvv+yN0jBFuHdEmP
+    /MwZp9PzIuwdODNFS9vaRk50BKJDjndM89LAVyQNIaDzgaBArQ2PxWlLOwH6
+    peCvb293SAFP9E6q7SpKj8/lG3H4dYVQIFchVLRwBulOPes+9G0wiwhF5bvC
+    UJn0RYQS+5xwT2oI9hs//G6k9HUy5GCg7YCriAAps+LAt1mapAq0y5qQIcUI
+    n4CT297s6hi5pkR6sUVAwXVvX5OqRqykJNm0cW+oXMiT5zdNyXep9kng4X2/
+    0kn0wOkrsQuTP7Jau4R1fhduTpmyWVNySYBWszFJteU1TdfSJNS4cr1vgdT/
+    8cYInTFde9YiEmg=]
+
 opendkim::uid: 123
 opendkim::socket: 'inet:8891@127.0.0.1'
 opendkim::trusted_hosts:

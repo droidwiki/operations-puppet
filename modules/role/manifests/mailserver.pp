@@ -31,6 +31,7 @@ class role::mailserver {
 
   include ::opendkim
   include postfixspf
+  include postsrsd
   include postfix
 
   $postfixcertcheck = hiera('monit::postfix::certcheck', {})

@@ -1,0 +1,5 @@
+user = <%= @vmaildbuser %>
+password = <%= @vmaildbpass %>
+hosts = <%= @vmaildbhost %>
+dbname = <%= @vmaildbname %>
+query = SELECT CONCAT(username, '@', domain) FROM users LEFT JOIN aliases ON aliases.source = CONCAT('%u', '@', '%d') WHERE username='%u' AND domain='%d' and aliases.destination IS NULL

@@ -78,6 +78,15 @@ class postfix(
     notify  => Service['postfix'],
   }
 
+  file { '/etc/postfix/sql/no-srs.cf':
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0660',
+    content => template('postfix/sql/no-srs.cf.erb'),
+    notify  => Service['postfix'],
+  }
+
   file { '/etc/postfix/sql/sender-login-maps.cf':
     ensure  => 'file',
     owner   => 'root',
