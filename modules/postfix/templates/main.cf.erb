@@ -3,11 +3,11 @@ biff                = no
 append_dot_mydomain = no
 readme_directory    = no
 mynetworks          = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
-mydestination       =
 mailbox_size_limit  = 51200000
 message_size_limit  = 51200000
-recipient_delimiter =
+recipient_delimiter = +
 inet_interfaces     = all
+mydestination       = $myhostname localhost.$mydomain localhost
 myorigin            = <%= @my_hostname %>
 myhostname          = <%= @my_hostname %>
 inet_protocols      = all
@@ -43,8 +43,20 @@ smtpd_sasl_path              = private/auth
 smtpd_sasl_auth_enable       = yes
 # Use Dovecot LMTP Service to deliver Mails to Dovecot
 virtual_transport            = lmtp:unix:private/dovecot-lmtp
+smtpd_relay_restrictions     =  reject_non_fqdn_recipient
+                                reject_unknown_recipient_domain
+                                permit_mynetworks
+                                reject_unauth_destination
 # Only allow mail transport if client is authenticated or in own network (PHP Scripts, ...)
 smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+smtpd_client_restrictions    = permit_mynetworks
+                               reject_unknown_client_hostname
+smtpd_helo_required          = yes
+smtpd_helo_restrictions      = permit_mynetworks
+                               reject_invalid_helo_hostname
+                               reject_non_fqdn_helo_hostname
+                               reject_unknown_helo_hostname
+smtpd_data_restrictions      = reject_unauth_pipelining
 
 # virtual mailboxes managed in mysql
 virtual_alias_maps      = mysql:/etc/postfix/sql/aliases.cf
@@ -57,4 +69,9 @@ milter_default_action = accept
 milter_protocol   = 6
 smtpd_milters     = inet:localhost:8891
 non_smtpd_milters = inet:localhost:8891
+
+# Mail clients
+mua_relay_restrictions = reject_non_fqdn_recipient,reject_unknown_recipient_domain,permit_mynetworks,permit_sasl_authenticated,reject
+mua_sender_restrictions = permit_mynetworks,reject_non_fqdn_sender,reject_sender_login_mismatch,permit_sasl_authenticated,reject
+mua_client_restrictions = permit_mynetworks,permit_sasl_authenticated,reject
 
