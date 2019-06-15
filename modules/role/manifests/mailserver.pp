@@ -29,10 +29,10 @@ class role::mailserver {
     provider => 'ip6tables',
   }
 
+  include ::opendkim
+  include postfixspf
   include postfix
 
   $postfixcertcheck = hiera('monit::postfix::certcheck', {})
   create_resources('monit::certcheck', $postfixcertcheck)
-
-  include ::opendkim
 }

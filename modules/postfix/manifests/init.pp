@@ -96,5 +96,21 @@ class postfix(
     notify => Service['postfix'],
   }
 
+  exec { 'refresh local-generics':
+    cwd     => '/etc/postfix/',
+    user    => 'root',
+    command => '/usr/sbin/postmap /etc/postfix/local-generics',
+    notify  => Service['postfix'],
+  }
+
+  file { '/etc/postfix/local-generics':
+    ensure => 'file',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0660',
+    source => 'puppet:///modules/postfix/local-generics',
+    notify => Exec['refresh local-generics'],
+  }
+
   monit::service { 'smtp': }
 }
