@@ -154,28 +154,28 @@ define droidwiki::nginx::mediawiki (
       ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}images/deleted":
-      location            => "^~ /${mediawiki_scriptpath}images/deleted",
-      try_files           => [ 'fail', '@rewrite' ],
+      location  => "^~ /${mediawiki_scriptpath}images/deleted",
+      try_files => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}cache":
-      location            => "^~ /${mediawiki_scriptpath}cache",
-      try_files           => [ 'fail', '@rewrite' ],
+      location  => "^~ /${mediawiki_scriptpath}cache",
+      try_files => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}languages":
-      location            => "^~ /${mediawiki_scriptpath}languages",
-      try_files           => [ 'fail', '@rewrite' ],
+      location  => "^~ /${mediawiki_scriptpath}languages",
+      try_files => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}maintenance":
-      location            => "^~ /${mediawiki_scriptpath}maintenance/",
-      try_files           => [ 'fail', '@rewrite' ],
+      location  => "^~ /${mediawiki_scriptpath}maintenance/",
+      try_files => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/${mediawiki_scriptpath}serialized":
-      location            => "^~ /${mediawiki_scriptpath}serialized",
-      try_files           => [ 'fail', '@rewrite' ],
+      location  => "^~ /${mediawiki_scriptpath}serialized",
+      try_files => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/ .svn .git":
-      location            => '~ /.(svn|git)(/|$)',
-      try_files           => [ 'fail', '@rewrite' ],
+      location  => '~ /.(svn|git)(/|$)',
+      try_files => [ 'fail', '@rewrite' ],
     ;
     "${vhost_url}/ .ht":
       location      => '~ /.ht',

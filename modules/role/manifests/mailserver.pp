@@ -8,9 +8,9 @@ class role::mailserver {
   }
 
   firewall { '400 accept incoming mail traffic IPv6':
-    proto  => 'tcp',
-    dport  => ['25', '143', '587', '993'],
-    action => 'accept',
+    proto    => 'tcp',
+    dport    => ['25', '143', '587', '993'],
+    action   => 'accept',
     provider => 'ip6tables',
   }
 

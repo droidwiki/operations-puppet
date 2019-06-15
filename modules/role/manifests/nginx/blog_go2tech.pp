@@ -52,10 +52,10 @@ class role::nginx::blog_go2tech {
   }
 
   nginx::resource::location { 'blog.go2tech.de/':
-    server              => 'blog.go2tech.de',
-    ssl                 => true,
-    ssl_only            => true,
-    location            => '/',
+    server    => 'blog.go2tech.de',
+    ssl       => true,
+    ssl_only  => true,
+    location  => '/',
     try_files => [ '$uri', '$uri/', '/index.php?$args' ],
   }
 

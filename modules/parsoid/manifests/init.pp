@@ -21,7 +21,7 @@ class parsoid {
 
   service { 'parsoid':
     ensure => 'running',
-    enable => 'true',
+    enable => true,
   }
 
   file { '/etc/mediawiki/parsoid/config.yaml':

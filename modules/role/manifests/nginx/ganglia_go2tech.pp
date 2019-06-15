@@ -10,10 +10,10 @@ class role::nginx::ganglia_go2tech {
   }
 
   nginx::resource::location { 'ganglia.go2tech.de/':
-    ensure              => 'present',
-    server              => 'ganglia.go2tech.de',
-    location            => '/',
-    try_files           => [ '$uri', '$uri/', '/index.php?$args' ],
+    ensure    => 'present',
+    server    => 'ganglia.go2tech.de',
+    location  => '/',
+    try_files => [ '$uri', '$uri/', '/index.php?$args' ],
   }
 
   nginx::resource::location { 'ganglia.go2tech.de/ .php':

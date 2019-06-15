@@ -57,7 +57,7 @@ class role::nginx::missionrhode_go2tech {
       ssl_only => true,
     ;
     'missionrhode.go2tech.de/':
-      location            => '/',
+      location  => '/',
       try_files => [ '$uri', '$uri/', '/index.php?$args' ]
     ;
     'missionrhode.go2tech.de php':
