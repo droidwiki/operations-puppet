@@ -1,5 +1,5 @@
 @       IN      SOA     root-dns.go2tech.de. admin.go2tech.de. (
-                     2019061201         ; Serial
+                     2019061502         ; Serial
                           28800         ; Refresh
                            7200         ; Retry
                         1209600         ; Expire
@@ -10,14 +10,17 @@
                IN NS   second-dns.go2tech.de.
 
 
-*               IN      A       37.120.178.25
-*               IN      AAAA    2a03:4000:6:80b1::1
-@               IN      TXT     "google-site-verification=-nOd6ZlGTaBJQH9SPtndSUlRlkxiUT-i4o5j6C9aJJA"
-_dmarc          IN      TXT     "v=DMARC1;p=none;pct=100;rua=mailto:dmarc-reports@droidwiki.org;ruf=mailto:dmarc-reports@droidwiki.org;adkim=r;aspf=s"
-@               IN      TXT     "v=spf1 mx include:_spf.google.com ~all"
-@               IN      A       37.120.178.25
-@               IN      AAAA    2a03:4000:6:80b1::1
-                IN      MX 1    mail.droidwiki.org.
-mail            IN      A       188.68.49.74
-mail            IN      AAAA    2a03:4000:6:d06b::1
-status          IN      CNAME   stats.uptimerobot.com.
+*                   IN      A       37.120.178.25
+*                   IN      AAAA    2a03:4000:6:80b1::1
+@                   IN      TXT     "google-site-verification=-nOd6ZlGTaBJQH9SPtndSUlRlkxiUT-i4o5j6C9aJJA"
+_dmarc              IN      TXT     "v=DMARC1;p=none;pct=100;rua=mailto:dmarc-reports@droidwiki.org;ruf=mailto:dmarc-reports@droidwiki.org;adkim=r;aspf=s"
+201906._domainkey   IN      TXT     ( "v=DKIM1; k=rsa; s=email; "
+      "p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqhAI1NAqq0XeeFWCBWIYHIZru+gx3PgOLKTvmuu6ORj5umpfklpuGe+oIiQw87xKbjfsjODOVQHsnu82Y8SLxLuSY9mGl2y7F+RMdvTRGYqb38RwOzVbsrxuuQ0vVPVoAEjYD0o3iuqwStOCzEsfXThwKY1wAZJZrDAA8HQG7VZrvL+s2owkoPS099acfkGGdMWhwUhUpeTMwY"
+      "ykgL6XdD4jJQq6Xs9R7mFPJQvyHqxfNYrPYrQqOLTaQBLyBmDet3jrgIEcH+G3b1hToELXyt1z7RBzHEtArKdXPUkjPRn1D57aEkGhidwmwJKJaGEwobMA/bhcBZsKQaCBaedKBQIDAQAB" )  ; ----- DKIM key 201906 for droidwiki.org
+@                   IN      TXT     "v=spf1 mx include:_spf.google.com ~all"
+@                   IN      A       37.120.178.25
+@                   IN      AAAA    2a03:4000:6:80b1::1
+                    IN      MX 1    mail.droidwiki.org.
+mail                IN      A       188.68.49.74
+mail                IN      AAAA    2a03:4000:6:d06b::1
+status              IN      CNAME   stats.uptimerobot.com.

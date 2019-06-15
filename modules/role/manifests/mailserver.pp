@@ -33,4 +33,6 @@ class role::mailserver {
 
   $postfixcertcheck = hiera('monit::postfix::certcheck', {})
   create_resources('monit::certcheck', $postfixcertcheck)
+
+  include ::opendkim
 }

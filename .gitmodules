@@ -92,3 +92,6 @@
 [submodule "modules/docker"]
 	path = modules/docker
 	url = https://github.com/puppetlabs/puppetlabs-docker.git
+[submodule "modules/opendkim"]
+	path = modules/opendkim
+	url = https://github.com/lvicainne/puppet-opendkim.git

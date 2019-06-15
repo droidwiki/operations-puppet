@@ -51,3 +51,10 @@ virtual_alias_maps      = mysql:/etc/postfix/sql/aliases.cf
 virtual_mailbox_maps    = mysql:/etc/postfix/sql/maps.cf
 virtual_mailbox_domains = mysql:/etc/postfix/sql/domains.cf
 local_recipient_maps    = $virtual_mailbox_maps
+
+# OpenDKIM
+milter_default_action = accept
+milter_protocol   = 6
+smtpd_milters     = inet:localhost:8891
+non_smtpd_milters = inet:localhost:8891
+
