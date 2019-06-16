@@ -63,7 +63,7 @@ class role::nginx::donut_go2tech {
     ;
     'donut.go2tech.de php':
       location => '~ \.php$',
-      fastcgi  => '127.0.0.1:9000',
+      fastcgi  => '172.16.0.1:9000',
     ;
     'donut.go2tech.de/monit':
       location            => '/monit',

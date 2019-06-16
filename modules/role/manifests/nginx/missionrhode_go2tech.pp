@@ -1,13 +1,13 @@
 # nginx vhost missionrhode.go2tech.de
 class role::nginx::missionrhode_go2tech {
-  file { '/data/www/missionrhode.go2tech.de':
+  file { '/data/shareddata/www/missionrhode.go2tech.de':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
   }
 
-  file { '/data/www/missionrhode.go2tech.de/public_html':
+  file { '/data/shareddata/www/missionrhode.go2tech.de/public_html':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
@@ -32,7 +32,7 @@ class role::nginx::missionrhode_go2tech {
     },
     server_name          => [ 'missionrhode.go2tech.de' ],
     use_default_location => false,
-    www_root             => '/data/www/missionrhode.go2tech.de/public_html',
+    www_root             => '/data/shareddata/www/missionrhode.go2tech.de/public_html',
     index_files          => [ 'index.php' ],
     server_cfg_append    => {
       'gzip'              => 'on',
@@ -63,7 +63,7 @@ class role::nginx::missionrhode_go2tech {
     'missionrhode.go2tech.de php':
       location  => '~ \.php$',
       try_files => [ '$uri', '$uri/', '=404' ],
-      fastcgi   => '127.0.0.1:9000',
+      fastcgi   => 'mediawikibackend',
     ;
   }
 

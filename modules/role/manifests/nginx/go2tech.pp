@@ -26,7 +26,7 @@ class role::nginx::go2tech {
   nginx::resource::location { '_ php':
     server   => '_',
     location => '~ \.php$',
-    fastcgi  => '127.0.0.1:9000',
+    fastcgi  => 'mediawikibackend',
   }
 
   nginx::resource::server { 'go2tech.de.80':
