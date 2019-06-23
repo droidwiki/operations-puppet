@@ -98,5 +98,9 @@ class role::nginx::dstatic {
         '   fastcgi_pass mediawikibackend;',
         '}',
       ],
+    ;
+    "dstatic.dev/static":
+      location => '/static/',
+      www_root => '/data/mediawiki/main/',
   }
 }
