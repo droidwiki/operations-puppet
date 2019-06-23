@@ -63,6 +63,7 @@ node 'donut.dwnet' {
   class { 'role::dns':
     type => 'master',
   }
+  include role::nginx::dstatic
   include role::nginx::droidwiki
   include role::nginx::data_droidwiki
   include role::nginx::ops_go2tech
