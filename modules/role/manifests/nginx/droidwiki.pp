@@ -75,6 +75,13 @@ class role::nginx::droidwiki {
     ssl           => true,
     ssl_only      => true,
     proxy         => 'http://172.16.0.1:6081',
+    proxy_set_header => [
+      'Host $host',
+      'X-Real-IP $remote_addr',
+      'X-Forwarded-For $proxy_add_x_forwarded_for',
+      'X-Forwarded-Proto https',
+      'Proxy ""',
+    ]
   }
 
   # some redirects
