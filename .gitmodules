@@ -95,3 +95,6 @@
 [submodule "modules/opendkim"]
 	path = modules/opendkim
 	url = https://github.com/lvicainne/puppet-opendkim.git
+[submodule "modules/varnish"]
+	path = modules/varnish
+	url = https://github.com/claranet/puppet-varnish.git

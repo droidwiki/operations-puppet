@@ -8,6 +8,18 @@ redis::bind: '172.16.0.1'
 nginx::tls::fullchain: /etc/letsencrypt/live/droidwiki.org/fullchain.pem
 nginx::tls::privkey: /etc/letsencrypt/live/droidwiki.org/privkey.pem
 
+varnish::secret: >
+    ENC[PKCS7,MIIBmQYJKoZIhvcNAQcDoIIBijCCAYYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEArhKrbwapCcIBjub/SLcos059mRlqbpJS6Z/i
+    +Bq8fZk+KhQh7joUg4+gXe4aHxhpodbu8lTfug6PlYL9eZy5wXiC3wRh9I4H
+    wVsciKo+lK5AlJNmh6PHQVKnBOaeKcaAoLiATNyFSiIi8OspURyI12MwlNKm
+    OeSbrUiLUvMhlcxapF7KBGDYHxBOyOBE5JMGLEZRjkq/Pa+8EaMmoTNTIrod
+    Jx7fCMuBTO5A+lEHZeGaRsDbZQAxnr6MZf56SRDGHTuRtcG2crsoLLeNV/OH
+    9ZmkJPfSk9YJznjoiKDH+zcjkp9sfBxYKVkW7dTGZBKoHbYQwPJt4lpajPFj
+    gMrkVTBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBC78JS/uPUUNuVFvXQu
+    1OPsgDDTvENk5gpG8JzRlZOraZHSeEpCFFw8TtkGZh+Xhb3PTiJLJaDq9x+P
+    J4hccoRbww0=]
+
 # php configuration
 php::fpm::pools:
   www:
