@@ -1,0 +1,12 @@
+#
+# THIS FILE IS MANAGED BY PUPPET
+#
+
+check process varnish with pidfile /var/run/varnish.pid
+   start program = "/etc/init.d/varnish start" with timeout 60 seconds
+   stop program = "/etc/init.d/varnish stop"
+   if failed port 6081 type tcp protocol http
+       with timeout 15 seconds
+       then restart
+   if 3 restarts within 5 cycles then timeout
+   group server

@@ -47,6 +47,7 @@ class role::webserver {
   }
 
   monit::service { 'nginx': }
+  monit::service { 'varnish': }
 
   file { '/data/www':
     ensure => 'directory',
