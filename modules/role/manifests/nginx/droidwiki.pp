@@ -42,7 +42,7 @@ class role::nginx::droidwiki {
     ipv6_enable          => true,
     ipv6_listen_options  => '',
     ssl                  => true,
-    ssl_port             => $ssl_port,
+    ssl_port             => 443,
     ssl_cert             => $sslcert,
     ssl_key              => $sslkey,
     ssl_dhparam          => $sslcert::params::dhparampempath,
@@ -69,12 +69,12 @@ class role::nginx::droidwiki {
     gzip_types           => 'text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript',
   }
 
-  nginx::resource::location { "www.droidwiki.org.external/":
-    location      => '/',
-    server        => 'www.droidwiki.org.external',
-    ssl           => true,
-    ssl_only      => true,
-    proxy         => 'http://172.16.0.1:6081',
+  nginx::resource::location { 'www.droidwiki.org.external/':
+    location         => '/',
+    server           => 'www.droidwiki.org.external',
+    ssl              => true,
+    ssl_only         => true,
+    proxy            => 'http://172.16.0.1:6081',
     proxy_set_header => [
       'Host $host',
       'X-Real-IP $remote_addr',

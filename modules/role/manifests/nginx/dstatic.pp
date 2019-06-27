@@ -2,24 +2,23 @@
 class role::nginx::dstatic {
   $add_header = {
     'X-Delivered-By'            => $facts['fqdn'],
-    'X-Upstream'                => '$upstream_addr',
     'Strict-Transport-Security' => 'max-age=31536000; includeSubdomains; preload',
   }
 
-  file { "/data/www/dstatic.dev":
+  file { '/data/www/dstatic.dev':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
   }
 
-  file { "/data/www/dstatic.dev/public_html":
+  file { '/data/www/dstatic.dev/public_html':
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
     mode   => '0755',
   }
-  $public_html = "/data/www/dstatic/public_html"
+  $public_html = '/data/www/dstatic/public_html'
 
   $server_names = [ 'dstatic.dev' ]
 
@@ -63,10 +62,10 @@ class role::nginx::dstatic {
       ssl                 => true,
       ssl_only            => true,
     ;
-    "dstatic.dev/":
+    'dstatic.dev/':
       location  => '/',
     ;
-    "dstatic.dev/ @thumb":
+    'dstatic.dev/ @thumb':
       location      => '@thumb',
       rewrite_rules => [
         "^/w/images/thumb/[0-9a-f]/[0-9a-f][0-9a-f]/([^/]+)/([0-9]+)px-.*\$ /w/thumb.php?f=\$1&width=\$2",
@@ -77,15 +76,15 @@ class role::nginx::dstatic {
       },
       fastcgi       => 'mediawikibackend',
     ;
-    "dstatic.dev/wiki/w":
-      location      => "~ /(.*)/w/(load|thumb).php",
+    'dstatic.dev/wiki/w':
+      location      => '~ /(.*)/w/(load|thumb).php',
       rewrite_rules => [
         '^/(.*)/w/(.*).php?(.*)$ /w/$2.php?wiki=$1&$2 last'
       ]
     ;
-    "dstatic.dev/w":
+    'dstatic.dev/w':
       www_root            => '/data/mediawiki/main',
-      location            => "/w/",
+      location            => '/w/',
       location_custom_cfg => {
         '' => 'internal'
       },
@@ -99,7 +98,7 @@ class role::nginx::dstatic {
         '}',
       ],
     ;
-    "dstatic.dev/static":
+    'dstatic.dev/static':
       location => '/static/',
       www_root => '/data/mediawiki/main/',
   }
