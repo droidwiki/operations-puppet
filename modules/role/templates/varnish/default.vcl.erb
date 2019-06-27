@@ -56,8 +56,21 @@ sub vcl_recv {
             unset req.http.Accept-Encoding;
           }
         }
+
+	unset req.http.x-wap;
+	if(req.http.User-Agent ~ "(?i)^(lg-|sie-|nec-|lge-|sgh-|pg-)|(mobi|240x240|240x320|320x320|alcatel|android|audiovox|bada|benq|blackberry|cdm-|compal-|docomo|ericsson|hiptop|htc[-_]|huawei|ipod|kddi-|kindle|meego|midp|mitsu|mmp\/|mot-|motor|ngm_|nintendo|opera.m|palm|panasonic|philips|phone|playstation|portalmmm|sagem-|samsung|sanyo|sec-|sendo|sharp|softbank|symbian|teleca|up.browser|webos)") {
+		set req.http.x-wap = "no";
+	}
+
+	if(req.http.Cookie ~ "mf_useformat=") {
+		set req.http.x-wap = "no";
+	}
  
         return (hash);
+}
+
+sub vcl_hash {
+	hash_data(req.http.x-wap);
 }
 
 sub vcl_pipe {
