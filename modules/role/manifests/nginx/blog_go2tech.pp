@@ -64,6 +64,6 @@ class role::nginx::blog_go2tech {
     ssl_only => true,
     server   => 'blog.go2tech.de',
     location => '~ \.php$',
-    fastcgi  => 'mediawikibackend',
+    fastcgi  => '$mediawikibackend',
   }
 }

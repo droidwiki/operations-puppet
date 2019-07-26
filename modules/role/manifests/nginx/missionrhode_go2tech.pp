@@ -63,7 +63,7 @@ class role::nginx::missionrhode_go2tech {
     'missionrhode.go2tech.de php':
       location  => '~ \.php$',
       try_files => [ '$uri', '$uri/', '=404' ],
-      fastcgi   => 'mediawikibackend',
+      fastcgi   => '$mediawikibackend',
     ;
   }
 

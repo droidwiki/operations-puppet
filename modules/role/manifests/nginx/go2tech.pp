@@ -26,7 +26,7 @@ class role::nginx::go2tech {
   nginx::resource::location { '_ php':
     server   => '_',
     location => '~ \.php$',
-    fastcgi  => 'mediawikibackend',
+    fastcgi  => '$mediawikibackend',
   }
 
   nginx::resource::server { 'go2tech.de.80':
@@ -94,7 +94,7 @@ class role::nginx::go2tech {
     'go2tech.de mail-admin php':
       location           => '~ ^/mail-admin/index\.php(/|$)',
       www_root           => '/data/shareddata/www/go2tech.de/mail-admin/public/',
-      fastcgi            => 'mediawikibackend',
+      fastcgi            => '$mediawikibackend',
       fastcgi_split_path => '^(.+\.php)(/.*)$',
       raw_prepend        => [
         # The current $fastcgi_script_name is /mail-admin/index.php which does not eixst
@@ -110,7 +110,7 @@ class role::nginx::go2tech {
     ;
     'go2tech.de php':
       location => '~ \.php$',
-      fastcgi  => 'mediawikibackend',
+      fastcgi  => '$mediawikibackend',
     ;
     'go2tech.de/monit':
       location            => '/monit',

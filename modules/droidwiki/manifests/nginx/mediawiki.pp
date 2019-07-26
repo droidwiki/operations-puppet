@@ -190,7 +190,7 @@ define droidwiki::nginx::mediawiki (
       fastcgi_param => {
         'SCRIPT_FILENAME' => '$document_root/thumb.php',
       },
-      fastcgi       => 'mediawikibackend',
+      fastcgi       => '$mediawikibackend',
     ;
     "${vhost_url}/api":
       location              => '/api',
@@ -222,7 +222,7 @@ define droidwiki::nginx::mediawiki (
       fastcgi_param => {
         'SCRIPT_FILENAME' => '$document_root/index.php',
       },
-      fastcgi       => 'mediawikibackend',
+      fastcgi       => '$mediawikibackend',
     }
 
     nginx::resource::location { "${vhost_url}/${mediawiki_scriptpath}":
@@ -238,7 +238,7 @@ define droidwiki::nginx::mediawiki (
         '   try_files $uri $uri/ =404;',
         '   fastcgi_param HTTP_ACCEPT_ENCODING "";',
         '   include /etc/nginx/fastcgi_params;',
-        '   fastcgi_pass mediawikibackend;',
+        '   fastcgi_pass $mediawikibackend;',
         '}',
       ],
     }
@@ -250,7 +250,7 @@ define droidwiki::nginx::mediawiki (
       ssl           => $ssl,
       ssl_only      => $ssl,
       try_files     => [ '$uri', '$uri/', '@rewrite' ],
-      fastcgi       => 'mediawikibackend',
+      fastcgi       => '$mediawikibackend',
       fastcgi_param => {
         'HTTP_ACCEPT_ENCODING' => '""',
       }

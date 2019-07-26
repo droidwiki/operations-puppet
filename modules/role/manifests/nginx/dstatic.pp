@@ -74,7 +74,7 @@ class role::nginx::dstatic {
       fastcgi_param => {
         'SCRIPT_FILENAME' => '$document_root/thumb.php',
       },
-      fastcgi       => 'mediawikibackend',
+      fastcgi       => '$mediawikibackend',
     ;
     'dstatic.dev/wiki/w':
       location      => '~ /(.*)/w/(load|thumb).php',
@@ -94,7 +94,7 @@ class role::nginx::dstatic {
         'location ~ \.php$ {',
         '   fastcgi_param HTTP_ACCEPT_ENCODING "";',
         '   include /etc/nginx/fastcgi_params;',
-        '   fastcgi_pass mediawikibackend;',
+        '   fastcgi_pass $mediawikibackend;',
         '}',
       ],
     ;

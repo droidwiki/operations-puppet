@@ -55,4 +55,13 @@ class role::webserver {
     group  => 'www-data',
     mode   => '0775',
   }
+
+  file { "${nginx::conf_dir}/conf.d/upstrean-selector.conf":
+    ensure => 'present',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/role/upstream-selector.conf'
+  }
+
 }

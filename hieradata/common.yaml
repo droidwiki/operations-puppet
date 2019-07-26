@@ -63,17 +63,6 @@ monit::admin_pass: >
     dKgRbTA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDZ+3Z+mnnRDcb6n5vL
     VsHsgBBw4XW0OlOtmehCSpVWTyU1]
 
-nginx::nginx_upstreams:
-  mediawikibackend:
-    ensure: present
-    members:
-      '172.16.0.1:9000':
-        server: 172.16.0.1
-        port: 9000
-      '172.16.0.2:9000':
-        server: 172.16.0.2
-        port: 9000
-
 bind::key::letsencrypt: >
     ENC[PKCS7,MIIBygYJKoZIhvcNAQcDoIIBuzCCAbcCAQAxggEhMIIBHQIBADAFMAACAQEw
     DQYJKoZIhvcNAQEBBQAEggEAYKuj5rjRWspR9Y0PrjgURsj3W53V7Ye1RHNP
