@@ -15,15 +15,13 @@ class role::concourse {
     version => '1.23.2',
   }
 
-  vcsrepo { '/data/concourse':
-    ensure   => 'latest',
-    provider => git,
-    require  => [ Package['git'] ],
-    source   => 'https://github.com/concourse/concourse.git',
-    revision => 'master',
+  file { '/data/concourse':
+    ensure => 'directory',
+    owner  => 'root',
+    group  => 'root',
   }
 
-  file { '/data/concourse/docker-compose-droidwiki.yml':
+  file { '/data/concourse/docker-compose.yml':
     ensure  => present,
     content => template('role/concourse/docker-compose.yml.erb'),
   }
