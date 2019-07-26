@@ -61,7 +61,8 @@ class role::webserver {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/role/upstream-selector.conf'
+    source => 'puppet:///modules/role/upstream-selector.conf',
+    notify => Service['nginx']
   }
 
 }
