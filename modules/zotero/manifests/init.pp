@@ -46,6 +46,10 @@ class zotero {
     source   => 'https://github.com/wikimedia/mediawiki-services-zotero-translators',
   }
 
+  package { ['libasound2', 'libgtk2.0-0', 'libxt6']:
+    ensure => 'present',
+  }
+
   file { '/usr/lib/xulrunner-24.0':
     ensure => 'directory',
     owner  => 'root',
