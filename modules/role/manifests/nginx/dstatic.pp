@@ -92,6 +92,12 @@ class role::nginx::dstatic {
       # https://github.com/jfryman/puppet-nginx/issues/692
       raw_prepend         => [
         'location ~ \.php$ {',
+        '   if ($request_filename ~ "thumb.php$") {',
+        '     add_header Access-Control-Allow-Origin "*";',
+        '     add_header Access-Control-Allow-Methods "GET, OPTIONS";',
+        '     add_header Access-Control-Allow-Headers "User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range";',
+        '     add_header Access-Control-Expose-Headers "Content-Length,Content-Range,X-Cache,X-Varnish,Age,Date";',
+        '   }',
         '   fastcgi_param HTTP_ACCEPT_ENCODING "";',
         '   include /etc/nginx/fastcgi_params;',
         '   fastcgi_pass $mediawikibackend;',
