@@ -15,6 +15,7 @@ node 'eclair.dwnet' {
   }
   include role::dns
   include role::concourse
+  include role::elasticsearch
 
   include role::puppetboard
 
