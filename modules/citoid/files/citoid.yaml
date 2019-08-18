@@ -10,15 +10,10 @@ worker_heap_limit_mb: 250
 # Logger info
 logging:
   level: warn
-  streams:
-  # Use gelf-stream -> logstash
-  - type: gelf
-    host: eclair.dwnet
-    port: 12201
 
 # Statsd metrics reporter
 metrics:
-  #type: log
+  type: log
   #host: localhost
   #port: 8125
 
