@@ -76,38 +76,6 @@ class role::nginx::go2tech {
       ssl      => true,
       ssl_only => true,
     ;
-    'go2tech.de mail-admin':
-      location      => '/mail-admin',
-      www_root      => '/data/shareddata/www/go2tech.de/mail-admin/public/',
-      # The current path nginx will try to serve would be:
-      #  /data/www/go2tech.de/mail-admin/public/mail-admin/build/app.css
-      # which does not exist, manually rewrite the url to remove the 2nd mail-admin
-      # dir
-      rewrite_rules => [
-        '^/mail-admin(/.*)$ $1 break',
-      ],
-      try_files     => [
-        '$uri',
-        '/mail-admin/index.php$is_args$args',
-      ],
-    ;
-    'go2tech.de mail-admin php':
-      location           => '~ ^/mail-admin/index\.php(/|$)',
-      www_root           => '/data/shareddata/www/go2tech.de/mail-admin/public/',
-      fastcgi            => '$mediawikibackend',
-      fastcgi_split_path => '^(.+\.php)(/.*)$',
-      raw_prepend        => [
-        # The current $fastcgi_script_name is /mail-admin/index.php which does not eixst
-        'if ($fastcgi_script_name ~ ^/mail-admin(/.*)$) {',
-        '    set $index $1;',
-        '}',
-      ],
-      fastcgi_param      => {
-        'SCRIPT_FILENAME' => '$realpath_root$index',
-        'DOCUMENT_ROOT'   => '$realpath_root',
-      },
-      internal           => true,
-    ;
     'go2tech.de php':
       location => '~ \.php$',
       fastcgi  => '$mediawikibackend',
