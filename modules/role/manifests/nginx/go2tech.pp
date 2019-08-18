@@ -131,6 +131,25 @@ class role::nginx::go2tech {
       ],
       proxy_connect_timeout => '300',
     ;
+    'go2tech.de/named/':
+      location              => '/named/',
+      proxy                 => "http://172.16.0.2:8081/",
+      auth_basic            => 'Restricted',
+      auth_basic_user_file  => '/data/shareddata/www/go2tech.de/access.htpasswd',
+      proxy_set_header      => [
+        'Host $host',
+        'X-Real-IP $remote_addr',
+        'X-Forwarded-For $remote_addr',
+      ],
+      proxy_connect_timeout => '300',
+      raw_append            => [
+        "sub_filter \"/bind9.xsl\" \"/named/bind9.xsl\";",
+        "sub_filter \"/xml\" \"/named/xml\";",
+        "sub_filter \"href=\\\"/\\\"\" \"href=\\\"/named/\\\"\";",
+        "sub_filter_once off;",
+        "sub_filter_types \"text/xml\" \"text/xslt+xml\";",
+      ],
+    ;
     'go2tech.de/citoid/':
       location              => '/citoid/',
       proxy                 => 'http://eclair.dwnet:1970/',

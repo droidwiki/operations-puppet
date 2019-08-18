@@ -74,12 +74,20 @@ class role::dns(
 
   include bind
   bind::server::conf { '/etc/bind/named.conf':
+    acls              => {
+        'internal' => [ '172.16.0.0/16' ],
+    },
     directory         => '/var/lib/bind/zones',
     listen_on_addr    => [ 'any' ],
     listen_on_v6_addr => [ 'any' ],
     allow_query       => [ 'any' ],
     recursion         => 'no',
     allow_transfer    => [ 'none' ],
+    statistics_channels => [{
+      ip   => $facts['networking']['interfaces']['eth1']['ip'],
+      port => '8081',
+      acl  => 'internal',
+    }],
     keys              => {
       'letsencrypt.' => [
         'algorithm hmac-sha512',
