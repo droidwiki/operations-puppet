@@ -118,25 +118,5 @@ class role::nginx::go2tech {
         "sub_filter_types \"text/xml\" \"text/xslt+xml\";",
       ],
     ;
-    'go2tech.de/citoid/':
-      location              => '/citoid/',
-      proxy                 => 'http://eclair.dwnet:1970/',
-      proxy_set_header      => [
-        'Host $host',
-        'X-Real-IP $remote_addr',
-        'X-Forwarded-For $remote_addr',
-      ],
-      proxy_connect_timeout => '300',
-    ;
-    'go2tech.de/cxserver/':
-      location              => '/cxserver/',
-      proxy                 => 'http://donut.dwnet:7232/',
-      proxy_set_header      => [
-        'Host $host',
-        'X-Real-IP $remote_addr',
-        'X-Forwarded-For $remote_addr',
-      ],
-      proxy_connect_timeout => '300',
-    ;
   }
 }
