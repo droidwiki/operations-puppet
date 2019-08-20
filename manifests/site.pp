@@ -22,8 +22,6 @@ node 'eclair.dwnet' {
   include role::ganglia
   include role::memcached
 
-  include role::nodejs
-
   # ganglia legacy options
   file { '/data/www/ganglia.go2tech.de':
     ensure => 'directory',
