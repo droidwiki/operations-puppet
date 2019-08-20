@@ -2,8 +2,9 @@
 # THIS FILE IS MANAGED BY PUPPET
 #
 
-check process parsoid with pidfile /var/run/parsoid.pid
-   start program = "/etc/init.d/parsoid start" with timeout 60 seconds
-   stop program = "/etc/init.d/parsoid stop"
-   if 3 restarts within 5 cycles then timeout
-   group application
+check host eclair.dwnet with address eclair.dwnet
+  if failed
+     port 8142
+     protocol http
+     status = 200
+  then alert
