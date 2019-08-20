@@ -23,8 +23,6 @@ node 'eclair.dwnet' {
   include role::memcached
 
   include role::nodejs
-  include zotero
-  include citoid
 
   # ganglia legacy options
   file { '/data/www/ganglia.go2tech.de':
