@@ -8,6 +8,7 @@ node 'eclair.dwnet' {
   }
   include role::mailserver
   include role::puppetmaster
+  include role::parsoid
   include role::deploymenthost
   class { 'certbot':
     mode => 'standalone',
@@ -44,7 +45,6 @@ node 'donut.dwnet' {
   include droidwiki::default
   include redis
   include role::mariadb
-  include role::parsoid
   include role::webserver
   include role::php
   include role::mediawiki
@@ -54,7 +54,6 @@ node 'donut.dwnet' {
   include certbot
   include role::nfs_server
   include role::nodejs
-  include parsoid
   include restbase
 
   class { 'role::dns':
