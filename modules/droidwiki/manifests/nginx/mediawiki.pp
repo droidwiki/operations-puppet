@@ -198,7 +198,7 @@ define droidwiki::nginx::mediawiki (
         '^  $request_uri',
         '^/api(/.*)  $1  break',
       ],
-      proxy                 => "http://127.0.0.1:7231/${vhost_url}\$uri",
+      proxy                 => "http://172.16.0.2:7231/${vhost_url}\$uri",
       proxy_set_header      => [
         'Host $host',
         'X-Real-IP $remote_addr',
