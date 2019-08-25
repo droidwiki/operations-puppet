@@ -5,6 +5,19 @@ admin::groups:
 droidwiki::default::isnfsserver: true
 redis::bind: '172.16.0.1'
 
+docker::worker_token: >
+    ENC[PKCS7,MIIBygYJKoZIhvcNAQcDoIIBuzCCAbcCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAK+71u6EZKjcVzV8CxR9fCN9n5HgTAAKI9MOU
+    n+Av+fHzPx5prO6CtWPYApcH1CtKEQKzDpBqNx8Ro7+jGpL2mDsF4evkCZ6t
+    aGHQyICjakR+tABoruXpnfMPcmC2r+Lm67blmPQ91uF4Cqe5aHA+pt8lgWim
+    2QPCDy2aoUNmlFi4qkKNfrlRW+lzz0YJ4vHhBNLJtQJ2JVXsLpCbnHzDV/g2
+    RdXdXPfHYECZyhsi9s5GvqYMUpuKzrAhCX6JmTkuxpwWoj/UZs4ZDpfyh5DL
+    vpTjwH7r3jRE/dthhES4JDbU5PTaDzX21GmT11VZZv9X+p9a6uW0/1+gwUyg
+    tSurwzCBjAYJKoZIhvcNAQcBMB0GCWCGSAFlAwQBKgQQKZIZuF7GgR19zgIN
+    KvKkI4Bga0vVlaSTSSAkvBf792tJaqBCYhoRggdsmmnnEmK31MVc4H0wV4VV
+    RbPRWGt94gLnFCj5Bpet3qWwijroQDlgYmrczLQJX3XN2AIojL8vtUq8Ke2Z
+    clclIPQ+ZzPKAo/p]
+
 nginx::tls::fullchain: /etc/letsencrypt/live/droidwiki.org/fullchain.pem
 nginx::tls::privkey: /etc/letsencrypt/live/droidwiki.org/privkey.pem
 nginx::nginx_upstreams:

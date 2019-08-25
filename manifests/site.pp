@@ -19,7 +19,6 @@ node 'eclair.dwnet' {
     manager => true,
   }
   include role::concourse
-  include role::elasticsearch
 
   include role::puppetboard
 

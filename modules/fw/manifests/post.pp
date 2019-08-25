@@ -72,19 +72,6 @@ class fw::post {
     provider => 'ip6tables',
   }
 
-  firewall { '997 drop all input':
-    proto  => 'all',
-    action => 'drop',
-    before => undef,
-  }
-
-  firewall { '997 drop all input IPv6':
-    proto    => 'all',
-    action   => 'drop',
-    before   => undef,
-    provider => 'ip6tables',
-  }
-
   firewall { '998 drop all forward':
     proto  => 'all',
     chain  => 'FORWARD',
@@ -101,14 +88,16 @@ class fw::post {
   }
 
   firewall { '999 drop all output':
-    proto  => 'all',
-    chain  => 'OUTPUT',
-    action => 'drop',
-    before => undef,
+    proto    => 'all',
+    outiface => 'eth0',
+    chain    => 'OUTPUT',
+    action   => 'drop',
+    before   => undef,
   }
 
   firewall { '999 drop all output IPv6':
     proto    => 'all',
+    outiface => 'eth0',
     chain    => 'OUTPUT',
     action   => 'drop',
     before   => undef,

@@ -104,21 +104,6 @@ class fw::pre {
     provider => 'ip6tables',
   }
 
-  firewall { '103 allow outgoing ssh traffic':
-    sport  => '22',
-    proto  => 'tcp',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '103 allow outgoing ssh traffic IPv6':
-    sport    => '22',
-    proto    => 'tcp',
-    chain    => 'OUTPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
   firewall { '105 allow outgoing dns requests':
     dport  => '53',
     proto  => 'udp',
@@ -153,36 +138,6 @@ class fw::pre {
     provider => 'ip6tables',
   }
 
-  firewall { '107 allow outgoing ftp traffic':
-    dport  => '20',
-    proto  => 'tcp',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '107 allow outgoing ftp traffic IPv6':
-    dport    => '20',
-    proto    => 'tcp',
-    chain    => 'OUTPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '108 allow outgoing ftp traffic':
-    dport  => '21',
-    proto  => 'tcp',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '108 allow outgoing ftp traffic IPv6':
-    dport    => '21',
-    proto    => 'tcp',
-    chain    => 'OUTPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
   firewall { '109 allow outgoing ntp traffic':
     dport  => '123',
     proto  => 'udp',
@@ -196,30 +151,6 @@ class fw::pre {
     chain    => 'OUTPUT',
     action   => 'accept',
     provider => 'ip6tables',
-  }
-
-  firewall { '110 allow outgoing localhost traffic':
-    source => '127.0.0.1',
-    action => 'accept',
-  }
-
-  firewall { '110 allow outgoing localhost traffic IPv6':
-    source   => '::1',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '111 allow incoming localhost traffic':
-    destination => '127.0.0.1',
-    chain       => 'OUTPUT',
-    action      => 'accept',
-  }
-
-  firewall { '111 allow incoming localhost traffic IPv6':
-    destination => '::1',
-    chain       => 'OUTPUT',
-    action      => 'accept',
-    provider    => 'ip6tables',
   }
 
   firewall { '112 allow outgoing traffic for HKP keyserver proto':
