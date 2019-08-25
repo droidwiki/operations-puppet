@@ -15,6 +15,9 @@ node 'eclair.dwnet' {
     hook => 'service postfix restart',
   }
   include role::dns
+  class { 'role::docker':
+    manager => true,
+  }
   include role::concourse
   include role::elasticsearch
 
@@ -53,7 +56,10 @@ node 'donut.dwnet' {
   include role::memcached
   include certbot
   include role::nfs_server
-  include role::nodejs
+  class { 'role::docker':
+    worker_ip => $facts['networking']['interfaces']['eth1']['ip'],
+    token     => lookup( 'docker::worker_token' )
+  }
 
   class { 'role::dns':
     type => 'master',
