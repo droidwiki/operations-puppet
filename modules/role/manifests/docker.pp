@@ -14,6 +14,39 @@ class role::docker(
     extra_parameters => ['-g /data/docker']
   }
 
+  file { [ '/data/ha_volume', '/data/bricks', '/data/bricks/brick1', '/data/bricks/brick2' ]:
+    ensure  => 'directory',
+  }
+
+  class { ::gluster:
+    repo    => false,
+    client  => false,
+    pool    => 'production',
+    volumes => {
+      'ha_volume' => {
+        replica => 2,
+        bricks  => [
+          'eclair.dwnet:/data/bricks/brick1/brick',
+          'donut.dwnet:/data/bricks/brick1/brick',
+          'eclair.dwnet:/data/bricks/brick2/brick',
+          'donut.dwnet:/data/bricks/brick2/brick',
+        ],
+        options => [
+          'server.allow-insecure: on',
+          'nfs.disable: true',
+        ],
+      }
+    }
+  }
+
+  gluster::mount { '/data/ha_volume':
+    volume    => 'localhost:/ha_volume',
+    transport => 'tcp',
+    atboot    => true,
+    dump      => 0,
+    pass      => 0,
+  }
+
   firewall { '900 accept outgoing requests to DOCKER':
     chain   => 'OUTPUT',
     proto   => 'all',

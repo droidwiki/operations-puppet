@@ -96,3 +96,5 @@ cloudflare::api_key: >
     Aa0B9DBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAX1cgfzVB7ils8jD6n
     gAgQgDDRtAM/sZFYUdZ/JKFnBpelnvBLEgvrshkj5OiF0tuFbgejaOHDtvzK
     p8A3P9xmXiI=]
+
+gluster::service::service_name: glusterfs-server
