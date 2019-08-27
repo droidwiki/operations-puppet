@@ -5,13 +5,13 @@ class role::concourse {
     version => '1.23.2',
   }
 
-  file { '/data/concourse':
+  file { '/data/ha_volume/concourse':
     ensure => 'directory',
     owner  => 'root',
     group  => 'root',
   }
 
-  file { '/data/concourse/docker-compose.yml':
+  file { '/data/ha_volume/concourse/docker-compose.yml':
     ensure  => present,
     content => template('role/concourse/docker-compose.yml.erb'),
   }

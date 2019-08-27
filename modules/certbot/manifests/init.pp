@@ -24,11 +24,7 @@ class certbot(
   }
 
   package { 'python3-certbot-dns-cloudflare':
-    ensure  => 'present',
-    require => [
-      Apt::Ppa['ppa:certbot/certbot'],
-      Exec['apt_update'],
-    ]
+    ensure  => 'absent',
   }
 
   if ($mode == 'standalone') {

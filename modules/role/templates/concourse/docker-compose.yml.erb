@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: dev
       POSTGRES_PASSWORD: dev
     volumes:
-     - /data/concourse/postgres-data:/var/lib/postgresql/data
+     - ./postgres-data:/var/lib/postgresql/data
 
   web:
     image: concourse/concourse:5
