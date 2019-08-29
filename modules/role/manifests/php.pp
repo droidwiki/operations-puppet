@@ -1,10 +1,11 @@
 # Installs and configures a PHP runtime on the
 # server.
 class role::php(
-  $php_version = '7.2',
+  $php_version = '7.3',
 ) {
   # wikidiff2 apt repository
   apt::source { 'ppa-floriansw-droidwiki':
+    ensure       => 'absent',
     location     => 'http://ppa.launchpad.net/floriansw/droidwiki/ubuntu',
     release      => 'bionic',
     repos        => 'main',
@@ -28,6 +29,11 @@ class role::php(
     settings     => {
       'PHP/upload_max_filesize' => '100M',
       'PHP/post_max_size'       => '100M',
+      'opcache/opcache.enable'  => '1',
+      'opcache/opcache.memory_consumption' => '128M',
+      'opcache/opcache.max_accelerated_files' => '50000',
+      'opcache/opcache.revalidate_freq' => '60',
+      'opcache.fast_shutdown' => '1',
     },
 
     extensions   => {
@@ -77,12 +83,7 @@ class role::php(
       ldap      => {
         provider => 'apt',
       },
-      wikidiff2 => {
-        provider       => 'apt',
-        package_prefix => 'php-',
-      }
     },
-    require      => Apt::Source['ppa-floriansw-droidwiki'],
   }
 
   if $facts['os']['name'] == 'Ubuntu' and versioncmp($facts['os']['release']['full'], '16.04') < 0 {
