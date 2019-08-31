@@ -22,25 +22,7 @@ node 'eclair.dwnet' {
 
   include role::puppetboard
 
-  include role::ganglia
   include role::memcached
-
-  # ganglia legacy options
-  file { '/data/www/ganglia.go2tech.de':
-    ensure => 'directory',
-    force  => true,
-    owner  => 'www-data',
-    group  => 'www-data',
-    mode   => '0755',
-  }
-
-  file { '/data/www/ganglia.go2tech.de/public_html':
-    ensure => 'directory',
-    force  => true,
-    owner  => 'www-data',
-    group  => 'www-data',
-    mode   => '0755',
-  }
 }
 
 node 'donut.dwnet' {
@@ -51,7 +33,6 @@ node 'donut.dwnet' {
   include role::php
   include role::mediawiki
   include role::jobrunner
-  include role::ganglia
   include role::memcached
   include certbot
   include role::nfs_server
