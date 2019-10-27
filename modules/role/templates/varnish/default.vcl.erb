@@ -41,6 +41,10 @@ sub vcl_recv {
             return (pass);
         }
 
+        if (req.http.X-Debug-Server) {
+            return (pass);
+        }
+
         if (req.http.Cache-Control ~ "no-cache") {
             ban(req.url);
         }
