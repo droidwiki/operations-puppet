@@ -1,10 +1,17 @@
 # logrotate(8) config for mediawiki
 # This file is managed by Puppet
 
-# Delete logs after 3 days, the logs are saved in logstash anyway
 /data/log/mediawiki/*.log {
     su <%= @user %> <%= @group %>
+    daily
     rotate 3
     maxage 5
+    compress
+    delaycompress
+    notifempty
+    create 660 www-data www-data
     missingok
+    postrotate
+        invoke-rc.d php7.3-fpm reopen-logs
+    endscript
 }
