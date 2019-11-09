@@ -83,6 +83,9 @@ class role::php(
       ldap      => {
         provider => 'apt',
       },
+      gd        => {
+        provider => 'apt',
+      }
     },
   }
 
