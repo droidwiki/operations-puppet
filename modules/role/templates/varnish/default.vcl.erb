@@ -86,6 +86,13 @@ sub vcl_pipe {
         set req.http.connection = "close";
 }
 
+sub vcl_purge {
+	if (!req.http.x-wap) {
+		set req.http.x-wap = "no";
+		return (restart);
+	}
+}
+
 sub vcl_hit {
         if (req.method == "PURGE") {
             ban(req.url);
