@@ -61,6 +61,29 @@ class role::nginx::ci_go2tech {
     },
   }
 
+  nginx::resource::location { 'ci.go2tech.de/hijack':
+    server                => 'ci.go2tech.de',
+    ssl                   => true,
+    ssl_only              => true,
+    location              => '~ /hijack$',
+    proxy                 => 'http://172.16.0.2:8080',
+    proxy_set_header      => [
+      'Host $host',
+      'X-Real-IP $remote_addr',
+      'X-Forwarded-For $remote_addr',
+      'Upgrade $http_upgrade',
+      'Connection "upgrade"',
+      'Connection ""',
+    ],
+    proxy_http_version    => '1.1',
+    proxy_buffering       => 'off',
+    proxy_redirect        => 'off',
+    proxy_connect_timeout => '300',
+    location_cfg_append   => {
+      'port_in_redirect' => 'off',
+    },
+  }
+
   nginx::resource::location { 'ci.go2tech.de.80/':
     server              => 'ci.go2tech.de.80',
     location            => '/',
