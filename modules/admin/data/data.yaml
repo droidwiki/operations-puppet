@@ -21,8 +21,6 @@ groups:
     description: group for software deployments
     members: [florian, jimmy]
     privileges: ['ALL = (www-data) NOPASSWD: ALL',
-                 'ALL = NOPASSWD: /sbin/restart hhvm',
-                 'ALL = NOPASSWD: /sbin/start hhvm',
                  'ALL = NOPASSWD: /etc/init.d/nginx']
 
 users:
