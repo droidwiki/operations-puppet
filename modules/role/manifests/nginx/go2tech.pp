@@ -94,7 +94,6 @@ class role::nginx::go2tech {
       proxy                 => 'http://eclair.dwnet:2812',
       proxy_set_header      => [
         'Host $host',
-        'X-Real-IP $remote_addr',
         'X-Forwarded-For $remote_addr',
       ],
       proxy_connect_timeout => '300',
@@ -106,7 +105,6 @@ class role::nginx::go2tech {
       auth_basic_user_file  => '/data/shareddata/www/go2tech.de/access.htpasswd',
       proxy_set_header      => [
         'Host $host',
-        'X-Real-IP $remote_addr',
         'X-Forwarded-For $remote_addr',
       ],
       proxy_connect_timeout => '300',

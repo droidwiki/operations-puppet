@@ -201,7 +201,6 @@ define droidwiki::nginx::mediawiki (
       proxy                 => "http://172.16.0.2:7231/${vhost_url}\$uri",
       proxy_set_header      => [
         'Host $host',
-        'X-Real-IP $remote_addr',
         'X-Forwarded-For $remote_addr',
       ],
       proxy_connect_timeout => '300',

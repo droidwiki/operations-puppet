@@ -52,7 +52,6 @@ class role::nginx::ci_go2tech {
     proxy                 => 'http://172.16.0.2:8080',
     proxy_set_header      => [
       'Host $host',
-      'X-Real-IP $remote_addr',
       'X-Forwarded-For $remote_addr',
     ],
     proxy_connect_timeout => '300',
@@ -69,7 +68,6 @@ class role::nginx::ci_go2tech {
     proxy                 => 'http://172.16.0.2:8080',
     proxy_set_header      => [
       'Host $host',
-      'X-Real-IP $remote_addr',
       'X-Forwarded-For $remote_addr',
       'Upgrade $http_upgrade',
       'Connection "upgrade"',

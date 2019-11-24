@@ -79,7 +79,6 @@ class role::nginx::donut_go2tech {
       proxy                 => 'http://127.0.0.1:2812',
       proxy_set_header      => [
         'Host $host',
-        'X-Real-IP $remote_addr',
         'X-Forwarded-For $remote_addr',
       ],
       proxy_connect_timeout => '300',
