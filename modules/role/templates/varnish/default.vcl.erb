@@ -99,6 +99,20 @@ sub vcl_pipe {
 }
 
 sub vcl_purge {
+	if (req.url !~ "(\?|&)(action=amp)") {
+		set req.http.X-Original = req.url;
+		if (req.url ~ "&") {
+			set req.url = req.url + "&action=amp";
+		} else {
+			set req.url = req.url + "?action=amp";
+		}
+		return (restart);
+	}
+
+	if (req.http.X-Original) {
+		set req.url = req.http.X-Original;
+	}
+
 	if (!req.http.x-wap) {
 		set req.http.x-wap = "no";
 		return (restart);
