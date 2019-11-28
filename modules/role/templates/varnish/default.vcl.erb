@@ -38,33 +38,17 @@ sub vcl_recv {
             return (pass);
         }
 
-	if (req.url ~ "(?i)\.(jpg|jpeg|jpe|png)$" && req.url ~ "(?i)/thumb/" && req.http.Accept ~ "(?i)image/webp" && req.http.x-no-thumbor != "yes") {
-		set req.http.x-orig-url = req.url;
-		set req.url = regsub(req.url,".*\/thumb\/(.*)","/unsafe/filters:format(webp)/thumb/\1");
-		set req.backend_hint = thumbor;
+	if (req.http.If-None-Match) {
+		return (pass);
 	}
 
-        if (req.http.Authorization || req.http.Cookie ~ "session" || req.http.Cookie ~ "Token") {
-            return (pass);
-        }
-
-	if (req.http.Cookie ~ "droidwikiwikicookiewarning_dismissed=true") {
-		set req.http.Cookie = "droidwikiwikicookiewarning_dismissed=true";
-	} else {
-		unset req.http.Cookie;
+	if (req.http.X-Debug-Server) {
+		return (pass);
 	}
 
-        if (req.http.If-None-Match) {
-            return (pass);
-        }
-
-        if (req.http.X-Debug-Server) {
-            return (pass);
-        }
-
-        if (req.http.Cache-Control ~ "no-cache") {
-            ban(req.url);
-        }
+	if (req.http.Cache-Control ~ "no-cache") {
+		ban(req.url);
+	}
 
         if (req.http.Accept-Encoding) {
           if (req.http.User-Agent ~ "MSIE 6") {
@@ -77,6 +61,28 @@ sub vcl_recv {
             unset req.http.Accept-Encoding;
           }
         }
+
+	if (req.url ~ "(?i)\.(jpg|jpeg|jpe|png)$" && req.url ~ "(?i)/thumb/" && req.http.Accept ~ "(?i)image/webp" && req.http.x-no-thumbor != "yes") {
+		set req.http.x-orig-url = req.url;
+		set req.url = regsub(req.url,".*\/thumb\/(.*)","/unsafe/filters:format(webp)/thumb/\1");
+		set req.backend_hint = thumbor;
+	}
+
+	if (req.url ~ "action=amp$") {
+		unset req.http.Cookie;
+		unset req.http.x-wap;
+		return (hash);
+	}
+
+        if (req.http.Authorization || req.http.Cookie ~ "session" || req.http.Cookie ~ "Token") {
+            return (pass);
+        }
+
+	if (req.http.Cookie ~ "droidwikiwikicookiewarning_dismissed=true") {
+		set req.http.Cookie = "droidwikiwikicookiewarning_dismissed=true";
+	} else {
+		unset req.http.Cookie;
+	}
 
 	unset req.http.x-wap;
 	if (req.http.User-Agent ~ "(?i)^(lg-|sie-|nec-|lge-|sgh-|pg-)|(mobi|240x240|240x320|320x320|alcatel|android|audiovox|bada|benq|blackberry|cdm-|compal-|docomo|ericsson|hiptop|htc[-_]|huawei|ipod|kddi-|kindle|meego|midp|mitsu|mmp\/|mot-|motor|ngm_|nintendo|opera.m|palm|panasonic|philips|phone|playstation|portalmmm|sagem-|samsung|sanyo|sec-|sendo|sharp|softbank|symbian|teleca|up.browser|webos)" && req.url !~ "(\?|&)(action=amp)") {
