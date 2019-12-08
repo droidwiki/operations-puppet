@@ -35,7 +35,7 @@ class role::nginx::droidwiki {
 
   monit::certcheck { 'www.droidwiki.org': }
 
-  $droidwiki_domains = [ '.droid.wiki', '.droidwiki.de', '.droid-wiki.org', '.droidwiki.org' ]
+  $droidwiki_domains = [ '.droid.wiki', '.droid-wiki.org', '.droidwiki.org' ]
 
   nginx::resource::server { 'www.droidwiki.org.external':
     listen_port          => 443,
@@ -107,9 +107,6 @@ class role::nginx::droidwiki {
     ;
     'droidwiki.de':
       server_name      => $droidwiki_domains,
-    ;
-    'www.droidwiki.de':
-      server_name      => [ 'www.droidwiki.de' ],
     ;
     'droidwiki.de.80':
       server_name => $droidwiki_domains,
