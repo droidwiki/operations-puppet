@@ -5,7 +5,7 @@ define droidwiki::nginx::mediawiki (
   $manage_directories    = true,
   $server_name           = undef,
   $html_root             = undef,
-  $listen_port           = 80,
+  $listen_port           = 8080,
   $ssl                   = false,
   $ssl_port              = 443,
   $ssl_cert              = undef,
