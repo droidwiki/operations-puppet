@@ -18,7 +18,7 @@ class role::nginx::droidwiki {
   $sslcert = hiera('nginx::tls::fullchain');
   $sslkey = hiera('nginx::tls::privkey');
 
-  ['www.droidwiki.org', 'en.droidwiki.org', 'data.droidwiki.org'].each |Integer $index, String $domain| {
+  ['en.droidwiki.org', 'data.droidwiki.org'].each |Integer $index, String $domain| {
     droidwiki::nginx::mediawiki { $domain:
       vhost_url             => $domain,
       server_name           => [ $domain ],
@@ -28,6 +28,16 @@ class role::nginx::droidwiki {
       http2                 => 'off',
       manage_http_redirects => false,
     }
+  }
+
+  droidwiki::nginx::mediawiki { 'www.droidwiki.org':
+    vhost_url             => 'www.droidwiki.org',
+    server_name           => [ 'www.droidwiki.org', 'droidwiki.org' ],
+    manage_directories    => false,
+    html_root             => '/data/mediawiki/mw-config/mw-config/docroot',
+    ssl                   => false,
+    http2                 => 'off',
+    manage_http_redirects => false,
   }
 
   monit::certcheck { 'www.droidwiki.org': }
