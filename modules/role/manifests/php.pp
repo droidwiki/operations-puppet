@@ -1,7 +1,7 @@
 # Installs and configures a PHP runtime on the
 # server.
 class role::php(
-  $php_version = '7.3',
+  $php_version = '7.4',
 ) {
   # wikidiff2 apt repository
   apt::source { 'ppa-floriansw-droidwiki':
@@ -80,10 +80,13 @@ class role::php(
       curl      => {
         provider => 'apt',
       },
-      ldap      => {
+      gd        => {
         provider => 'apt',
       },
-      gd        => {
+      igbinary  => {
+        provider => 'apt',
+      },
+      msgpack   => {
         provider => 'apt',
       }
     },
