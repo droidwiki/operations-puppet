@@ -7,7 +7,6 @@ node 'eclair.dwnet' {
     isslave => true,
   }
   include role::mailserver
-  include role::puppetmaster
   include role::parsoid
   include role::deploymenthost
   class { 'certbot':
@@ -19,9 +18,6 @@ node 'eclair.dwnet' {
     manager => true,
   }
   include role::concourse
-
-  include role::puppetboard
-
   include role::memcached
 }
 
@@ -49,7 +45,6 @@ node 'donut.dwnet' {
   include role::datawiki
   include role::nginx::donut_go2tech
   include role::nginx::missionrhode_go2tech
-  include role::nginx::puppetboard_go2tech
   include role::nginx::blog_go2tech
   include role::nginx::ganglia_go2tech
   include role::nginx::go2tech

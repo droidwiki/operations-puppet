@@ -2,9 +2,6 @@
 	path = modules/firewall
 	url = https://github.com/puppetlabs/puppetlabs-firewall.git
 	branch = 1.8.x
-[submodule "modules/puppetdb"]
-	path = modules/puppetdb
-	url = https://github.com/puppetlabs/puppetlabs-puppetdb.git
 [submodule "modules/inifile"]
 	path = modules/inifile
 	url = https://github.com/puppetlabs/puppetlabs-inifile.git
@@ -21,9 +18,6 @@
 	path = modules/concat
 	url = https://github.com/puppetlabs/puppetlabs-concat.git
 	branch = 2.1.x
-[submodule "modules/puppetboard"]
-	path = modules/puppetboard
-	url = https://github.com/voxpupuli/puppet-puppetboard.git
 [submodule "modules/vcsrepo"]
 	path = modules/vcsrepo
 	url = https://github.com/puppetlabs/puppetlabs-vcsrepo.git
