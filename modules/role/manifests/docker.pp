@@ -32,8 +32,8 @@ class role::docker(
           'donut.dwnet:/data/bricks/brick2/brick',
         ],
         options => [
-          'server.allow-insecure: on',
-          'nfs.disable: true',
+          'server.allow-insecure: "on"',
+          'nfs.disable: "true"',
         ],
       }
     }
