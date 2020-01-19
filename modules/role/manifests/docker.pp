@@ -18,7 +18,7 @@ class role::docker(
     ensure  => 'directory',
   }
 
-  class { ::gluster:
+  class { '::gluster':
     repo    => false,
     client  => false,
     pool    => 'production',

@@ -108,17 +108,17 @@ class role::nginx::droidwiki {
       use_default_location => false,
     ;
     'droidwiki.domains':
-      server_name      => [ '.droid.wiki', '.droid-wiki.org' ],
-      server_cfg_append    => {
+      server_name       => [ '.droid.wiki', '.droid-wiki.org' ],
+      server_cfg_append => {
         'return' => '301 https://www.droidwiki.org$request_uri',
       },
     ;
     'droidwiki.http-redirect':
-      server_name => [ '.droid.wiki', '.droid-wiki.org', '.droidwiki.org' ],
-      listen_port => 80,
-      ssl         => false,
-      index_files => [],
-      server_cfg_append    => {
+      server_name       => [ '.droid.wiki', '.droid-wiki.org', '.droidwiki.org' ],
+      listen_port       => 80,
+      ssl               => false,
+      index_files       => [],
+      server_cfg_append => {
         'return' => '301 https://$host$request_uri',
       },
     ;

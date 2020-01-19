@@ -27,13 +27,13 @@ class role::php(
     phpunit      => false,
 
     settings     => {
-      'PHP/upload_max_filesize' => '100M',
-      'PHP/post_max_size'       => '100M',
-      'opcache/opcache.enable'  => '1',
-      'opcache/opcache.memory_consumption' => '128M',
+      'PHP/upload_max_filesize'               => '100M',
+      'PHP/post_max_size'                     => '100M',
+      'opcache/opcache.enable'                => '1',
+      'opcache/opcache.memory_consumption'    => '128M',
       'opcache/opcache.max_accelerated_files' => '50000',
-      'opcache/opcache.revalidate_freq' => '60',
-      'opcache.fast_shutdown' => '1',
+      'opcache/opcache.revalidate_freq'       => '60',
+      'opcache.fast_shutdown'                 => '1',
     },
 
     extensions   => {
