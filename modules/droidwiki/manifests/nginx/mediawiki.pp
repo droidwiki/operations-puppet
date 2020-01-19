@@ -208,9 +208,9 @@ define droidwiki::nginx::mediawiki (
         'port_in_redirect' => 'off',
       },
     ;
-    "${vhost_url}/rest.php/":
-      location  => '/rest.php/',
-      try_files => [ '$uri', '$uri/', '/rest.php' ],
+    "${vhost_url}/${mediawiki_scriptpath}rest.php/":
+      location  => "/${mediawiki_scriptpath}rest.php/",
+      try_files => [ '$uri', '$uri/', "/${mediawiki_scriptpath}rest.php" ],
   }
 
   # without a different script and article path, the / location already exists. Duplicate locations
