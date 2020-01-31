@@ -8,7 +8,7 @@ class role::backup_s3_sync {
     aws_secret_access_key => hiera( 'backup_s3_sync::aws_secret_access_key' )
   }
 
-  file { '/data/backups/sync_backups.sh':
+  file { '/data/backup/sync_backups.sh':
     mode   => '0755',
     group  => 'root',
     owner  => 'root',
