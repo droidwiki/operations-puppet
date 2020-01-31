@@ -19,6 +19,7 @@ node 'eclair.dwnet' {
   }
   include role::concourse
   include role::memcached
+  include role::backup_s3_sync
 }
 
 node 'donut.dwnet' {
