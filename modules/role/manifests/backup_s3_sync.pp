@@ -15,4 +15,13 @@ class role::backup_s3_sync {
     owner  => 'root',
     source => 'puppet:///modules/role/sync_backups.sh'
   }
+
+  cron { 'sync_backups':
+    ensure   => present,
+    command  => '/data/backup/sync_backups.sh',
+    user     => 'root',
+    hour     => '0',
+    minute   => '0',
+    monthday => '1-31/2',
+  }
 }
