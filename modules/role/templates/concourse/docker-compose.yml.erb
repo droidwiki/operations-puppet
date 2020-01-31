@@ -12,7 +12,7 @@ services:
      - ./postgres-data:/var/lib/postgresql/data
 
   web:
-    image: concourse/concourse:5
+    image: concourse/concourse:5.8
     command: web
     restart: unless-stopped
     links: [db]
@@ -33,7 +33,7 @@ services:
       - 8.8.4.4
 
   worker:
-    image: concourse/concourse:5
+    image: concourse/concourse:5.8
     command: worker
     restart: unless-stopped
     privileged: true
