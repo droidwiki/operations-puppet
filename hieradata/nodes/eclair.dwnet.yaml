@@ -272,3 +272,16 @@ concourse::github::client_secret: >
 php::fpm::pools:
   www:
     listen: '172.16.0.2:9000'
+
+backup_s3_sync::aws_secret_access_key: >
+    ENC[PKCS7,MIIBmQYJKoZIhvcNAQcDoIIBijCCAYYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAMLRjprUaFQFvWgjUK9v2zYPncsBukraqp2Yu
+    IJyu5MFHced+jowExKPq75tzuVnnDITtjlNdZt48BFMpVhJPIaSA/T66IY5o
+    271HlPGT0DJXzNXL5TdmD8thgG4icwh4Q9cOLUHNhYp9bFDCeDj+RukEl4qE
+    JTHWhIsSvhLGfEhcdaRnrHtnYm+MwfafYggqSL0YfPlbhXIG534NILH7U2KM
+    mcGu2TtLeGs0l5HSACVXTHOpnjMEDOX7wbpuq1jWQbpo/rRA6AJjhDr9/KVr
+    K/tMhCVfZn6dQNBusQZc9MwOP2kBznjYwCYwavvrXTfCdY+f82ENux/wfvgi
+    kOKz9zBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBaSwkzZzZEqqUT3IDe
+    W3IogDCwp3DhA0Wj0sx+I+Ew3aytcD+4+kIn1nQFFLlb+d90LiMVEl92Ue/L
+    d/Ua2Dj54ho=]
+backup_s3_sync::aws_access_key_id: AKIAQFJKXLCXUY72P2MM
