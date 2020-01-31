@@ -83,11 +83,6 @@ class role::dns(
     allow_query         => [ 'any' ],
     recursion           => 'no',
     allow_transfer      => [ 'none' ],
-    statistics_channels => [{
-      ip   => $facts['networking']['interfaces']['eth1']['ip'],
-      port => '8081',
-      acl  => 'internal',
-    }],
     keys                => {
       'letsencrypt.' => [
         'algorithm hmac-sha512',
