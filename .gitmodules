@@ -95,3 +95,6 @@
 [submodule "modules/gluster"]
 	path = modules/gluster
 	url = https://github.com/voxpupuli/puppet-gluster.git
+[submodule "modules/awscli"]
+	path = modules/awscli
+	url = https://github.com/jdowning/puppet-awscli.git
