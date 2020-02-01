@@ -21,7 +21,7 @@ class role::nginx::go2tech {
     index_files          => [ 'missing.php' ],
     add_header           => { 'X-Delivered-By' => $facts['fqdn'] },
     use_default_location => false,
-    format_log           => 'buffer=4k',
+    format_log           => 'combined buffer=4k',
   }
 
   nginx::resource::location { '_ php':
@@ -42,7 +42,7 @@ class role::nginx::go2tech {
     },
     index_files          => [],
     use_default_location => false,
-    format_log           => 'buffer=4k',
+    format_log           => 'combined buffer=4k',
   }
 
   nginx::resource::server { 'go2tech.de':
@@ -68,7 +68,7 @@ class role::nginx::go2tech {
       'error_page 404' => '/404.html',
     },
     use_default_location => false,
-    format_log           => 'buffer=4k',
+    format_log           => 'combined buffer=4k',
   }
 
   monit::certcheck { 'go2tech.de': }

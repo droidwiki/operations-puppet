@@ -30,7 +30,7 @@ class role::nginx::blog_go2tech {
     ssl_stapling_verify  => true,
     http2                => on,
     www_root             => '/data/shareddata/www/blog.go2tech.de/public_html/',
-    format_log           => 'buffer=4k',
+    format_log           => 'combined buffer=4k',
     index_files          => [ 'index.php' ],
   }
 
@@ -50,7 +50,7 @@ class role::nginx::blog_go2tech {
       'return' => '301 https://blog.go2tech.de$request_uri',
     },
     use_default_location => false,
-    format_log           => 'buffer=4k',
+    format_log           => 'combined buffer=4k',
   }
 
   nginx::resource::location { 'blog.go2tech.de/':

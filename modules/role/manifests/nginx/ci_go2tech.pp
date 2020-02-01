@@ -29,7 +29,7 @@ class role::nginx::ci_go2tech {
     ssl_stapling         => true,
     ssl_stapling_verify  => true,
     http2                => on,
-    format_log           => 'buffer=4k',
+    format_log           => 'combined buffer=4k',
   }
 
   nginx::resource::server { 'ci.go2tech.de.80':
@@ -43,7 +43,7 @@ class role::nginx::ci_go2tech {
     },
     index_files          => [],
     use_default_location => false,
-    format_log           => 'buffer=4k',
+    format_log           => 'combined buffer=4k',
   }
 
   nginx::resource::location { 'ci.go2tech.de/':

@@ -33,7 +33,7 @@ class role::nginx::missionrhode_go2tech {
     server_name          => [ 'missionrhode.go2tech.de' ],
     use_default_location => false,
     www_root             => '/data/shareddata/www/missionrhode.go2tech.de/public_html',
-    format_log           => 'buffer=4k',
+    format_log           => 'combined buffer=4k',
     index_files          => [ 'index.php' ],
     server_cfg_append    => {
       'gzip'              => 'on',
@@ -80,7 +80,7 @@ class role::nginx::missionrhode_go2tech {
         'return' => '301 https://missionrhode.go2tech.de$request_uri',
       },
       use_default_location => false,
-      format_log           => 'buffer=4k',
+      format_log           => 'combined buffer=4k',
     ;
     'missionrhode.go2tech.de.80':
       server_name => [ 'missionrhode.go2tech.de' ],
