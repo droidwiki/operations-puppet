@@ -85,6 +85,7 @@ define droidwiki::nginx::mediawiki (
     use_default_location => false,
     server_name          => $server_names,
     www_root             => $mediawiki_wwwroot,
+    format_log           => 'buffer=4k',
     index_files          => [ 'index.php' ],
     server_cfg_append    => {
       'error_page 500 502 503 504' => '/500.html',
@@ -114,6 +115,7 @@ define droidwiki::nginx::mediawiki (
       },
       index_files          => [],
       use_default_location => false,
+      format_log           => 'buffer=4k',
     }
   }
 

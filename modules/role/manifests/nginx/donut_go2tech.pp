@@ -31,6 +31,7 @@ class role::nginx::donut_go2tech {
     },
     index_files          => [],
     use_default_location => false,
+    format_log           => 'buffer=4k',
   }
 
   nginx::resource::server { 'donut.go2tech.de':
@@ -51,6 +52,7 @@ class role::nginx::donut_go2tech {
       'error_page 404' => '/404.html',
     },
     use_default_location => false,
+    format_log           => 'buffer=4k',
   }
 
   monit::certcheck { 'donut.go2tech.de': }

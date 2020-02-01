@@ -57,6 +57,7 @@ class role::nginx::droidwiki {
     use_default_location => false,
     server_name          => [ '.droidwiki.org' ],
     www_root             => '/data/mediawiki/main',
+    format_log           => 'buffer=4k',
     index_files          => [ 'index.php' ],
     server_cfg_append    => {
       'error_page 500 502 503 504' => '/500.html',
@@ -100,6 +101,7 @@ class role::nginx::droidwiki {
       ssl_key              => $sslkey,
       ssl_stapling         => true,
       ssl_stapling_verify  => true,
+      format_log           => 'buffer=4k',
       ssl_dhparam          => $sslcert::params::dhparampempath,
       http2                => on,
       add_header           => {

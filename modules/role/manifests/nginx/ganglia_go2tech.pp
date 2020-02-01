@@ -7,6 +7,7 @@ class role::nginx::ganglia_go2tech {
     ipv6_listen_options  => '',
     server_name          => [ 'ganglia.go2tech.de' ],
     www_root             => '/data/shareddata/www/ganglia.go2tech.de/public_html',
+    format_log           => 'buffer=4k',
   }
 
   nginx::resource::location { 'ganglia.go2tech.de/':
