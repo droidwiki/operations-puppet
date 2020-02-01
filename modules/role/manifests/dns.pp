@@ -74,22 +74,22 @@ class role::dns(
 
   include bind
   bind::server::conf { '/etc/bind/named.conf':
-    acls                => {
+    acls              => {
       'internal' => [ '172.16.0.0/16' ],
     },
-    directory           => '/var/lib/bind/zones',
-    listen_on_addr      => [ 'any' ],
-    listen_on_v6_addr   => [ 'any' ],
-    allow_query         => [ 'any' ],
-    recursion           => 'no',
-    allow_transfer      => [ 'none' ],
-    keys                => {
+    directory         => '/var/lib/bind/zones',
+    listen_on_addr    => [ 'any' ],
+    listen_on_v6_addr => [ 'any' ],
+    allow_query       => [ 'any' ],
+    recursion         => 'no',
+    allow_transfer    => [ 'none' ],
+    keys              => {
       'letsencrypt.' => [
         'algorithm hmac-sha512',
         "secret \"${hiera('bind::key::letsencrypt')}\"",
       ],
     },
-    zones               => {
+    zones             => {
       'go2tech.de'     => [
         "type ${type}",
         'file "go2tech.de"',
