@@ -90,7 +90,7 @@ define droidwiki::nginx::mediawiki (
       'error_page 500 502 503 504' => '/500.html',
       'error_page 403'             => '/403.html',
       'gzip'                       => 'on',
-      'gzip_comp_level'            => '2',
+      'gzip_comp_level'            => '6',
       'gzip_http_version'          => '1.0',
       'gzip_proxied'               => 'any',
       'gzip_min_length'            => '1100',
@@ -99,7 +99,7 @@ define droidwiki::nginx::mediawiki (
       'gzip_disable'               => '"MSIE [1-6].(?!.*SV1)"',
       'gzip_vary'                  => 'on',
     },
-    gzip_types           => 'text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript',
+    gzip_types           => 'application/xml+rss text/html text/css text/javascript text/xml text/plain text/x-component application/javascript application/x-javascript application/json application/xml application/rss+xml application/atom+xml font/truetype font/opentype application/vnd.ms-fontobject image/svg+xml text/x-js',
   }
 
   if ( $ssl and $manage_http_redirects ) {
