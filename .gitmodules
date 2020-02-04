@@ -65,9 +65,6 @@
 [submodule "modules/nfs"]
 	path = modules/nfs
 	url = https://github.com/derdanne/puppet-nfs.git
-[submodule "modules/nodejs"]
-	path = modules/nodejs
-	url = https://github.com/voxpupuli/puppet-nodejs.git
 [submodule "modules/mysql"]
 	path = modules/mysql
 	url = https://github.com/puppetlabs/puppetlabs-mysql.git
