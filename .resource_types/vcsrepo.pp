@@ -1,10 +1,12 @@
-# This file was automatically generated on 2019-03-19 19:06:36 +0100.
+# This file was automatically generated on 2020-02-04 21:36:20 +0100.
 # Use the 'puppet generate types' command to regenerate this file.
 
 # A local version control repository
 Puppet::Resource::ResourceType3.new(
   'vcsrepo',
   [
+    # Ensure the version control repository.
+    # 
     # Valid values are `present`, `bare`, `mirror`, `absent`, `latest`.
     Puppet::Resource::Param(Enum['present', 'bare', 'mirror', 'absent', 'latest'], 'ensure'),
 
@@ -142,6 +144,11 @@ Puppet::Resource::ResourceType3.new(
     # 
     # Valid values are `true`, `false`.
     Puppet::Resource::Param(Variant[Boolean, Enum['true', 'false']], 'trust_server_cert'),
+
+    # Keep local changes on files tracked by the repository when changing revision
+    # 
+    # Valid values are `true`, `false`.
+    Puppet::Resource::Param(Variant[Boolean, Enum['true', 'false']], 'keep_local_changes'),
 
     # The specific backend to use for this `vcsrepo`
     # resource. You will seldom need to specify this --- Puppet will usually

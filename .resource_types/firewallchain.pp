@@ -1,7 +1,8 @@
-# This file was automatically generated on 2019-03-19 19:06:35 +0100.
+# This file was automatically generated on 2020-02-04 21:36:20 +0100.
 # Use the 'puppet generate types' command to regenerate this file.
 
-# This type provides the capability to manage rule chains for firewalls.
+# @summary
+#   This type provides the capability to manage rule chains for firewalls.
 # 
 # Currently this supports only iptables, ip6tables and ebtables on Linux. And
 # provides support for setting the default policy on chains and tables that
@@ -11,6 +12,13 @@
 # If Puppet is managing the iptables, iptables-persistent, or iptables-services packages,
 # and the provider is iptables_chain, the firewall resource will autorequire
 # those packages to ensure that any required binaries are installed.
+# 
+# #### Providers
+#   * iptables_chain is the only provider that supports firewallchain.
+# 
+# #### Features
+#   * iptables_chain: The provider provides iptables chain features.
+#   * policy: Default policy (inbuilt chains only).
 Puppet::Resource::ResourceType3.new(
   'firewallchain',
   [
@@ -54,6 +62,7 @@ Puppet::Resource::ResourceType3.new(
     #   '(?i)foo' or '(?i:foo)'
     # 
     # Full example:
+    # ```
     # firewallchain { 'INPUT:filter:IPv4':
     #   purge => true,
     #   ignore => [
@@ -61,6 +70,7 @@ Puppet::Resource::ResourceType3.new(
     #     '--comment "[^"]*(?i:ignore)[^"]*"', # ignore any rules with "ignore" (case insensitive) in the comment in the rule
     #   ],
     # }
+    # ```
     Puppet::Resource::Param(Any, 'ignore'),
 
     # The specific backend to use for this `firewallchain`

@@ -1,4 +1,4 @@
-# This file was automatically generated on 2019-03-19 19:06:34 +0100.
+# This file was automatically generated on 2020-02-04 21:36:19 +0100.
 # Use the 'puppet generate types' command to regenerate this file.
 
 # @summary This type provides Puppet with the capabilities to manage GPG keys needed
@@ -80,8 +80,8 @@ Puppet::Resource::ResourceType3.new(
 
     # The key server to fetch the key from based on the ID. It can either be a domain name or url.
     # 
-    # Values can match `/\A((hkp|hkps|http|https):\/\/)?([a-z\d])([a-z\d-]{0,61}\.)+[a-z\d]+(:\d{2,5})?$/`.
-    Puppet::Resource::Param(Pattern[/\A((hkp|hkps|http|https):\/\/)?([a-z\d])([a-z\d-]{0,61}\.)+[a-z\d]+(:\d{2,5})?$/], 'server'),
+    # Values can match `/\A((hkp|hkps|http|https):\/\/)?([a-z\d])([a-z\d-]{0,61}\.)+[a-z\d]+(:\d{2,5})?(\/[a-zA-Z\d\-_.]+)*\/?$/`.
+    Puppet::Resource::Param(Pattern[/\A((hkp|hkps|http|https):\/\/)?([a-z\d])([a-z\d-]{0,61}\.)+[a-z\d]+(:\d{2,5})?(\/[a-zA-Z\d\-_.]+)*\/?$/], 'server'),
 
     # Additional options to pass to apt-key's --keyserver-options.
     Puppet::Resource::Param(Any, 'options'),
@@ -90,6 +90,11 @@ Puppet::Resource::ResourceType3.new(
     # 
     # Valid values are `true`, `false`, `yes`, `no`.
     Puppet::Resource::Param(Variant[Boolean, Enum['true', 'false', 'yes', 'no']], 'refresh'),
+
+    # When true and source uses https, accepts download of keys without SSL verfication
+    # 
+    # Valid values are `true`, `false`, `yes`, `no`.
+    Puppet::Resource::Param(Variant[Boolean, Enum['true', 'false', 'yes', 'no']], 'weak_ssl'),
 
     # The specific backend to use for this `apt_key`
     # resource. You will seldom need to specify this --- Puppet will usually

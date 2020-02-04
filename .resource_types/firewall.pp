@@ -1,8 +1,8 @@
-# This file was automatically generated on 2019-03-19 19:06:35 +0100.
+# This file was automatically generated on 2020-02-04 21:36:20 +0100.
 # Use the 'puppet generate types' command to regenerate this file.
 
-# This type provides the capability to manage firewall rules within
-# puppet.
+# @summary
+#   This type provides the capability to manage firewall rules within puppet.
 # 
 # **Autorequires:**
 # 
@@ -14,10 +14,117 @@
 # and the provider is iptables or ip6tables, the firewall resource will
 # autorequire those packages to ensure that any required binaries are
 # installed.
+# 
+# #### Providers
+#   Note: Not all features are available with all providers.
+# 
+#   * ip6tables: Ip6tables type provider
+# 
+#     * Required binaries: ip6tables-save, ip6tables.
+#     * Supported features: address_type, connection_limiting, conntrack, dnat, hop_limiting, icmp_match,
+#     interface_match, iprange, ipsec_dir, ipsec_policy, ipset, iptables, isfirstfrag,
+#     ishasmorefrags, islastfrag, length, log_level, log_prefix, log_uid, mark, mask, mss,
+#     owner, pkttype, queue_bypass, queue_num, rate_limiting, recent_limiting, reject_type,
+#     snat, socket, state_match, string_matching, tcp_flags, hashlimit, bpf.
+# 
+#   * iptables: Iptables type provider
+# 
+#     * Required binaries: iptables-save, iptables.
+#     * Default for kernel == linux.
+#     * Supported features: address_type, clusterip, connection_limiting, conntrack, dnat, icmp_match,
+#     interface_match, iprange, ipsec_dir, ipsec_policy, ipset, iptables, isfragment, length,
+#     log_level, log_prefix, log_uid, mark, mask, mss, netmap, nflog_group, nflog_prefix,
+#     nflog_range, nflog_threshold, owner, pkttype, queue_bypass, queue_num, rate_limiting,
+#     recent_limiting, reject_type, snat, socket, state_match, string_matching, tcp_flags, bpf.
+# 
+# #### Features
+#   * address_type: The ability to match on source or destination address type.
+# 
+#   * clusterip: Configure a simple cluster of nodes that share a certain IP and MAC address without an explicit load balancer in front of them.
+# 
+#   * connection_limiting: Connection limiting features.
+# 
+#   * conntrack: Connection tracking features.
+# 
+#   * dnat: Destination NATing.
+# 
+#   * hop_limiting: Hop limiting features.
+# 
+#   * icmp_match: The ability to match ICMP types.
+# 
+#   * interface_match: Interface matching.
+# 
+#   * iprange: The ability to match on source or destination IP range.
+# 
+#   * ipsec_dir: The ability to match IPsec policy direction.
+# 
+#   * ipsec_policy: The ability to match IPsec policy.
+# 
+#   * iptables: The provider provides iptables features.
+# 
+#   * isfirstfrag: The ability to match the first fragment of a fragmented ipv6 packet.
+# 
+#   * isfragment: The ability to match fragments.
+# 
+#   * ishasmorefrags: The ability to match a non-last fragment of a fragmented ipv6 packet.
+# 
+#   * islastfrag: The ability to match the last fragment of an ipv6 packet.
+# 
+#   * length: The ability to match the length of the layer-3 payload.
+# 
+#   * log_level: The ability to control the log level.
+# 
+#   * log_prefix: The ability to add prefixes to log messages.
+# 
+#   * log_uid: The ability to log the userid of the process which generated the packet.
+# 
+#   * mark: The ability to match or set the netfilter mark value associated with the packet.
+# 
+#   * mask: The ability to match recent rules based on the ipv4 mask.
+# 
+#   * nflog_group: The ability to set the group number for NFLOG.
+# 
+#   * nflog_prefix: The ability to set a prefix for nflog messages.
+# 
+#   * nflog_range: The ability to set nflog_range.
+# 
+#   * nflog_threshold: The ability to set nflog_threshold.
+# 
+#   * owner: The ability to match owners.
+# 
+#   * pkttype: The ability to match a packet type.
+# 
+#   * rate_limiting: Rate limiting features.
+# 
+#   * recent_limiting: The netfilter recent module.
+# 
+#   * reject_type: The ability to control reject messages.
+# 
+#   * set_mss: Set the TCP MSS of a packet.
+# 
+#   * snat: Source NATing.
+# 
+#   * socket: The ability to match open sockets.
+# 
+#   * state_match: The ability to match stateful firewall states.
+# 
+#   * string_matching: The ability to match a given string by using some pattern matching strategy.
+# 
+#   * tcp_flags: The ability to match on particular TCP flag settings.
+# 
+#   * netmap: The ability to map entire subnets via source or destination nat rules.
+# 
+#   * hashlimit: The ability to use the hashlimit-module.
+# 
+#   * bpf: The ability to use Berkeley Paket Filter rules.
+# 
+#   * ipvs: The ability to match IP Virtual Server packets.
+# 
+#   * ct_target: The ability to set connection tracking parameters for a packet or its associated connection.
 Puppet::Resource::ResourceType3.new(
   'firewall',
   [
-    # Manage the state of this rule. The default action is *present*.
+    # Manage the state of this rule.
     # 
     # Valid values are `present`, `absent`.
     Puppet::Resource::Param(Enum['present', 'absent'], 'ensure'),
@@ -106,7 +213,7 @@ Puppet::Resource::ResourceType3.new(
     # This would cover ports 1 to 1024.
     Puppet::Resource::Param(Any, 'dport'),
 
-    # DEPRECATED
+    # *note* This property has been DEPRECATED
     # 
     # The destination or source port to match for this filter (if the protocol
     # supports ports). Will accept a single element or an array.
@@ -190,8 +297,7 @@ Puppet::Resource::ResourceType3.new(
     # Requires features address_type.
     Puppet::Resource::Param(Enum['UNSPEC', '! UNSPEC', 'UNSPEC --limit-iface-in', 'UNSPEC --limit-iface-out', '! UNSPEC --limit-iface-in', '! UNSPEC --limit-iface-out', 'UNICAST', '! UNICAST', 'UNICAST --limit-iface-in', 'UNICAST --limit-iface-out', '! UNICAST --limit-iface-in', '! UNICAST --limit-iface-out', 'LOCAL', '! LOCAL', 'LOCAL --limit-iface-in', 'LOCAL --limit-iface-out', '! LOCAL --limit-iface-in', '! LOCAL --limit-iface-out', 'BROADCAST', '! BROADCAST', 'BROADCAST --limit-iface-in', 'BROADCAST --limit-iface-out', '! BROADCAST --limit-iface-in', '! BROADCAST --limit-iface-out', 'ANYCAST', '! ANYCAST', 'ANYCAST --limit-iface-in', 'ANYCAST --limit-iface-out', '! ANYCAST --limit-iface-in', '! ANYCAST --limit-iface-out', 'MULTICAST', '! MULTICAST', 'MULTICAST --limit-iface-in', 'MULTICAST --limit-iface-out', '! MULTICAST --limit-iface-in', '! MULTICAST --limit-iface-out', 'BLACKHOLE', '! BLACKHOLE', 'BLACKHOLE --limit-iface-in', 'BLACKHOLE --limit-iface-out', '! BLACKHOLE --limit-iface-in', '! BLACKHOLE --limit-iface-out', 'UNREACHABLE', '! UNREACHABLE', 'UNREACHABLE --limit-iface-in', 'UNREACHABLE --limit-iface-out', '! UNREACHABLE --limit-iface-in', '! UNREACHABLE --limit-iface-out', 'PROHIBIT', '! PROHIBIT', 'PROHIBIT --limit-iface-in', 'PROHIBIT --limit-iface-out', '! PROHIBIT --limit-iface-in', '! PROHIBIT --limit-iface-out', 'THROW', '! THROW', 'THROW --limit-iface-in', 'THROW --limit-iface-out', '! THROW --limit-iface-in', '! THROW --limit-iface-out', 'NAT', '! NAT', 'NAT --limit-iface-in', 'NAT --limit-iface-out', '! NAT --limit-iface-in', '! NAT --limit-iface-out', 'XRESOLVE', '! XRESOLVE', 'XRESOLVE --limit-iface-in', 'XRESOLVE --limit-iface-out', '! XRESOLVE --limit-iface-in', '! XRESOLVE --limit-iface-out'], 'src_type'),
 
-    # The specific protocol to match for this rule. By default this is
-    # *tcp*.
+    # The specific protocol to match for this rule.
     # 
     # Valid values are `ip`, `! ip`, `tcp`, `! tcp`, `udp`, `! udp`, `icmp`, `! icmp`, `ipv6-icmp`, `! ipv6-icmp`, `esp`, `! esp`, `ah`, `! ah`, `vrrp`, `! vrrp`, `igmp`, `! igmp`, `ipencap`, `! ipencap`, `ipv4`, `! ipv4`, `ipv6`, `! ipv6`, `ospf`, `! ospf`, `gre`, `! gre`, `cbt`, `! cbt`, `sctp`, `! sctp`, `pim`, `! pim`, `all`, `! all`.
     Puppet::Resource::Param(Enum['ip', '! ip', 'tcp', '! tcp', 'udp', '! udp', 'icmp', '! icmp', 'ipv6-icmp', '! ipv6-icmp', 'esp', '! esp', 'ah', '! ah', 'vrrp', '! vrrp', 'igmp', '! igmp', 'ipencap', '! ipencap', 'ipv4', '! ipv4', 'ipv6', '! ipv6', 'ospf', '! ospf', 'gre', '! gre', 'cbt', '! cbt', 'sctp', '! sctp', 'pim', '! pim', 'all', '! all'], 'proto'),
@@ -200,14 +306,14 @@ Puppet::Resource::ResourceType3.new(
     Puppet::Resource::Param(Any, 'mss'),
 
     # Match when the TCP flags are as specified.
-    #       Is a string with a list of comma-separated flag names for the mask,
-    #       then a space, then a comma-separated list of flags that should be set.
-    #       The flags are: SYN ACK FIN RST URG PSH ALL NONE
-    #       Note that you specify them in the order that iptables --list-rules
-    #       would list them to avoid having puppet think you changed the flags.
-    #       Example: FIN,SYN,RST,ACK SYN matches packets with the SYN bit set and the
-    # ACK,RST and FIN bits cleared.  Such packets are used to request
-    #                TCP  connection initiation.
+    # Is a string with a list of comma-separated flag names for the mask,
+    # then a space, then a comma-separated list of flags that should be set.
+    # The flags are: SYN ACK FIN RST URG PSH ALL NONE
+    # Note that you specify them in the order that iptables --list-rules
+    # would list them to avoid having puppet think you changed the flags.
+    # Example: FIN,SYN,RST,ACK SYN matches packets with the SYN bit set and the
+    # ACK,RST and FIN bits cleared. Such packets are used to request
+    # TCP  connection initiation.
     # 
     # 
     # 
@@ -224,8 +330,6 @@ Puppet::Resource::ResourceType3.new(
     # 
     # Or you can provide a user-based chain.
     # 
-    # The default value is 'INPUT'.
-    # 
     # Values can match `/^[a-zA-Z0-9\-_]+$/`.
     # 
     # Requires features iptables.
@@ -238,8 +342,6 @@ Puppet::Resource::ResourceType3.new(
     # * filter
     # * raw
     # * rawpost
-    # 
-    # By default the setting is 'filter'.
     # 
     # Valid values are `nat`, `mangle`, `filter`, `raw`, `rawpost`. 
     # 
@@ -260,7 +362,7 @@ Puppet::Resource::ResourceType3.new(
     # 
     # But any valid chain name is allowed.
     # 
-    # For the values ACCEPT, DROP and REJECT you must use the generic
+    # For the values ACCEPT, DROP, and REJECT, you must use the generic
     # 'action' parameter. This is to enfore the use of generic parameters where
     # possible for maximum cross-platform modelling.
     # 
@@ -348,7 +450,7 @@ Puppet::Resource::ResourceType3.new(
     # Requires features dnat.
     Puppet::Resource::Param(Variant[Boolean, Enum['true', 'false']], 'random'),
 
-    # When combined with jump => "REJECT" you can specify a different icmp
+    # When combined with action => "REJECT" you can specify a different icmp
     # response to be sent back to the packet sender.
     # 
     # 
@@ -451,11 +553,187 @@ Puppet::Resource::ResourceType3.new(
     # * NEW
     # * RELATED
     # * UNTRACKED
+    # * SNAT
+    # * DNAT
     # 
-    # Valid values are `INVALID`, `ESTABLISHED`, `NEW`, `RELATED`, `UNTRACKED`. 
+    # Valid values are `INVALID`, `ESTABLISHED`, `NEW`, `RELATED`, `UNTRACKED`, `SNAT`, `DNAT`. 
     # 
-    # Requires features state_match.
-    Puppet::Resource::Param(Enum['INVALID', 'ESTABLISHED', 'NEW', 'RELATED', 'UNTRACKED'], 'ctstate'),
+    # Requires features conntrack.
+    Puppet::Resource::Param(Enum['INVALID', 'ESTABLISHED', 'NEW', 'RELATED', 'UNTRACKED', 'SNAT', 'DNAT'], 'ctstate'),
+
+    # The specific layer-4 protocol number to match for this rule using the
+    # conntrack module.
+    # 
+    # Values can match `/^!?\s?\d+$/`.
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Pattern[/^!?\s?\d+$/], 'ctproto'),
+
+    # The original source address using the conntrack module. For example:
+    # 
+    #     ctorigsrc => '192.168.2.0/24'
+    # 
+    # You can also negate a mask by putting ! in front. For example:
+    # 
+    #     ctorigsrc => '! 192.168.2.0/24'
+    # 
+    # The ctorigsrc can also be an IPv6 address if your provider supports it.
+    # 
+    # 
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Any, 'ctorigsrc'),
+
+    # The original destination address using the conntrack module. For example:
+    # 
+    #     ctorigdst => '192.168.2.0/24'
+    # 
+    # You can also negate a mask by putting ! in front. For example:
+    # 
+    #     ctorigdst => '! 192.168.2.0/24'
+    # 
+    # The ctorigdst can also be an IPv6 address if your provider supports it.
+    # 
+    # 
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Any, 'ctorigdst'),
+
+    # The reply source address using the conntrack module. For example:
+    # 
+    #     ctreplsrc => '192.168.2.0/24'
+    # 
+    # You can also negate a mask by putting ! in front. For example:
+    # 
+    #     ctreplsrc => '! 192.168.2.0/24'
+    # 
+    # The ctreplsrc can also be an IPv6 address if your provider supports it.
+    # 
+    # 
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Any, 'ctreplsrc'),
+
+    # The reply destination address using the conntrack module. For example:
+    # 
+    #     ctrepldst => '192.168.2.0/24'
+    # 
+    # You can also negate a mask by putting ! in front. For example:
+    # 
+    #     ctrepldst => '! 192.168.2.0/24'
+    # 
+    # The ctrepldst can also be an IPv6 address if your provider supports it.
+    # 
+    # 
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Any, 'ctrepldst'),
+
+    # The original source port to match for this filter using the conntrack module.
+    # For example:
+    # 
+    #     ctorigsrcport => '80'
+    # 
+    # You can also specify a port range: For example:
+    # 
+    #     ctorigsrcport => '80:81'
+    # 
+    # You can also negate a port by putting ! in front. For example:
+    # 
+    #     ctorigsrcport => '! 80'
+    # 
+    # Values can match `/^!?\s?\d+$|^!?\s?\d+\:\d+$/`.
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Pattern[/^!?\s?\d+$|^!?\s?\d+\:\d+$/], 'ctorigsrcport'),
+
+    # The original destination port to match for this filter using the conntrack module.
+    # For example:
+    # 
+    #     ctorigdstport => '80'
+    # 
+    # You can also specify a port range: For example:
+    # 
+    #     ctorigdstport => '80:81'
+    # 
+    # You can also negate a port by putting ! in front. For example:
+    # 
+    #     ctorigdstport => '! 80'
+    # 
+    # Values can match `/^!?\s?\d+$|^!?\s?\d+\:\d+$/`.
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Pattern[/^!?\s?\d+$|^!?\s?\d+\:\d+$/], 'ctorigdstport'),
+
+    # The reply source port to match for this filter using the conntrack module.
+    # For example:
+    # 
+    #     ctreplsrcport => '80'
+    # 
+    # You can also specify a port range: For example:
+    # 
+    #     ctreplsrcport => '80:81'
+    # 
+    # You can also negate a port by putting ! in front. For example:
+    # 
+    #     ctreplsrcport => '! 80'
+    # 
+    # Values can match `/^!?\s?\d+$|^!?\s?\d+\:\d+$/`.
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Pattern[/^!?\s?\d+$|^!?\s?\d+\:\d+$/], 'ctreplsrcport'),
+
+    # The reply destination port to match for this filter using the conntrack module.
+    # For example:
+    # 
+    #     ctrepldstport => '80'
+    # 
+    # You can also specify a port range: For example:
+    # 
+    #     ctrepldstport => '80:81'
+    # 
+    # You can also negate a port by putting ! in front. For example:
+    # 
+    #     ctrepldstport => '! 80'
+    # 
+    # Values can match `/^!?\s?\d+$|^!?\s?\d+\:\d+$/`.
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Pattern[/^!?\s?\d+$|^!?\s?\d+\:\d+$/], 'ctrepldstport'),
+
+    # Matches a packet based on its status using the conntrack module. Values can be:
+    # 
+    # * EXPECTED
+    # * SEEN_REPLY
+    # * ASSURED
+    # * CONFIRMED
+    # 
+    # Valid values are `NONE`, `EXPECTED`, `SEEN_REPLY`, `ASSURED`, `CONFIRMED`. 
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Enum['NONE', 'EXPECTED', 'SEEN_REPLY', 'ASSURED', 'CONFIRMED'], 'ctstatus'),
+
+    # Matches a packet based on lifetime remaining in seconds or range of values
+    # using the conntrack module. For example:
+    # 
+    #     ctexpire => '100:150'
+    # 
+    # Values can match `/^!?\s?\d+$|^!?\s?\d+\:\d+$/`.
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Pattern[/^!?\s?\d+$|^!?\s?\d+\:\d+$/], 'ctexpire'),
+
+    # Matches a packet that is flowing in the specified direction using the
+    # conntrack module. If this flag is not specified at all, matches packets
+    # in both directions. Values can be:
+    # 
+    # * REPLY
+    # * ORIGINAL
+    # 
+    # Valid values are `REPLY`, `ORIGINAL`. 
+    # 
+    # Requires features conntrack.
+    Puppet::Resource::Param(Enum['REPLY', 'ORIGINAL'], 'ctdir'),
 
     # Match the Netfilter mark value associated with the packet.  Accepts either of:
     # mark/mask or mark.  These will be converted to hex if they are not already.
@@ -584,8 +862,9 @@ Puppet::Resource::ResourceType3.new(
     # Enable the recent module. Takes as an argument one of set, update,
     # rcheck or remove. For example:
     # 
+    #   ```
     #   # If anyone's appeared on the 'badguy' blacklist within
-    #   # the last 60 seconds, drop their traffic, and update the timestamp.
+    #   #  the last 60 seconds, drop their traffic, and update the timestamp.
     #   firewall { '100 Drop badguy traffic':
     #     recent   => 'update',
     #     rseconds => 60,
@@ -594,8 +873,12 @@ Puppet::Resource::ResourceType3.new(
     #     action   => 'DROP',
     #     chain    => 'FORWARD',
     #   }
-    #   # No-one should be sending us traffic on eth0 from localhost
-    #   # Blacklist them
+    #   ```
+    # 
+    # 
+    #   ```
+    #   # No-one should be sending us traffic on eth0 from the
+    #   #  localhost, Blacklist them
     #   firewall { '101 blacklist strange traffic':
     #     recent      => 'set',
     #     rsource     => true,
@@ -605,6 +888,7 @@ Puppet::Resource::ResourceType3.new(
     #     action      => 'DROP',
     #     chain       => 'FORWARD',
     #   }
+    #   ```
     # 
     # Valid values are `set`, `update`, `rcheck`, `remove`. 
     # 
@@ -720,7 +1004,7 @@ Puppet::Resource::ResourceType3.new(
     # Requires features ipsec_dir.
     Puppet::Resource::Param(Enum['in', 'out'], 'ipsec_dir'),
 
-    # Set the matching mode for statistic matching. Supported modes are `random` and `nth`.
+    # Set the matching mode for statistic matching.
     # 
     # Valid values are `nth`, `random`.
     Puppet::Resource::Param(Enum['nth', 'random'], 'stat_mode'),
@@ -850,7 +1134,7 @@ Puppet::Resource::ResourceType3.new(
     # Requires features iptables.
     Puppet::Resource::Param(Any, 'month_days'),
 
-    # Only match on the given weekdays. Possible values are Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+    # Only match on the given weekdays.
     # 
     # Valid values are `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`. 
     # 
@@ -880,7 +1164,7 @@ Puppet::Resource::ResourceType3.new(
     Puppet::Resource::Param(Variant[Boolean, Enum['true', 'false']], 'clusterip_new'),
 
     # Used with the CLUSTERIP jump target.
-    # Specify the hashing mode. Valid values: sourceip, sourceip-sourceport, sourceip-sourceport-destport.
+    # Specify the hashing mode.
     # 
     # Valid values are `sourceip`, `sourceip-sourceport`, `sourceip-sourceport-destport`. 
     # 
@@ -1028,7 +1312,21 @@ Puppet::Resource::ResourceType3.new(
     # 
     # 
     # Requires features iptables.
-    Puppet::Resource::Param(Any, 'bytecode')
+    Puppet::Resource::Param(Any, 'bytecode'),
+
+    # Indicates that the current packet belongs to an IPVS connection.
+    # 
+    # Valid values are `true`, `false`. 
+    # 
+    # Requires features ipvs.
+    Puppet::Resource::Param(Variant[Boolean, Enum['true', 'false']], 'ipvs'),
+
+    # Assign this packet to zone id and only have lookups done in that zone.
+    # 
+    # 
+    # 
+    # Requires features ct_target.
+    Puppet::Resource::Param(Any, 'zone')
   ],
   [
     # The canonical name of the rule. This name is also used for ordering
@@ -1054,14 +1352,14 @@ Puppet::Resource::ResourceType3.new(
     # : Ip6tables type provider
     # 
     #   * Required binaries: `ip6tables-save`, `ip6tables`.
-    #   * Supported features: `address_type`, `connection_limiting`, `dnat`, `hop_limiting`, `icmp_match`, `interface_match`, `iprange`, `ipsec_dir`, `ipsec_policy`, `ipset`, `iptables`, `isfirstfrag`, `ishasmorefrags`, `islastfrag`, `length`, `log_level`, `log_prefix`, `log_uid`, `mark`, `mask`, `mss`, `owner`, `pkttype`, `queue_bypass`, `queue_num`, `rate_limiting`, `recent_limiting`, `reject_type`, `snat`, `socket`, `state_match`, `string_matching`, `tcp_flags`.
+    #   * Supported features: `address_type`, `connection_limiting`, `conntrack`, `ct_target`, `dnat`, `hop_limiting`, `icmp_match`, `interface_match`, `iprange`, `ipsec_dir`, `ipsec_policy`, `ipset`, `iptables`, `isfirstfrag`, `ishasmorefrags`, `islastfrag`, `length`, `log_level`, `log_prefix`, `log_uid`, `mark`, `mask`, `mss`, `owner`, `pkttype`, `queue_bypass`, `queue_num`, `rate_limiting`, `recent_limiting`, `reject_type`, `snat`, `socket`, `state_match`, `string_matching`, `tcp_flags`.
     # 
     # iptables
     # : Iptables type provider
     # 
     #   * Required binaries: `iptables-save`, `iptables`.
     #   * Default for `kernel` == `linux`.
-    #   * Supported features: `address_type`, `clusterip`, `connection_limiting`, `dnat`, `icmp_match`, `interface_match`, `iprange`, `ipsec_dir`, `ipsec_policy`, `ipset`, `iptables`, `isfragment`, `length`, `log_level`, `log_prefix`, `log_uid`, `mark`, `mask`, `mss`, `netmap`, `nflog_group`, `nflog_prefix`, `nflog_range`, `nflog_threshold`, `owner`, `pkttype`, `queue_bypass`, `queue_num`, `rate_limiting`, `recent_limiting`, `reject_type`, `snat`, `socket`, `state_match`, `string_matching`, `tcp_flags`.
+    #   * Supported features: `address_type`, `clusterip`, `connection_limiting`, `conntrack`, `ct_target`, `dnat`, `icmp_match`, `interface_match`, `iprange`, `ipsec_dir`, `ipsec_policy`, `ipset`, `iptables`, `ipvs`, `isfragment`, `length`, `log_level`, `log_prefix`, `log_uid`, `mark`, `mask`, `mss`, `netmap`, `nflog_group`, `nflog_prefix`, `nflog_range`, `nflog_threshold`, `owner`, `pkttype`, `queue_bypass`, `queue_num`, `rate_limiting`, `recent_limiting`, `reject_type`, `snat`, `socket`, `state_match`, `string_matching`, `tcp_flags`.
     Puppet::Resource::Param(Any, 'provider')
   ],
   {

@@ -72,3 +72,6 @@
 [submodule "modules/awscli"]
 	path = modules/awscli
 	url = https://github.com/jdowning/puppet-awscli.git
+[submodule "modules/inifile"]
+	path = modules/inifile
+	url = https://github.com/puppetlabs/puppetlabs-inifile.git

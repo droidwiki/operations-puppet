@@ -73,9 +73,8 @@ class role::php(
         provider       => 'apt',
         package_prefix => 'php-',
       },
-      mysql     => {
+      mysqli    => {
         provider => 'apt',
-        so_name  => 'mysqli',
       },
       curl      => {
         provider => 'apt',
