@@ -2,14 +2,6 @@
 	path = modules/firewall
 	url = https://github.com/puppetlabs/puppetlabs-firewall.git
 	branch = 1.8.x
-[submodule "modules/inifile"]
-	path = modules/inifile
-	url = https://github.com/puppetlabs/puppetlabs-inifile.git
-	branch = 1.5.x
-[submodule "modules/postgresql"]
-	path = modules/postgresql
-	url = https://github.com/puppetlabs/puppetlabs-postgresql.git
-	branch = 4.7.x
 [submodule "modules/apt"]
 	path = modules/apt
 	url = https://github.com/puppetlabs/puppetlabs-apt.git
@@ -22,9 +14,6 @@
 	path = modules/vcsrepo
 	url = https://github.com/puppetlabs/puppetlabs-vcsrepo.git
 	branch = 1.3.x
-[submodule "modules/python"]
-	path = modules/python
-	url = https://github.com/stankevich/puppet-python.git
 [submodule "modules/stdlib"]
 	path = modules/stdlib
 	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
@@ -35,12 +24,6 @@
 [submodule "modules/git"]
 	path = modules/git
 	url = https://github.com/theforeman/puppet-git.git
-[submodule "modules/ganglia"]
-	path = modules/ganglia
-	url = https://github.com/jhoblitt/puppet-ganglia.git
-[submodule "modules/epel"]
-	path = modules/epel
-	url = https://github.com/stahnma/puppet-module-epel.git
 [submodule "modules/automysqlbackup"]
 	path = modules/automysqlbackup
 	url = https://github.com/nextrevision/puppet-automysqlbackup.git
@@ -56,12 +39,6 @@
 [submodule "modules/rsyslog"]
 	path = modules/rsyslog
 	url = https://github.com/saz/puppet-rsyslog.git
-[submodule "modules/datacat"]
-	path = modules/datacat
-	url = https://github.com/richardc/puppet-datacat.git
-[submodule "modules/sysctl"]
-	path = modules/sysctl
-	url = https://github.com/thias/puppet-sysctl.git
 [submodule "modules/nfs"]
 	path = modules/nfs
 	url = https://github.com/derdanne/puppet-nfs.git
