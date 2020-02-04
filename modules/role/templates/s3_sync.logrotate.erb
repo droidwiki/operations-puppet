@@ -1,0 +1,15 @@
+# logrotate(8) config for mediawiki
+# This file is managed by Puppet
+
+/data/log/s3_sync/*.log {
+    su <%= @user %> <%= @group %>
+    daily
+    rotate 1
+    maxage 5
+    compress
+    delaycompress
+    notifempty
+    create 660 root root
+    missingok
+    endscript
+}

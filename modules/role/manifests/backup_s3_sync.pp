@@ -16,9 +16,22 @@ class role::backup_s3_sync {
     source => 'puppet:///modules/role/sync_backups.sh'
   }
 
+  file { '/var/log/s3_sync':
+    ensure => 'directory',
+    owner  => 'root',
+    group  => 'root',
+  }
+
+  file { '/etc/logrotate.d/s3_sync':
+    content => template('role/s3_sync.logrotate.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+  }
+
   cron { 'sync_backups':
     ensure   => present,
-    command  => '/data/backup/sync_backups.sh',
+    command  => '/data/backup/sync_backups.sh > /var/log/s3_sync/out.log',
     user     => 'root',
     hour     => '0',
     minute   => '0',
