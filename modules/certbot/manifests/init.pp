@@ -28,13 +28,13 @@ class certbot(
   }
 
   if ($mode == 'standalone') {
-    firewall { '304 accept incoming http traffic':
+    firewall { '305 accept incoming http traffic':
       proto  => 'tcp',
       dport  => '80',
       action => 'accept',
     }
 
-    firewall { '304 accept incoming http traffic IPv6':
+    firewall { '305 accept incoming http traffic IPv6':
       proto    => 'tcp',
       dport    => '80',
       action   => 'accept',

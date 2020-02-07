@@ -54,6 +54,16 @@ class role::docker(
     require => Class['docker'],
   }
 
+  firewall { '901 accept incoming docker gateway requests':
+    chain   => 'INPUT',
+    action  => 'accept',
+    proto   => 'tcp',
+    iniface => 'docker_gwbridge',
+    # varnishd, php-fpm, monit
+    dport   => [6081, 9000, 2812],
+    require => Class['docker'],
+  }
+
   if ($manager) {
     docker::swarm {'cluster_manager':
       init           => true,
