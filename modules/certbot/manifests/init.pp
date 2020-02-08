@@ -3,7 +3,7 @@
 # handle the the process of getting a new certificate.
 class certbot(
   $mode = 'webroot',
-  $hook = 'service nginx restart',
+  $hook = 'cp -R -L /etc/letsencrypt/live/droidwiki.org/ /data/ha_volume/nginx/certs/',
 ) {
   apt::ppa { 'ppa:certbot/certbot': }
 

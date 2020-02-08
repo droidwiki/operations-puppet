@@ -19,6 +19,7 @@ node 'eclair.dwnet' {
   }
   include role::concourse
   include role::webserver
+  include certbot::nginx
   include role::memcached
   include role::backup_s3_sync
 }
@@ -28,7 +29,6 @@ node 'donut.dwnet' {
   include redis
   include role::mariadb
   include role::webserver
-  include role::varnish
   include role::php
   include role::mediawiki
   include role::jobrunner
