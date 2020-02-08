@@ -1,0 +1,10 @@
+#
+# THIS FILE IS MANAGED BY PUPPET
+#
+
+check host eclair.dwnet with address eclair.dwnet
+  if failed
+     port 8142
+     protocol http
+     status = 200
+  then alert
