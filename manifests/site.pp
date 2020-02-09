@@ -31,7 +31,6 @@ node 'donut.dwnet' {
   include role::webserver
   include role::php
   include role::mediawiki
-  include role::jobrunner
   include role::memcached
   include certbot
   include role::nfs_server
