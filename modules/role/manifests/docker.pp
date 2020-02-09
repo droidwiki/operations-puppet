@@ -59,8 +59,8 @@ class role::docker(
     action  => 'accept',
     proto   => 'tcp',
     iniface => 'docker_gwbridge',
-    # varnishd, php-fpm, monit
-    dport   => [6081, 9000, 2812],
+    # varnishd, php-fpm, monit, concourse
+    dport   => [6081, 9000, 2812, 8081],
     require => Class['docker'],
   }
 
