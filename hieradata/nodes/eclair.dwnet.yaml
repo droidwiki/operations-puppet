@@ -224,16 +224,6 @@ opendkim::keys:
 # mariadb settings
 role::mariadb::isslave: true
 
-# logstash settings
-role::logstash::redis_input_host: 37.120.178.25
-role::logstash::redis_input_port: 6379
-role::logstash::redis_input_data_type: list
-role::logstash::redis_input_key: logstash
-role::logstash::es_output_flush_size: 5000
-role::logstash::es_output_host: 127.0.0.1
-role::logstash::es_output_port: 9200
-role::logstash::es_output_idle_flush_time: 1
-
 # mariadb settings
 mysql::server::root_password: >
     ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
