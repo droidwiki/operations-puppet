@@ -9,9 +9,7 @@
     compress
     delaycompress
     notifempty
-    create 660 www-data www-data
+    create 777 www-data www-data
     missingok
-    postrotate
-        invoke-rc.d php7.3-fpm reopen-logs
     endscript
 }
