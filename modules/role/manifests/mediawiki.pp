@@ -40,9 +40,7 @@ class role::mediawiki(
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
-    # FIXME: 765 because otherwise deployments would fail as they're done
-    # with the user who does the deployment (this should be changed)
-    mode   => '0755',
+    mode   => '0777',
   }
 
   file { '/etc/logrotate.d/mediawiki':
