@@ -42,9 +42,6 @@
 [submodule "modules/mysql"]
 	path = modules/mysql
 	url = https://github.com/puppetlabs/puppetlabs-mysql.git
-[submodule "modules/php"]
-	path = modules/php
-	url = https://github.com/voxpupuli/puppet-php.git
 [submodule "modules/archive"]
 	path = modules/archive
 	url = https://github.com/voxpupuli/puppet-archive.git

@@ -2,7 +2,6 @@
 node 'eclair.dwnet' {
   include droidwiki::default
   include role::mariadb
-  include role::php
   class { 'role::mediawiki':
     isslave => true,
   }
@@ -29,7 +28,6 @@ node 'donut.dwnet' {
   include redis
   include role::mariadb
   include role::webserver
-  include role::php
   include role::mediawiki
   include role::memcached
   include certbot
