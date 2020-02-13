@@ -59,7 +59,7 @@ class role::mediawiki(
 
     $wikis.each |Integer $index, String $dbname| {
       cron { "cron-updatespecialpages-${dbname}":
-        command  => "docker run -it --rm --net=host -u www-data:www-data -v /data:/data -w /data/mediawiki droidwiki/php-fpm:7.4 php mw-config/mw-config/multiversion/MWScript.php updateSpecialPages.php --wiki=${dbname} --override  > /data/log/mediawiki/updateSpecialPages-${dbname}.log 2>&1",
+        command  => "docker run -it --rm --net=host -u $(id www-data) -v /data:/data -w /data/mediawiki droidwiki/php-fpm:7.4 php mw-config/mw-config/multiversion/MWScript.php updateSpecialPages.php --wiki=${dbname} --override  > /data/log/mediawiki/updateSpecialPages-${dbname}.log 2>&1",
         user     => 'root',
         monthday => [8, 22],
       }
