@@ -19,7 +19,6 @@ node 'eclair.dwnet' {
   include role::concourse
   include role::webserver
   include certbot::nginx
-  include role::memcached
   include role::backup_s3_sync
 }
 
@@ -29,7 +28,6 @@ node 'donut.dwnet' {
   include role::mariadb
   include role::webserver
   include role::mediawiki
-  include role::memcached
   include certbot
   include role::nfs_server
   class { 'role::docker':
