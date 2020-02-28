@@ -11,7 +11,7 @@ class role::docker(
   }
 
   class { 'docker':
-    extra_parameters => ['-g /data/docker']
+    extra_parameters => ['-g /data/docker --metrics-addr 0.0.0.0:9323 --experimental=true']
   }
 
   file { [ '/data/ha_volume', '/data/bricks', '/data/bricks/brick1', '/data/bricks/brick2' ]:
@@ -47,20 +47,30 @@ class role::docker(
     pass      => 0,
   }
 
-  firewall { '900 accept outgoing requests to DOCKER':
+  firewall { '900 accept outgoing tcp requests to DOCKER':
     chain   => 'OUTPUT',
     proto   => 'all',
     jump    => 'DOCKER',
     require => Class['docker'],
   }
 
-  firewall { '901 accept incoming docker gateway requests':
+  firewall { '901 accept incoming udp docker gateway requests':
     chain   => 'INPUT',
     action  => 'accept',
     proto   => 'tcp',
     iniface => 'docker_gwbridge',
-    # monit, concourse, mariadb, memcached, redis, elasticsearch
-    dport   => [2812, 8081, 3306, 11211, 6379, 9200],
+    # monit, concourse, mariadb, memcached, redis, elasticsearch, prometheus, grafana, dockerd metrics
+    dport   => [2812, 8081, 3306, 11211, 6379, 9200, 9090, 9091, 9323],
+    require => Class['docker'],
+  }
+
+  firewall { '901 accept incoming docker gateway requests':
+    chain   => 'INPUT',
+    action  => 'accept',
+    proto   => 'udp',
+    iniface => 'docker_gwbridge',
+    # statsd
+    dport   => [9125],
     require => Class['docker'],
   }
 

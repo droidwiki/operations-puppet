@@ -50,6 +50,13 @@ class role::mediawiki(
     mode    => '0444',
   }
 
+  file { '/usr/bin/php':
+    source => 'puppet:///modules/role/php',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '755',
+  }
+
   if ($isslave) {
     $wikis = [
       'droidwikiwiki',
@@ -60,7 +67,7 @@ class role::mediawiki(
 
     $wikis.each |Integer $index, String $dbname| {
       cron { "cron-updatespecialpages-${dbname}":
-        command  => "docker run -it --rm --net=host -u $(id -u www-data) -v /data:/data -w /data/mediawiki droidwiki/php-fpm:7.4 php mw-config/mw-config/multiversion/MWScript.php updateSpecialPages.php --wiki=${dbname} --override  > /data/log/mediawiki/updateSpecialPages-${dbname}.log 2>&1",
+        command  => "/usr/bin/php /data/mediawiki/mw-config/mw-config/multiversion/MWScript.php updateSpecialPages.php --wiki=${dbname} --override  > /data/log/mediawiki/updateSpecialPages-${dbname}.log 2>&1",
         user     => 'root',
         monthday => [8, 22],
       }

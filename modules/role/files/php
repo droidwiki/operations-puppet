@@ -1,0 +1,4 @@
+#/usr/env/bash
+
+phpContainer=$(docker service ps -f "node=$(hostname)" -f 'desired-state=running' webserver_php --format "{{.Name}}.{{.ID}}" --no-trunc | head -n1)
+docker exec -it $phpContainer php $@
