@@ -18,6 +18,8 @@ class role::docker(
     ensure  => 'directory',
   }
 
+  apt::ppa { 'ppa:gluster/glusterfs-7': }
+
   class { '::gluster':
     repo    => false,
     client  => false,
