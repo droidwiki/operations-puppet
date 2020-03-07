@@ -21,7 +21,8 @@ groups:
     description: group for software deployments
     members: [florian, jimmy]
     privileges: ['ALL = (www-data) NOPASSWD: ALL',
-                 'ALL = NOPASSWD: /usr/bin/php']
+                 'ALL = NOPASSWD: /usr/bin/php',
+                 'ALL = NOPASSWD: /usr/bin/deploy-webserver']
 
 users:
   florian:

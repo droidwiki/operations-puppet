@@ -59,8 +59,8 @@ class role::docker(
     action  => 'accept',
     proto   => 'tcp',
     iniface => 'docker_gwbridge',
-    # monit, concourse, mariadb, memcached, redis, elasticsearch, prometheus, grafana, dockerd metrics
-    dport   => [2812, 8081, 3306, 11211, 6379, 9200, 9090, 9091, 9323],
+    # monit, concourse, mariadb, memcached, redis, elasticsearch, prometheus, grafana, dockerd metrics, varnish
+    dport   => [2812, 8081, 3306, 11211, 6379, 9200, 9090, 9091, 9323, 6081],
     require => Class['docker'],
   }
 
@@ -72,6 +72,14 @@ class role::docker(
     # statsd
     dport   => [9125],
     require => Class['docker'],
+  }
+
+  # Helper script to deploy docker webserver stack from Concourse
+  file { '/usr/bin/deploy-webserver':
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/role/deploy-webserver',
   }
 
   if ($manager) {

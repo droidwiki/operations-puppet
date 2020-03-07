@@ -1,0 +1,5 @@
+#/usr/env/bash
+
+cd /data/ha_volume/nginx
+docker stack deploy -c - webserver
+
