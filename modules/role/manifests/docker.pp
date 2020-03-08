@@ -66,16 +66,6 @@ class role::docker(
     require => Class['docker'],
   }
 
-  firewall { '901 accept incoming docker gateway requests':
-    chain   => 'INPUT',
-    action  => 'accept',
-    proto   => 'udp',
-    iniface => 'docker_gwbridge',
-    # statsd
-    dport   => [9125],
-    require => Class['docker'],
-  }
-
   # Helper script to deploy docker webserver stack from Concourse
   file { '/usr/bin/deploy-webserver':
     owner  => 'root',
