@@ -257,6 +257,28 @@ concourse::github::client_secret: >
     1zUDnjBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBD5bznotkDzUrcBCa9B
     WAzygDDXhdXIYSzJED59gnJspliZINIbDDWSXKNf9+atnl+iOO9Pj4Rr4T8H
     egDP62hDUvU=]
+concourse::vault::role_id: >
+    ENC[PKCS7,MIIBmQYJKoZIhvcNAQcDoIIBijCCAYYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAC9LO7/QzPh9ieoJ6FI9+HwQ/gOgwinIaXkEc
+    KWXGZI9o3OtbV/FACHQld83qdqd+EyDm3SUwykkINaVI69DzCoDf91Jry+Us
+    NBHpLg+HzTMjOz3CpdwPkVDaVBYtrF6gJ6Ej+/rvvMZNi3/5b+4CQYV3i4sv
+    KSBlgzNPi6mm+umV7HGc6t49Xc2s5q416YmXRUefgw630wHWd9WLqKjcJP/w
+    KedDtczk1ChyHred8Jo9XDw5/c2+/G07edKbx7UM+t/0xh5vyfShvLG3CKBJ
+    StHgxDDfWMQXljFTDCbZ/baWfPWKJpwujFyhVzxfz73XrAvC4WFhMy5D7YEI
+    nSh8vTBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDj2gqLpVMEjErJGBVU
+    npTkgDBh/kyFSLdkczZJOEVkjvzIMEoKa5xzjbkNPxGWDW/I/lgOe3HQnQus
+    OHoBmvJgDr8=]
+concourse::vault::secret_id: >
+    ENC[PKCS7,MIIBmQYJKoZIhvcNAQcDoIIBijCCAYYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAtzRn6ekakRu4Gt450qKolKwWI1xLLkJN72Wx
+    Zk6cDLXs+95+8Ni6AJ3MX6C2a4cHaciYEW+IZNgaI9GjNQ8hWfgVeSAFqUAf
+    P2y1UClU+gCcEM/fsHNyr783XAj5uS27oSM+uciFICrsnbsIq+4D16pq35um
+    LjJchgDcQKhVwwChnm4tcT1U/6OFpAzP6TtsNGrlYbEYjdsFlMLPS8MQbMF2
+    G42baouZhG3f2gY83mI+1zyBv7jUO/LM4Fpn/JhwzUCzHJ/j8voDMMLAVoV0
+    uP0FelShHH8hOkh6cyHsRQfe8ErHW8Dn53tdK6pHx1BxAKQlsNH/U9H3a0UQ
+    RODKkjBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBkpyBfMZsGNMjERrmP
+    xhmXgDB15n0js7rLejfoO5IU85rgecGpqpjjuWYOhSdo9UXnahGFSx9s4v/F
+    h4oaRGZYeT4=]
 
 # php configuration
 php::fpm::pools:

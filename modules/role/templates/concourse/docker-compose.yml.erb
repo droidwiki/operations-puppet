@@ -18,7 +18,9 @@ services:
     links: [db]
     depends_on: [db]
     ports: ["8081:8080"]
-    volumes: ["./keys/web:/concourse-keys"]
+    volumes:
+    - ./keys/web:/concourse-keys
+    - ./vault/certs/:/vault/certs
     environment:
       CONCOURSE_POSTGRES_HOST: db
       CONCOURSE_POSTGRES_USER: dev
@@ -28,6 +30,10 @@ services:
       CONCOURSE_GITHUB_CLIENT_ID: <%= scope().call_function('hiera', ['concourse::github::client_id']) %>
       CONCOURSE_GITHUB_CLIENT_SECRET: <%= scope().call_function('hiera', ['concourse::github::client_secret']) %>
       CONCOURSE_MAIN_TEAM_GITHUB_ORG: droidwiki
+      CONCOURSE_VAULT_AUTH_BACKEND: approle
+      CONCOURSE_VAULT_AUTH_PARAM: role_id:<%= scope().call_function('hiera', ['concourse::vault::role_id']) %>,secret_id:<%= scope().call_function('hiera', ['concourse::vault::secret_id']) %>
+      CONCOURSE_VAULT_URL: https://vault:8200
+      CONCOURSE_VAULT_CA_CERT: /vault/certs/vault-ca.crt
     dns:
       - 8.8.8.8
       - 8.8.4.4
@@ -47,3 +53,13 @@ services:
     dns:
       - 8.8.8.8
       - 8.8.4.4
+
+  vault:
+    image: vault
+    cap_add: [IPC_LOCK]
+    ports: ["172.16.0.2:8200:8200"]
+    volumes:
+    - ./vault/file:/vault/file
+    - ./vault/certs:/vault/certs
+    - ./vault/config:/vault/config
+    command: server
