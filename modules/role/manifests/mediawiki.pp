@@ -54,7 +54,7 @@ class role::mediawiki(
     source => 'puppet:///modules/role/php',
     owner  => 'root',
     group  => 'root',
-    mode   => '755',
+    mode   => '0755',
   }
 
   if ($isslave) {
