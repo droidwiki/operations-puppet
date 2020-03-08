@@ -57,9 +57,9 @@ services:
   vault:
     image: vault
     cap_add: [IPC_LOCK]
+    restart: unless-stopped
     ports: ["172.16.0.2:8200:8200"]
     volumes:
-    - ./vault/file:/vault/file
     - ./vault/certs:/vault/certs
     - ./vault/config:/vault/config
     command: server
