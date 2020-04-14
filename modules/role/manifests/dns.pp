@@ -99,7 +99,10 @@ class role::dns(
       'droidwiki.org'  => [
         "type ${type}",
         'file "droidwiki.org"',
-        $type ? { 'master' => 'update-policy { grant letsencrypt. name _acme-challenge.droidwiki.org. txt; }', default => '// omitting update-policy on slave' },
+        $type ? {
+          'master' => 'update-policy { grant letsencrypt. name _acme-challenge.droidwiki.org. txt; grant letsencrypt. name _acme-challenge.mail.droidwiki.org. txt; }',
+          default => '// omitting update-policy on slave'
+        },
         $type ? { 'slave' => "masters { ${master_ip}; }", default => "allow-transfer { ${slave_ip}; }" }
       ],
       'droid.wiki'     => [
@@ -141,10 +144,10 @@ class role::dns(
       zonedir     => '/var/lib/bind/zones',
       source_base => 'puppet:///modules/role/dns/',
     }
+  }
 
-    file { '/etc/bind/rfc2136_letsencrypt.ini':
-      content => template('role/dns/rfc2136_letsencrypt.ini.erb'),
-      mode    => '0600',
-    }
+  file { '/etc/bind/rfc2136_letsencrypt.ini':
+    content => template('role/dns/rfc2136_letsencrypt.ini.erb'),
+    mode    => '0600',
   }
 }
