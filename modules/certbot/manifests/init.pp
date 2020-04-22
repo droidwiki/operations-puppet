@@ -43,7 +43,7 @@ class certbot(
   }
 
   cron { 'letsencrypt renew cron':
-    command => "/usr/bin/certbot renew --quiet --no-self-upgrade --renew-hook \"${hook}\"",
+    command => "/usr/bin/certbot renew --quiet --no-self-upgrade --deploy-hook \"${hook}\"",
     user    => root,
     hour    => 2,
     minute  => 30,
