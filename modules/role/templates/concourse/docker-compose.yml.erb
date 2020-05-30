@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: postgres
+    image: postgres:12-alpine
     restart: unless-stopped
     environment:
       POSTGRES_DB: concourse
@@ -12,7 +12,7 @@ services:
      - ./postgres-data:/var/lib/postgresql/data
 
   web:
-    image: concourse/concourse:6.0
+    image: concourse/concourse:6.1
     command: web
     restart: unless-stopped
     links: [db]
@@ -39,7 +39,7 @@ services:
       - 8.8.4.4
 
   worker:
-    image: concourse/concourse:6.0
+    image: concourse/concourse:6.1
     command: worker
     restart: unless-stopped
     privileged: true
@@ -55,7 +55,7 @@ services:
       - 8.8.4.4
 
   vault:
-    image: vault
+    image: vault:1.4.2
     cap_add: [IPC_LOCK]
     restart: unless-stopped
     ports: ["172.16.0.2:8200:8200"]
