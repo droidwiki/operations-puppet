@@ -1,14 +1,12 @@
 # logrotate(8) config for mediawiki
 # This file is managed by Puppet
 
-/data/log/mediawiki/*.log {
+/data/log/mediawiki/*.log* {
     su <%= @user %> <%= @group %>
     daily
     rotate 3
     maxage 5
     compress
     delaycompress
-    notifempty
     missingok
-    endscript
 }

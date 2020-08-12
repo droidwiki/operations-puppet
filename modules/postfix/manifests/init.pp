@@ -48,14 +48,14 @@ class postfix(
     ensure => 'directory',
     owner  => 'root',
     group  => 'root',
-    mode   => '0660',
+    mode   => '0640',
   }
 
   file { '/etc/postfix/sql/aliases.cf':
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
-    mode    => '0660',
+    mode    => '0640',
     content => template('postfix/sql/aliases.cf.erb'),
     notify  => Service['postfix'],
   }
@@ -64,7 +64,7 @@ class postfix(
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
-    mode    => '0660',
+    mode    => '0640',
     content => template('postfix/sql/domains.cf.erb'),
     notify  => Service['postfix'],
   }
@@ -73,7 +73,7 @@ class postfix(
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
-    mode    => '0660',
+    mode    => '0640',
     content => template('postfix/sql/maps.cf.erb'),
     notify  => Service['postfix'],
   }
@@ -82,7 +82,7 @@ class postfix(
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
-    mode    => '0660',
+    mode    => '0640',
     content => template('postfix/sql/no-srs.cf.erb'),
     notify  => Service['postfix'],
   }
@@ -91,7 +91,7 @@ class postfix(
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
-    mode    => '0660',
+    mode    => '0640',
     content => template('postfix/sql/sender-login-maps.cf.erb'),
     notify  => Service['postfix'],
   }
@@ -100,7 +100,7 @@ class postfix(
     ensure => 'file',
     owner  => 'root',
     group  => 'root',
-    mode   => '0660',
+    mode   => '0640',
     source => 'puppet:///modules/postfix/submission_header_cleanup',
     notify => Service['postfix'],
   }
@@ -116,7 +116,7 @@ class postfix(
     ensure => 'file',
     owner  => 'root',
     group  => 'root',
-    mode   => '0660',
+    mode   => '0640',
     source => 'puppet:///modules/postfix/local-generics',
     notify => Exec['refresh local-generics'],
   }

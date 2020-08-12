@@ -43,6 +43,8 @@ class role::mediawiki(
     mode   => '0777',
   }
 
+  $user  = 'www-data'
+  $group = 'www-data'
   file { '/etc/logrotate.d/mediawiki':
     content => template('role/mediawiki.logrotate.erb'),
     owner   => 'root',

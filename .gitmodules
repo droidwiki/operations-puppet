@@ -35,7 +35,7 @@
 	url = https://github.com/arioch/puppet-redis.git
 [submodule "modules/rsyslog"]
 	path = modules/rsyslog
-	url = https://github.com/saz/puppet-rsyslog.git
+	url = https://github.com/voxpupuli/puppet-rsyslog.git
 [submodule "modules/nfs"]
 	path = modules/nfs
 	url = https://github.com/derdanne/puppet-nfs.git

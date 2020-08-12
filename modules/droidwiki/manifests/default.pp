@@ -62,10 +62,7 @@ class droidwiki::default (
     target => '/usr/local/bin/pip',
   }
 
-  class { 'rsyslog::client':
-    server => 'eclair.dwnet',
-    port   => '1514',
-  }
+  include rsyslog::config
 
   if ($isnfsserver == false) {
     # all droidwiki servers should have access to the nfs shareddata
