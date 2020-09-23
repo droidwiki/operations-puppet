@@ -3,7 +3,7 @@
 # handle the the process of getting a new certificate.
 class certbot(
   $mode = 'webroot',
-  $hook = 'cp -R -L /etc/letsencrypt/live/droidwiki.org/ /data/ha_volume/nginx/nginx/certs/',
+  $hook = Undef,
 ) {
   apt::ppa { 'ppa:certbot/certbot': }
 
@@ -42,8 +42,13 @@ class certbot(
     }
   }
 
+  $command = '/usr/bin/certbot renew --quiet --no-self-upgrade'
+  if ($hook != Undef) {
+    $params = " --deploy-hook \"${hook}\""
+  }
+
   cron { 'letsencrypt renew cron':
-    command => "/usr/bin/certbot renew --quiet --no-self-upgrade --deploy-hook \"${hook}\"",
+    command => "${command}${params}",
     user    => root,
     hour    => 2,
     minute  => 30,
