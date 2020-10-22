@@ -24,7 +24,6 @@ node 'eclair.dwnet' {
 
 node 'donut.dwnet' {
   include droidwiki::default
-  include redis
   include role::mariadb
   include role::webserver
   include role::mediawiki
