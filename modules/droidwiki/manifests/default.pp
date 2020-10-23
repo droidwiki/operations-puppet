@@ -62,8 +62,6 @@ class droidwiki::default (
     target => '/usr/local/bin/pip',
   }
 
-  include rsyslog::config
-
   if ($isnfsserver == false) {
     # all droidwiki servers should have access to the nfs shareddata
     class { '::nfs':
