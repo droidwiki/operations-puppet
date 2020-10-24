@@ -61,8 +61,8 @@ class role::docker(
     action  => 'accept',
     proto   => 'tcp',
     iniface => 'docker_gwbridge',
-    # monit, concourse, mariadb, memcached, redis, elasticsearch, prometheus, grafana, dockerd metrics, varnish, vault
-    dport   => [2812, 8081, 3306, 11211, 6379, 9200, 9090, 9091, 9323, 6081, 8200],
+    # monit, concourse, mariadb, memcached, redis, elasticsearch, prometheus, grafana, dockerd metrics, vault
+    dport   => [2812, 8081, 3306, 11211, 6379, 9200, 9090, 9091, 9323, 8200],
     require => Class['docker'],
   }
 
