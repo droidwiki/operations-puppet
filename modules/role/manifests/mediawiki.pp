@@ -18,15 +18,6 @@ class role::mediawiki(
     group  => 'www-data',
   }
 
-  # default location for configuration files
-  # related to mediawiki services
-  file{ '/etc/mediawiki':
-    ensure => 'directory',
-    mode   => '0755',
-    owner  => 'root',
-    group  => 'root',
-  }
-
   file { '/data/log':
     ensure => 'directory',
     owner  => 'www-data',
