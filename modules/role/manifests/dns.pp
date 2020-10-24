@@ -4,47 +4,17 @@ class role::dns(
   $master_ip = '37.120.178.25',
   $slave_ip  = '188.68.49.74',
 ) {
-  firewall { '700 allow outgoing dns requests':
-    sport  => 53,
-    proto  => 'udp',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '700 allow outgoing dns requests IPv6':
-    sport    => 53,
-    proto    => 'udp',
-    chain    => 'OUTPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '701 allow incoming dns requests':
+  firewall { '700 allow incoming dns requests':
     dport  => 53,
     proto  => 'udp',
     chain  => 'INPUT',
     action => 'accept',
   }
 
-  firewall { '701 allow incoming dns requests IPv6':
+  firewall { '700 allow incoming dns requests IPv6':
     dport    => 53,
     proto    => 'udp',
     chain    => 'INPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '702 allow outgoing dns requests':
-    sport  => 53,
-    proto  => 'tcp',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '702 allow outgoing dns requests IPv6':
-    sport    => 53,
-    proto    => 'tcp',
-    chain    => 'OUTPUT',
     action   => 'accept',
     provider => 'ip6tables',
   }

@@ -79,27 +79,12 @@ class droidwiki::default (
 
   firewall { '300 accept outgoing https traffic':
     proto  => 'tcp',
-    sport  => '443',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '300 accept outgoing https traffic IPv6':
-    proto    => 'tcp',
-    sport    => '443',
-    chain    => 'OUTPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '301 accept outgoing https traffic':
-    proto  => 'tcp',
     dport  => '443',
     chain  => 'OUTPUT',
     action => 'accept',
   }
 
-  firewall { '301 accept outgoing https traffic IPv6':
+  firewall { '300 accept outgoing https traffic IPv6':
     proto    => 'tcp',
     dport    => '443',
     chain    => 'OUTPUT',
@@ -117,21 +102,6 @@ class droidwiki::default (
   firewall { '302 accept outgoing http traffic IPv6':
     proto    => 'tcp',
     dport    => '80',
-    chain    => 'OUTPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '303 accept outgoing http traffic':
-    proto  => 'tcp',
-    sport  => '80',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '303 accept outgoing http traffic IPv6':
-    proto    => 'tcp',
-    sport    => '80',
     chain    => 'OUTPUT',
     action   => 'accept',
     provider => 'ip6tables',

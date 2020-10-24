@@ -2,21 +2,6 @@
 # host (from where mediawiki code is being prepated
 # for deployment and deployed)
 class role::deploymenthost {
-  firewall { '800 allow connections through git:// protocol':
-    dport  => 9418,
-    proto  => 'tcp',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '800 allow connections through git:// protocol IPv6':
-    dport    => 9418,
-    proto    => 'tcp',
-    chain    => 'OUTPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
   package { 'rsync':
     ensure => present,
   }

@@ -63,19 +63,6 @@ class fw::pre {
     provider => 'ip6tables',
   }
 
-  firewall { '100 allow incoming ssh traffic':
-    sport  => '22',
-    proto  => 'tcp',
-    action => 'accept',
-  }
-
-  firewall { '100 allow incoming ssh traffic IPv6':
-    sport    => '22',
-    proto    => 'tcp',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
   firewall { '101 allow incoming ssh traffic':
     dport  => '22',
     proto  => 'tcp',
@@ -85,21 +72,6 @@ class fw::pre {
   firewall { '101 allow incoming ssh traffic IPv6':
     dport    => '22',
     proto    => 'tcp',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '102 allow outgoing ssh traffic':
-    dport  => '22',
-    proto  => 'tcp',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '102 allow outgoing ssh traffic IPv6':
-    dport    => '22',
-    proto    => 'tcp',
-    chain    => 'OUTPUT',
     action   => 'accept',
     provider => 'ip6tables',
   }
@@ -164,36 +136,6 @@ class fw::pre {
     chain    => 'OUTPUT',
     proto    => 'tcp',
     dport    => '11371',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '113 allow outgoing dhcp traffic':
-    chain  => 'OUTPUT',
-    proto  => 'udp',
-    dport  => '67',
-    action => 'accept',
-  }
-
-  firewall { '113 allow outgoing dhcp traffic IPv6':
-    chain    => 'OUTPUT',
-    proto    => 'udp',
-    dport    => '67',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '114 allow outgoing dhcp traffic':
-    chain  => 'OUTPUT',
-    proto  => 'udp',
-    dport  => '547',
-    action => 'accept',
-  }
-
-  firewall { '114 allow outgoing dhcp traffic IPv6':
-    chain    => 'OUTPUT',
-    proto    => 'udp',
-    dport    => '547',
     action   => 'accept',
     provider => 'ip6tables',
   }

@@ -1,24 +1,5 @@
 # Post run class for iptables configuration
 class fw::post {
-  firewall { '993 log dropped input chain':
-    chain      => 'INPUT',
-    jump       => 'LOG',
-    log_level  => '6',
-    log_prefix => '[IPTABLES INPUT] dropped ',
-    proto      => 'all',
-    before     => undef,
-  }
-
-  firewall { '993 log dropped input chain IPv6':
-    chain      => 'INPUT',
-    jump       => 'LOG',
-    log_level  => '6',
-    log_prefix => '[IPTABLES INPUT] dropped ',
-    proto      => 'all',
-    before     => undef,
-    provider   => 'ip6tables',
-  }
-
   firewall { '994 log dropped forward chain':
     chain      => 'FORWARD',
     jump       => 'LOG',
