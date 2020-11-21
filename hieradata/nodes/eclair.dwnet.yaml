@@ -280,11 +280,6 @@ concourse::vault::secret_id: >
     xhmXgDB15n0js7rLejfoO5IU85rgecGpqpjjuWYOhSdo9UXnahGFSx9s4v/F
     h4oaRGZYeT4=]
 
-# php configuration
-php::fpm::pools:
-  www:
-    listen: '172.16.0.2:9000'
-
 backup_s3_sync::aws_secret_access_key: >
     ENC[PKCS7,MIIBmQYJKoZIhvcNAQcDoIIBijCCAYYCAQAxggEhMIIBHQIBADAFMAACAQEw
     DQYJKoZIhvcNAQEBBQAEggEAMLRjprUaFQFvWgjUK9v2zYPncsBukraqp2Yu

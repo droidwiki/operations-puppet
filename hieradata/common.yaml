@@ -64,3 +64,28 @@ bind::key::letsencrypt: >
     ic8/T+FI0hANCRii]
 
 gluster::service::service_name: glusterfs-server
+
+docker:
+  awslogs:
+    access_key_id: >
+      ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEw
+      DQYJKoZIhvcNAQEBBQAEggEAFLYTmyPdwG8rjKExakAWashQFXR7e00cXJDM
+      Vmi3VNj0f03+UfxpsxumzH+ON9pzcrMprleATcJ7V2naG+FHXRszlPYd/eSj
+      m+ltLbqj5zVSFtRHKmgaLRkTJs+nQStiLBFT9l7ko1qo62i+KDcjwkKQqXfi
+      dnZbHgff/TKrOB4wVBX/kdQe3Tx9rdPpYX00OmZEpiDLp9lyQDSa1Au4KsZf
+      9NEisltfEmMs+mYO9+Z8ndtt71pStqxyC/acWNOPysJ5yxi6KwIfQwiR7Ee7
+      pTKugXVHRCxjBB3se8xSpS7YBi0ewepPmhoOPI8BIw7dA70WHTiowLJRpxSB
+      n0uwbzBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDlT5ecB7OIBJJy4CFx
+      bdY4gCCPu4VaUqZZP0bMz9XeITHZYwP46jZj/3RihTsOp/KgIA==]
+    secret_access_key:  >
+      ENC[PKCS7,MIIBmQYJKoZIhvcNAQcDoIIBijCCAYYCAQAxggEhMIIBHQIBADAFMAACAQEw
+      DQYJKoZIhvcNAQEBBQAEggEAZiadEgnjFb/uupOOIm/ugdv1EIP7plgjzZCM
+      gTqbIWk4llLPcdeQ/vnwoSZw4ZaQTdrVFlS501/kOqwGWGvhZseRcBgy2w2n
+      RVFZKbJqQQL+A79isTBORkwyIpwYWvLPo88cUje9OLMOPx2SECPcHrcctzpD
+      aLrB6ZM20WjWQb8QpzTihKOkqFu5eqh7x7mxCgmkfmWCQDtpfjXf+1+zU18a
+      rlbp8s20jXY0akQVTwhLMs+F0mHbBH2hdYiMt5o863bI+Z6rQDbgjdoD5kL3
+      D2jyZWximYxLmB2P8RsTu8wpuMcaT7LPYI1WzpDPN6bWFIo3FogxqR4HmubA
+      fpQ/DjBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBB9Tkk48G+/W+Hr52Ov
+      YDlIgDAxhxJeVOc///BQXOqxUvK9bNqtdbezlfdR/HZ1VVgihKuUJYfeLnUb
+      vPJjHKtbtB0=]
+
