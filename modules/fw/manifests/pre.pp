@@ -76,6 +76,21 @@ class fw::pre {
     provider => 'ip6tables',
   }
 
+  firewall { '102 allow outgoing ssh traffic':
+    dport  => '22',
+    proto  => 'tcp',
+    chain  => 'OUTPUT',
+    action => 'accept',
+  }
+
+  firewall { '102 allow outgoing ssh traffic IPv6':
+    dport    => '22',
+    proto    => 'tcp',
+    chain    => 'OUTPUT',
+    action   => 'accept',
+    provider => 'ip6tables',
+  }
+
   firewall { '105 allow outgoing dns requests':
     dport  => '53',
     proto  => 'udp',
