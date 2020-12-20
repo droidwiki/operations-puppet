@@ -27,7 +27,9 @@ node 'donut.dwnet' {
   include role::mariadb
   include role::webserver
   include role::mediawiki
-  include certbot
+  class { 'certbot':
+    hook => 'cp -R -L /etc/letsencrypt/live/droidwiki.org/ /data/ha_volume/nginx/nginx/certs/',
+  }
   include role::nfs_server
   class { 'role::docker':
     worker_ip => $facts['networking']['interfaces']['eth1']['ip'],
