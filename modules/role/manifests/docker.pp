@@ -83,6 +83,14 @@ class role::docker(
     source => 'puppet:///modules/role/deploy-webserver',
   }
 
+  # Helper script to deploy docker escape-statistics stack from Concourse
+  file { '/usr/bin/deploy-escape-statistics':
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/role/deploy-escape-statistics',
+  }
+
   if ($manager) {
     docker::swarm {'cluster_manager':
       init           => true,

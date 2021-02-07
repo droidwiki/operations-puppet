@@ -1,0 +1,5 @@
+#/usr/env/bash
+
+cd /data/ha_volume/
+docker stack deploy -c - escape-statistics
+

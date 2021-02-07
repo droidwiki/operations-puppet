@@ -22,7 +22,8 @@ groups:
     members: [florian, jimmy]
     privileges: ['ALL = (www-data) NOPASSWD: ALL',
                  'ALL = NOPASSWD: /usr/bin/php',
-                 'ALL = NOPASSWD: /usr/bin/deploy-webserver']
+                 'ALL = NOPASSWD: /usr/bin/deploy-webserver',
+                 'ALL = NOPASSWD: /usr/bin/deploy-escape-statistics']
 
 users:
   florian:
