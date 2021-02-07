@@ -56,13 +56,14 @@ class role::mediawiki(
       'datawiki',
       'opswiki',
       'endroidwikiwiki',
+      'armakothwiki',
     ]
 
     $wikis.each |Integer $index, String $dbname| {
       cron { "cron-updatespecialpages-${dbname}":
-        command  => "/usr/bin/php /data/mediawiki/mw-config/mw-config/multiversion/MWScript.php updateSpecialPages.php --wiki=${dbname} --override  > /data/log/mediawiki/updateSpecialPages-${dbname}.log 2>&1",
-        user     => 'root',
-        monthday => [8, 22],
+        command => "/usr/bin/php /data/mediawiki/mw-config/mw-config/multiversion/MWScript.php updateSpecialPages.php --wiki=${dbname} --override  > /data/log/mediawiki/updateSpecialPages-${dbname}.log 2>&1",
+        user    => 'root',
+        minute  => '0',
       }
     }
   }
