@@ -1,6 +1,6 @@
 $TTL 60
 @       IN      SOA     root-dns.go2tech.de. admin.go2tech.de. (
-                     2020081801         ; Serial
+                     2021060901         ; Serial
                           28800         ; Refresh
                            7200         ; Retry
                         1209600         ; Expire
@@ -27,4 +27,3 @@ _dmarc            TXT     "v=DMARC1;p=quarantine;pct=100;rua=mailto:dmarc-report
                   MX 1    mail.droidwiki.org.
 mail              A       188.68.49.74
 mail              AAAA    2a03:4000:6:d06b::1
-status            CNAME   stats.uptimerobot.com.
