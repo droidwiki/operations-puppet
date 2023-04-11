@@ -30,10 +30,6 @@ services:
       CONCOURSE_GITHUB_CLIENT_ID: <%= scope().call_function('hiera', ['concourse::github::client_id']) %>
       CONCOURSE_GITHUB_CLIENT_SECRET: <%= scope().call_function('hiera', ['concourse::github::client_secret']) %>
       CONCOURSE_MAIN_TEAM_GITHUB_ORG: droidwiki
-      CONCOURSE_VAULT_AUTH_BACKEND: approle
-      CONCOURSE_VAULT_AUTH_PARAM: role_id:<%= scope().call_function('hiera', ['concourse::vault::role_id']) %>,secret_id:<%= scope().call_function('hiera', ['concourse::vault::secret_id']) %>
-      CONCOURSE_VAULT_URL: https://vault:8200
-      CONCOURSE_VAULT_CA_CERT: /vault/certs/vault-ca.crt
     dns:
       - 8.8.8.8
       - 8.8.4.4
@@ -53,14 +49,4 @@ services:
     dns:
       - 8.8.8.8
       - 8.8.4.4
-
-  vault:
-    image: vault:1.8.2
-    cap_add: [IPC_LOCK]
-    restart: unless-stopped
-    ports: ["172.16.0.2:8200:8200"]
-    volumes:
-    - ./vault/certs:/vault/certs
-    - ./vault/config:/vault/config
-    command: server
 
