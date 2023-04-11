@@ -34,7 +34,7 @@ class role::mariadb(
   }
 
   apt::source { 'mariadb':
-    location => 'https://mirror.kumi.systems/mariadb/repo/10.4/ubuntu',
+    location => 'https://mirror.kumi.systems/mariadb/repo/10.6/ubuntu',
     release  => $::lsbdistcodename,
     repos    => 'main',
     key      => {
