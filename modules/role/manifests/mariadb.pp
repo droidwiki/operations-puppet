@@ -33,21 +33,23 @@ class role::mariadb(
     server => 'hkp://keyserver.ubuntu.com:80',
   }
 
-  apt::source { 'mariadb':
-    location => 'https://mirror.kumi.systems/mariadb/repo/10.6/ubuntu',
-    release  => $::lsbdistcodename,
-    repos    => 'main',
-    key      => {
-      id     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
-      server => 'hkp://keyserver.ubuntu.com:80',
-    },
-    include  => {
-      src => false,
-      deb => true,
-    },
+  if (!$isslave) {
+    apt::source { 'mariadb':
+      location => 'https://mirror.kumi.systems/mariadb/repo/10.6/ubuntu',
+      release  => $::lsbdistcodename,
+      repos    => 'main',
+      key      => {
+        id     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
+        server => 'hkp://keyserver.ubuntu.com:80',
+      },
+      include  => {
+        src => false,
+        deb => true,
+      },
+    }
   }
 
-  if ($isslave) {
-    class { 'role::mariadb::slave': }
-  }
+  # if ($isslave) {
+  #   class { 'role::mariadb::slave': }
+  # }
 }

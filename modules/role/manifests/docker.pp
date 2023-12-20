@@ -71,7 +71,7 @@ class role::docker(
     proto   => 'tcp',
     iniface => 'docker_gwbridge',
     # monit, infamous-stats, infamous-rcon, concourse, mariadb, memcached, redis, elasticsearch, prometheus, grafana, dockerd metrics, vault
-    dport   => [2812, 7010, 8010 8081, 3306, 11211, 6379, 9200, 9090, 9091, 9323, 8200],
+    dport   => [2812, 7010, 8010, 8081, 3306, 11211, 6379, 9200, 9090, 9091, 9323, 8200],
     require => Class['docker'],
   }
 

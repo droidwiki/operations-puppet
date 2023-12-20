@@ -1,5 +1,19 @@
 # Configures a mariadb role to be a slave server
 class role::mariadb::slave {
+  apt::source { 'mariadb':
+    location => 'https://mirror.kumi.systems/mariadb/repo/10.6/ubuntu',
+    release  => $::lsbdistcodename,
+    repos    => 'main',
+    key      => {
+      id     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
+      server => 'hkp://keyserver.ubuntu.com:80',
+    },
+    include  => {
+      src => false,
+      deb => true,
+    },
+  }
+
   class {'::mysql::server':
     package_name     => 'mariadb-server',
     service_name     => 'mysql',
