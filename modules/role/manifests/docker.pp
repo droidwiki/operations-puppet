@@ -13,7 +13,7 @@ class role::docker(
   }
 
   class { 'docker':
-    extra_parameters => ['--data-dir /data/docker --metrics-addr 0.0.0.0:9323 --experimental=true']
+    extra_parameters => ['--data-root /data/docker --metrics-addr 0.0.0.0:9323 --experimental=true']
   }
 
   file { '/etc/systemd/system/docker.service.d/aws-credentials-overrides.conf':
