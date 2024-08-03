@@ -56,4 +56,51 @@ class droidwiki::default () {
   class { ['fw::pre', 'fw::post']: }
 
   include ssh
+
+  firewall { '300 accept outgoing https traffic':
+    proto  => 'tcp',
+    dport  => '443',
+    chain  => 'OUTPUT',
+    action => 'accept',
+  }
+
+  firewall { '300 accept outgoing https traffic IPv6':
+    proto    => 'tcp',
+    dport    => '443',
+    chain    => 'OUTPUT',
+    action   => 'accept',
+    provider => 'ip6tables',
+  }
+
+  firewall { '302 accept outgoing http traffic':
+    proto  => 'tcp',
+    dport  => '80',
+    chain  => 'OUTPUT',
+    action => 'accept',
+  }
+
+  firewall { '302 accept outgoing http traffic IPv6':
+    proto    => 'tcp',
+    dport    => '80',
+    chain    => 'OUTPUT',
+    action   => 'accept',
+    provider => 'ip6tables',
+  }
+
+ firewall { '900 accept outgoing tcp requests to DOCKER':
+    chain   => 'OUTPUT',
+    proto   => 'all',
+    jump    => 'DOCKER',
+    require => Class['docker'],
+  }
+
+  firewall { '901 accept incoming udp docker gateway requests':
+    chain   => 'INPUT',
+    action  => 'accept',
+    proto   => 'tcp',
+    iniface => 'docker_gwbridge',
+    # monit, infamous-stats, infamous-rcon, concourse, mariadb, memcached, redis, vault
+    dport   => [2812, 7010, 7020, 8010, 8020, 8081, 3306, 9091, 9323, 8200],
+    require => Class['docker'],
+  }
 }
