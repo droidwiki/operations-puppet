@@ -1,3 +1,0 @@
-gluster::service::service_name: glusterfs-server
-admin::groups:
-  - deployment

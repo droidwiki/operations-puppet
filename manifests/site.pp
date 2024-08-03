@@ -5,6 +5,7 @@ node 'eclair.dwnet' {
 }
 
 node default {
+  include apt
   include droidwiki::default
   include role::webserver
   class { 'certbot':
