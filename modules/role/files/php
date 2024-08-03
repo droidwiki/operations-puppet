@@ -1,4 +1,0 @@
-#/usr/env/bash
-
-phpContainer=$(docker container ls --filter name=^webserver_php --format '{{.Names}}' --latest)
-docker exec $phpContainer php $@

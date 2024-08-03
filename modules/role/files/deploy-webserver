@@ -1,5 +1,0 @@
-#/usr/env/bash
-
-cd /data/ha_volume/nginx
-docker stack deploy --prune -c - webserver
-

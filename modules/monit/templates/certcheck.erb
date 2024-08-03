@@ -1,9 +1,0 @@
-#
-# THIS FILE IS MANAGED BY PUPPET
-#
-check host <%= @name %> with address <%= @host %>
-  if failed
-    port <%= @port %>
-    protocol <%= @protocol %>
-    and certificate valid > <%= @cert_valid_greater %> days
-  then alert
