@@ -56,5 +56,4 @@ class droidwiki::default () {
   class { ['fw::pre', 'fw::post']: }
 
   include ssh
-  include admin
 }
