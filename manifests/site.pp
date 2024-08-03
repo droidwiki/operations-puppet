@@ -1,43 +1,15 @@
 # site.pp
 node 'eclair.dwnet' {
   include droidwiki::default
-  include role::mariadb
-  class { 'role::mediawiki':
-    isslave => true,
-  }
-  include role::mailserver
-  include role::parsoid
-  include role::deploymenthost
-  class { 'certbot':
-    mode => 'standalone',
-    hook => 'service postfix restart',
-  }
-  include role::dns
-  class { 'role::docker':
-    manager => true,
-  }
-  include role::concourse
   include role::webserver
-  include certbot::nginx
-  include role::backup_s3_sync
 }
 
-node 'donut.dwnet' {
+node default {
   include droidwiki::default
-  include role::mariadb
   include role::webserver
-  include role::mediawiki
   class { 'certbot':
     hook => 'cp -R -L /etc/letsencrypt/live/droidwiki.org/ /data/ha_volume/nginx/nginx/certs/',
   }
-  include role::nfs_server
-  class { 'role::docker':
-    worker_ip => $facts['networking']['interfaces']['eth1']['ip'],
-    token     => lookup( 'docker::worker_token' )
-  }
-
-  class { 'role::dns':
-    type => 'master',
-  }
-  include role::datawiki
+  include certbot::nginx
+  include role::dns
 }

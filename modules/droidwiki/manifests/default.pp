@@ -1,7 +1,5 @@
 # Default things to do for all servers.
-class droidwiki::default (
-  $isnfsserver = false,
-) {
+class droidwiki::default () {
   file { '/etc/hosts':
     ensure  => file,
     content => template('droidwiki/hosts.default.erb'),
@@ -57,53 +55,6 @@ class droidwiki::default (
 
   class { ['fw::pre', 'fw::post']: }
 
-  file { '/usr/local/bin/pip-python':
-    ensure => link,
-    target => '/usr/local/bin/pip',
-  }
-
-  if ($isnfsserver == false) {
-    # all droidwiki servers should have access to the nfs shareddata
-    class { '::nfs':
-      client_enabled => true,
-    }
-    Nfs::Client::Mount <<| |>>
-  }
-
   include ssh
   include admin
-
-  include monit
-  monit::service { 'os_disk': }
-  monit::service { 'data_disk': }
-
-  firewall { '300 accept outgoing https traffic':
-    proto  => 'tcp',
-    dport  => '443',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '300 accept outgoing https traffic IPv6':
-    proto    => 'tcp',
-    dport    => '443',
-    chain    => 'OUTPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
-
-  firewall { '302 accept outgoing http traffic':
-    proto  => 'tcp',
-    dport  => '80',
-    chain  => 'OUTPUT',
-    action => 'accept',
-  }
-
-  firewall { '302 accept outgoing http traffic IPv6':
-    proto    => 'tcp',
-    dport    => '80',
-    chain    => 'OUTPUT',
-    action   => 'accept',
-    provider => 'ip6tables',
-  }
 }
