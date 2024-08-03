@@ -3,8 +3,6 @@ class role::docker(
   $manager               = false,
   $worker_ip             = Undef,
   $token                 = Undef,
-  $aws_access_key_id     = hiera( 'docker.awslogs.access_key_id' ),
-  $aws_secret_access_key = hiera( 'docker.awslogs.secret_access_key' )
 ) {
   file { '/data/docker':
     ensure => directory,
@@ -14,13 +12,6 @@ class role::docker(
 
   class { 'docker':
     extra_parameters => ['--data-root /data/docker --metrics-addr 0.0.0.0:9323 --experimental=true']
-  }
-
-  file { '/etc/systemd/system/docker.service.d/aws-credentials-overrides.conf':
-    ensure  => file,
-    content => template('role/docker/aws-credentials-overrides.conf.erb'),
-    notify  => Exec['docker-systemd-reload-before-service'],
-    before  => Service['docker'],
   }
 
   file { [ '/data/ha_volume', '/data/bricks', '/data/bricks/brick1', '/data/bricks/brick2' ]:
