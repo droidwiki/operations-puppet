@@ -91,7 +91,6 @@ class droidwiki::default () {
     chain   => 'OUTPUT',
     proto   => 'all',
     jump    => 'DOCKER',
-    require => Class['docker'],
   }
 
   firewall { '901 accept incoming udp docker gateway requests':
@@ -101,6 +100,5 @@ class droidwiki::default () {
     iniface => 'docker_gwbridge',
     # monit, infamous-stats, infamous-rcon, concourse, mariadb, memcached, redis, vault
     dport   => [2812, 7010, 7020, 8010, 8020, 8081, 3306, 9091, 9323, 8200],
-    require => Class['docker'],
   }
 }
