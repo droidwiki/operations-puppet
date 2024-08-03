@@ -6,14 +6,6 @@
 	path = modules/apt
 	url = https://github.com/puppetlabs/puppetlabs-apt.git
 	branch = 2.2.x
-[submodule "modules/concat"]
-	path = modules/concat
-	url = https://github.com/puppetlabs/puppetlabs-concat.git
-	branch = 2.1.x
-[submodule "modules/vcsrepo"]
-	path = modules/vcsrepo
-	url = https://github.com/puppetlabs/puppetlabs-vcsrepo.git
-	branch = 1.3.x
 [submodule "modules/stdlib"]
 	path = modules/stdlib
 	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
@@ -21,33 +13,6 @@
 [submodule "modules/git"]
 	path = modules/git
 	url = https://github.com/theforeman/puppet-git.git
-[submodule "modules/automysqlbackup"]
-	path = modules/automysqlbackup
-	url = https://github.com/nextrevision/puppet-automysqlbackup.git
-[submodule "modules/tagmail"]
-	path = modules/tagmail
-	url = https://github.com/puppetlabs/puppetlabs-tagmail.git
-[submodule "modules/file_concat"]
-	path = modules/file_concat
-	url = https://github.com/electrical/puppet-lib-file_concat.git
-[submodule "modules/nfs"]
-	path = modules/nfs
-	url = https://github.com/derdanne/puppet-nfs.git
-[submodule "modules/mysql"]
-	path = modules/mysql
-	url = https://github.com/puppetlabs/puppetlabs-mysql.git
-[submodule "modules/archive"]
-	path = modules/archive
-	url = https://github.com/voxpupuli/puppet-archive.git
-[submodule "modules/docker"]
-	path = modules/docker
-	url = https://github.com/puppetlabs/puppetlabs-docker.git
 [submodule "modules/gluster"]
 	path = modules/gluster
 	url = https://github.com/voxpupuli/puppet-gluster.git
-[submodule "modules/awscli"]
-	path = modules/awscli
-	url = https://github.com/jdowning/puppet-awscli.git
-[submodule "modules/inifile"]
-	path = modules/inifile
-	url = https://github.com/puppetlabs/puppetlabs-inifile.git
